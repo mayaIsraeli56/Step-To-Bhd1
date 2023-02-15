@@ -76,3 +76,20 @@ ion-content.ion-content-start {
 .no-scroll {
   --overflow: hidden;
 }
+
+.homeSwiper .swiper-slide-active img {
+  transform: scale(100%) translateY(4%);
+  transition: 0.3s;
+}
+
+.homeSwiper .swiper-slide-active h2 {
+  font-weight: 600;
+  font-size: 2.5vh;
+  transition: 0.3s;
+}
+
+.text-dark-plain {
+  color: var(--ion-color-medium);
+  text-shadow: none;
+  font-weight: 600;
+}

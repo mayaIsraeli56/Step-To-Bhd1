@@ -15,7 +15,6 @@
 </template>
 
 <script>
-
 export default {
   name: "ConnectingUsers",
   props: ["signOption", "openingTime"],
@@ -64,7 +63,6 @@ export default {
 </script>
 
 <style scoped>
-
 img {
   position: absolute;
   width: 100vw;
@@ -77,17 +75,20 @@ img {
   top: 10vh;
   left: 10vw;
   transform: rotate(20deg) scale(150%);
+  opacity: 0.4;
 }
 
 @keyframes from-opening {
   0% {
     top: 10vh;
     left: 10vw;
+    opacity: 0.4;
     transform: rotate(20deg) scale(150%);
   }
 
   100% {
     top: 0vh;
+    opacity: 1;
     transform: rotate(0deg);
     left: 0vw;
     width: 100%;

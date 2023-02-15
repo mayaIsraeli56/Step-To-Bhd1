@@ -116,7 +116,7 @@ export default defineComponent({
 <style scoped>
 div {
   background-color: #4c4c5058;
-  width: 100vw;
+  width: 100vw !important;
   height: 100vh;
   position: absolute;
   top: 0;
@@ -124,7 +124,6 @@ div {
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 2;
 }
 ion-card-header.ios {
   display: flex;

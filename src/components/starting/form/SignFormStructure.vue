@@ -38,14 +38,19 @@
     </ion-button>
 
     <p v-if="errMsg && btnOn && !forgotPass" :data-index="4">{{ errMsg }}</p>
-    <div class="arrow" :data-index="6" v-if="btnOn">
+    <div class="arrow" :data-index="6" v-if="btnOn" >
       {{ text[0] }}
       <arrow-animation :deg="0"></arrow-animation>
     </div>
   </transition-group>
 
   <transition @before-enter="beforeEnter" @enter="enter" @leave="leave" appear
-    ><sign-form-forgot v-if="forgotPass" @closeForgot="forgotPass= false" :oldEmail="userData[0].userInput"></sign-form-forgot
+    ><sign-form-forgot
+  
+      v-if="forgotPass"
+      @closeForgot="forgotPass = false"
+      :oldEmail="userData[0].userInput"
+    ></sign-form-forgot
   ></transition>
 </template>
 
@@ -292,10 +297,13 @@ export default defineComponent({
 </script>
 
 <style scoped>
+
 div {
   display: flex;
   flex-direction: column;
+  width: 55vw;
 }
+
 ion-button.signbtn {
   --background: var(--ion-color-light);
   padding-top: 0.5vh !important;
@@ -347,4 +355,5 @@ p {
   display: flex;
   flex-direction: column;
 }
+
 </style>

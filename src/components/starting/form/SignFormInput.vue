@@ -56,6 +56,10 @@ ion-input {
   --color: var(--ion-color-secondary-contrast);
 }
 
+ion-item.item-has-focus {
+  --background: #fcfdfe !important;
+}
+
 ion-item.ion-item-sign {
   --color: var(--ion-color-secondary-contrast);
   --background: var(--ion-color-secondary);

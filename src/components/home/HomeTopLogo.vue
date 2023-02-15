@@ -1,58 +1,136 @@
 <template>
-  <div class="container">
-    <ion-img :src="stepLogoSrc" alt="step-logo" class="step-logo"></ion-img>
-    <ion-text>האפליקציה הרשמית של בה"ד אחת</ion-text>
-    <ion-img :src="bhdlogoSrc" alt="bhd-logo" class="bhd-logo"></ion-img>
-  </div>
+  <transition-group tag="div" class="container" appear name="fade">
+    <div class="cirele" :key="0"></div>
+    <ion-img
+      :src="stepLogoSrc"
+      alt="step-logo"
+      class="step-logo"
+      v-if="firstOpened"
+      :key="1"
+    ></ion-img>
+
+    <ion-img
+      :src="bhdlogoSrc"
+      alt="bhd-logo"
+      class="bhd-logo"
+      v-if="firstOpened"
+      :key="2"
+    ></ion-img>
+    <ion-text class="num" :key="3" ref="num"
+      >פרק {{ learnChapter + 1 }}
+    </ion-text>
+    <ion-text v-if="showHeading" :key="2" ref="text" class="text">
+      {{ text }}</ion-text
+    >
+  </transition-group>
 </template>
 
 <script>
 import { defineComponent } from "vue";
 import { IonImg, IonText } from "@ionic/vue";
+import { mapState } from "vuex";
 
 export default defineComponent({
   name: "HomeTopLogo",
   components: { IonImg, IonText },
+  props: ["firstOpened", "slideNum"],
 
   data() {
     return {
-      circleSrc: require("@/assets/media1/HomePage/top-circel.png"),
       bhdlogoSrc: require("@/assets/media1/openingScreen/bhd-logo.png"),
-      stepLogoSrc: require("@/assets/media1/HomePage/horizontal-logo.png"),
+      stepLogoSrc: require("@/assets/media1/openingScreen/horizontal-logo-text.png"),
+      text: "",
+      showHeading: false,
+
+      textArray: ["אנשים", "בחנים", "מקראות", "משחקים", "הסכתים"],
     };
+  },
+
+  computed: mapState(["learnChapter"]),
+
+  created() {
+    const unwatch = this.$watch("firstOpened", () => {
+      setTimeout(() => {
+        this.showHeading = true;
+        unwatch();
+      }, 500);
+    });
+  },
+
+  watch: {
+    slideNum: {
+      handler() {
+        this.text = this.textArray[this.slideNum];
+      },
+    },
+    learnChapter: {
+      handler() {
+        if (this.learnChapter != null) {
+          import(`@/json/chapters/chapter${this.learnChapter + 1}`).then(
+            (module) => {
+              this.text = module.title;
+              this.$refs.num.$el.style.opacity = 1;
+              this.$refs.text.$el.style.fontSize = "4.7vh";
+            }
+          );
+        } else {
+          this.$refs.num.$el.style.opacity = 0;
+          this.$refs.text.$el.style.top = "0vh";
+          this.text = this.textArray[this.slideNum];
+        }
+      },
+    },
   },
 });
 </script>
 
 <style scoped>
-
 .container {
-  position: absolute;
+  position: relative;
   top: 0;
   left: 0;
   width: 100vw;
   height: 18vh;
-  background-image: url("@/assets/media1/HomePage/top-circel.png");
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
 }
 .bhd-logo {
   position: relative;
   height: 6.5vh;
-  top: 3.25vh;
+  top: 4vh;
 }
 
 .step-logo {
   position: relative;
-  height: 5vh;
+  height: 9vh;
   top: 3vh;
 }
 
 ion-text {
   position: relative;
-  font-size: 1.7vh;
+  font-size: 5vh;
   top: 3.2vh;
   text-shadow: none;
   font-weight: 600;
+  transition: 1s;
+}
+
+.cirele {
+  width: 100%;
+  height: 200%;
+  transform: translateY(-50%);
+  border-radius: 100%;
+  background-color: #83a9ad;
+  position: absolute;
+}
+
+.num {
+  display: block;
+  font-size: 2.5vh;
+  top: 1.5vh;
+  opacity: 0;
+}
+
+.text {
+  position: relative;
+  top: 0vh;
 }
 </style>
