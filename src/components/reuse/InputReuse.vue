@@ -7,7 +7,7 @@
         v-model="inputSent"
         ref="input"
         required
-        @change="this.$emit('updateInputs', this.$.vnode.key, this.inputSent)"
+        @change="this.$emit('updateInputs', this.inputSent, this.$.vnode.key)"
       />
       <span class="underline"></span>
       <span class="field__label-wrap" aria-hidden="true">
@@ -22,12 +22,17 @@ import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "ReuseInput",
-  props: ["inputText", "ok"],
+  props: ["inputText", "ok", "color","width"],
 
   data() {
     return {
       inputSent: "",
     };
+  },
+
+  mounted() {
+    this.color? this.$refs.input.style.backgroundColor = "rgb(255, 247, 240)" : "";
+    this.width? this.$refs.input.style.width = this.width : "";
   },
 
   watch: {

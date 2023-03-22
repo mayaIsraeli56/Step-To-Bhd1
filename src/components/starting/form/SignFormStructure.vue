@@ -128,7 +128,7 @@ export default defineComponent({
   },
 
   methods: {
-    updateInputs(inputKey, inputSent) {
+    updateInputs(inputSent, inputKey) {
       this.userData[inputKey].userInput = inputSent;
     },
 

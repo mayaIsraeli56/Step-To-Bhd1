@@ -1,29 +1,24 @@
 <template>
   <div class="bkg">
     <ion-card>
+      <ion-img :src="img" alt="exit" @click="$emit('closeForgot')"></ion-img>
       <ion-card-header>
         <ion-card-title>אז שכחת סיסמה...</ion-card-title>
       </ion-card-header>
 
       <ion-card-content>
-        
-        <div class="field field_v2" ref="item">
-          <input
-            :class="[this.showErorr ? 'focus' : '', 'field__input']"
-            placeholder=" "
-            v-model="email"
-            ref="input"
-            required
-          />
-          <span class="underline"></span>
-          <span class="field__label-wrap" aria-hidden="true">
-            <span class="field__label">המייל שלי</span>
-          </span>
-        </div>
-        <ion-img :src="img" alt="exit" @click="$emit('closeForgot')"></ion-img>
+        <reuse-inupt
+          :data-index="1"
+          :key="1"
+          inputText="המייל שלי"
+          :ok="!showErorr"
+          color="rgb(255, 247, 240)"
+          @updateInputs="updateInputs"
+        ></reuse-inupt>
+
         <ion-button @click="checkFiled">שלח לי מייל לאיפוס סיסמה</ion-button>
         <transition appear>
-          <p v-if="showErorr">{{ msg }}</p>
+          <p :class="{ 'not-visible': !showErorr}">{{ msg }}</p>
         </transition>
       </ion-card-content>
     </ion-card>
@@ -40,7 +35,10 @@ import {
   IonImg,
 } from "@ionic/vue";
 import { defineComponent, computed } from "vue";
+import ReuseInupt from "@/components/reuse/InputReuse.vue";
 import { getAuth, sendPasswordResetEmail } from "firebase/auth";
+
+
 
 export default defineComponent({
   name: "SignFormForgot",
@@ -51,6 +49,7 @@ export default defineComponent({
     IonCardTitle,
     IonButton,
     IonImg,
+    ReuseInupt,
   },
   props: ["oldEmail"],
 
@@ -58,7 +57,6 @@ export default defineComponent({
     const img = computed(() =>
       require("@/assets/media1/openingScreen/cancel.png")
     );
-
     return { img };
   },
 
@@ -71,6 +69,10 @@ export default defineComponent({
   },
 
   methods: {
+    updateInputs(inputSent ) {
+      this.email = inputSent;
+    },
+
     checkFiled() {
       let atpos = this.email.indexOf("@");
 
@@ -86,7 +88,7 @@ export default defineComponent({
             this.msg = "נשלח מייל לאיפוס!";
             setTimeout(() => {
               this.$emit("closeForgot");
-            }, 1000);
+            }, 1200);
           })
           .catch((error) => {
             this.catchProblem(error.code);
@@ -101,7 +103,7 @@ export default defineComponent({
           this.msg = "מה עם המייל?";
           break;
         case "auth/user-not-found":
-          this.msg = "המייל לא קיים במערכה";
+          this.msg = "המייל לא קיים במערכת";
           break;
         case "auth/invalid-email":
           this.msg = " אתם בטוחים שהמייל הזה קיים ?";
@@ -115,7 +117,6 @@ export default defineComponent({
 });
 </script>
 
-<style scoped src="@/theme/input.css"></style>
 <style scoped>
 .bkg {
   position: absolute;
@@ -155,7 +156,6 @@ ion-card {
   flex-direction: column;
 }
 
-
 ion-card-title,
 ion-card-subtitle {
   color: var(--ion-color-medium-tint);
@@ -179,7 +179,7 @@ ion-card-content {
 ion-img {
   position: absolute;
   display: block;
-  top: -80%;
+  top: 5%;
   right: 5%;
   width: 12%;
   z-index: 3;
@@ -189,8 +189,8 @@ ion-img {
 
 p {
   color: var(--ion-color-medium-tint);
-  margin-top: 1%;
-  font-size: 2%;
+  font-size: 140%;
+  transition: 1s ease;
 }
 
 .v-enter-active,
@@ -206,7 +206,8 @@ p {
 .field__input {
   background: var(--ion-color-light);
 }
+
+.not-visible {
+  opacity: 0;
+}
 </style>
-
-
-

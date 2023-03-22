@@ -19,15 +19,14 @@ export default defineComponent({
   },
 
   mounted() {
-    this.myEventHandler();
-    window.addEventListener("resize", this.myEventHandler);
+    this.resizeHandler();
+    window.addEventListener("resize", this.resizeHandler);
   },
   unmounted() {
-    window.removeEventListener("resize", this.myEventHandler);
+    window.removeEventListener("resize", this.resizeHandler);
   },
   methods: {
-    myEventHandler() {
-
+    resizeHandler() {
    let width= window.innerWidth
    let height= window.innerHeight
 
