@@ -23,6 +23,7 @@
     animation-iteration-count: infinite;
     animation-timing-function: linear;
     width: 100%;
+    max-width: 180px;
   }
   
   @keyframes bounceAlpha {

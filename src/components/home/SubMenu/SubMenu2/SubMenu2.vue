@@ -6,7 +6,12 @@
     v-if="!openSubChapters"
   >
     <slot
-      ><swiper-slide v-for="n in 8" :key="n" :class="'slide' + n">
+      ><swiper-slide
+        v-for="n in this.ChapterInfo.length"
+        :key="n"
+        :class="'slide' + n"
+        ref="slide"
+      >
         <div class="circle">{{ n }}</div>
         <div class="title">{{ this.ChapterInfo[n - 1].title }}</div>
         <div class="text">{{ this.ChapterInfo[n - 1].text }}</div>
@@ -31,13 +36,18 @@ export default {
 
   data() {
     return {
-      slidesNum: 8,
+      slidesNum: null,
       ChapterInfo: ChapterInfo,
       openSubChapters: false,
       subchapter: null,
+      animated: true,
     };
   },
 
+  created() {
+    this.slidesNum = this.ChapterInfo.length;
+  },
+  
   methods: {
     openChapter() {
       this.openSubChapters = true;
@@ -54,7 +64,7 @@ export default {
 <style scoped>
 .swiper-slide {
   background-color: #fafafa;
-  height: 52vh;
+  height: 90%;
   border-radius: 7%;
   display: flex;
   align-items: center;
@@ -63,7 +73,7 @@ export default {
 }
 
 .swiper {
-  margin-top: -6vh;
+  margin-top: -6%;
 }
 
 .circle {
@@ -107,12 +117,13 @@ export default {
   height: 25vh;
   font-weight: 500;
 }
+
 </style>
 
 <style>
 .swiper-pagination {
   position: relative;
-  top: 0vh;
+  top: 0;
 }
 
 .swiper-pagination-bullet-active {

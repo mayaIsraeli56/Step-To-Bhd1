@@ -30,6 +30,7 @@ body {
   height: 100vh;
   scroll-behavior: smooth;
   overflow: hidden;
+  
 }
 
 html {
@@ -40,7 +41,7 @@ html {
 body {
   position: relative;
   vertical-align: middle;
-  background-color: #83a9ad;
+  background-color: var(--ion-color-secondary);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -59,6 +60,8 @@ body {
   width: 100%;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .bhd-logo {

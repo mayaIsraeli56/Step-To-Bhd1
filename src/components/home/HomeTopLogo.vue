@@ -70,12 +70,12 @@ export default defineComponent({
             (module) => {
               this.text = module.title;
               this.$refs.num.$el.style.opacity = 1;
-              this.$refs.text.$el.style.fontSize = "4.7vh";
+              this.$refs.text.$el.style.fontSize = "140%";
             }
           );
         } else {
           this.$refs.num.$el.style.opacity = 0;
-          this.$refs.text.$el.style.top = "0vh";
+          this.$refs.text.$el.style.top = "0";
           this.text = this.textArray[this.slideNum];
         }
       },
@@ -89,19 +89,19 @@ export default defineComponent({
   position: relative;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 18vh;
+  width: 100%;
+  height: 18%;
 }
 .bhd-logo {
   position: relative;
-  height: 6.5vh;
-  top: 4vh;
+  height: 35%;
+  top: 22%;
 }
 
 .step-logo {
   position: relative;
-  height: 9vh;
-  top: 3vh;
+  height: 50%;
+  top: 15%;
 }
 
 ion-text {
@@ -124,13 +124,14 @@ ion-text {
 
 .num {
   display: block;
-  font-size: 2.5vh;
-  top: 1.5vh;
+  font-size: 90%;
+  top: 10%;
   opacity: 0;
+  margin-bottom: 1.5%;
 }
 
 .text {
   position: relative;
-  top: 0vh;
+  top: 0;
 }
 </style>

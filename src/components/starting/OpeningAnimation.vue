@@ -48,13 +48,15 @@ export default {
 .bhd-logo {
   display: block;
   margin: auto;
-  margin-top: 2vh;
-  margin-bottom: 2vh;
+  margin-top: 5%;
+  margin-bottom: 2%;
+  transform: scale(0.8);
 }
 
 .STB-logo {
-  height: 28vh;
-  margin: 3vh;
+  height: 28%;
+  width: 60%;
+  margin: 8% 20%;
 }
 
 .wave1 {
@@ -62,7 +64,7 @@ export default {
   bottom: 0;
   left: 0;
   width: 140%;
-  height: 35vh;
+  height: 35%;
   z-index: -1;
 }
 
@@ -71,6 +73,6 @@ export default {
   bottom: 0;
   left: 0;
   width: 100%;
-  max-height: 70vh;
+  max-height: 70%;
 }
 </style>

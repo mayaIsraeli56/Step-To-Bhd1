@@ -40,21 +40,12 @@ export default {
 </script>
 
 <style scoped>
-.signs-container {
-  position: absolute;
-  width: 100vw;
-  height: 76vh;
-  margin: 12vh 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
 
 .arrow-container {
   position: absolute;
-  width: 25vw;
-  margin: 3vh 0;
-  height: 94vh;
+  width: 25%;
+  margin: 0;
+  height: 100%;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -62,22 +53,4 @@ export default {
   justify-content: space-between;
 }
 
-img {
-  position: absolute;
-  width: 100vw;
-  height: 100vh;
-  z-index: -1;
-  left: 0vw;
-}
-
-.swipe-area {
-  position: absolute;
-  width: 100vw;
-  height: 100vh;
-  z-index: 2;
-}
-.swipe-area-d {
-  height: 30vh;
-  top: 70vh;
-}
 </style>

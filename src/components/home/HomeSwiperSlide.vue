@@ -27,7 +27,7 @@ export default {
 h2 {
   position: relative;
   color: var(--ion-color-medium);
-  font-size: large;
+  font-size: x-large !important;
   margin-top: 5%;
   text-shadow: none;
 }
@@ -35,7 +35,7 @@ h2 {
 img {
   position: relative;
   transform: scale(80%);
-  margin-top: 30%;
+  margin-top: 20%;
   transition: 0.3s;
 }
 </style>

@@ -36,12 +36,13 @@ export default {
 <style scoped>
 .signs-container {
   position: absolute;
-  width: 100vw;
-  height: 76vh;
-  margin: 12vh 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  padding: 15% 0% 15% 0%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 .signs-animation-d {
   animation: slide-fade-txt-d 1s ease-in-out forwards;

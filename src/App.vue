@@ -1,5 +1,5 @@
 <template>
-  <ion-app>
+  <ion-app id="ion-app" ref="ionApp">
     <router-view v-slot="{ Component }">
       <transition mode="out-in" appear>
         <component :is="Component" :key="$route.path" />
@@ -8,7 +8,7 @@
   </ion-app>
 </template>
 
-<script lang="ts">
+<script lang="js">
 import { IonApp } from "@ionic/vue";
 import { defineComponent } from "vue";
 
@@ -17,10 +17,34 @@ export default defineComponent({
   components: {
     IonApp,
   },
+
+  mounted() {
+    this.myEventHandler();
+    window.addEventListener("resize", this.myEventHandler);
+  },
+  unmounted() {
+    window.removeEventListener("resize", this.myEventHandler);
+  },
+  methods: {
+    myEventHandler() {
+
+   let width= window.innerWidth
+   let height= window.innerHeight
+
+   if(!(width <= 600 && height<= 1000 && (height/width) <= 3.5 && (height/width) >=1.5)) {
+      this.$refs.ionApp.$el.style.maxHeight = `${Math.min(height, (width*2))}px`
+      this.$refs.ionApp.$el.style.maxWidth= `${Math.min(width, (height*0.5))}px`
+   }
+      this.$refs.ionApp.$el.style.margin= `auto`
+    },
+  },
 });
 </script>
 
 <style scoped>
+.ion-app {
+  display: block;
+}
 .v-enter-active,
 .v-leave-active {
   transition: opacity 1s ease;

@@ -1,49 +1,4 @@
-<template>
-  <div>
-    <div class="field field_v2">
-      <input
-        :class="[!this.ok ? 'focus' : '', 'field__input']"
-        placeholder=" "
-        v-model="inputSent"
-        ref="input"
-        required
-        @change="this.$emit('updateInputs', this.$.vnode.key, this.inputSent)"
-      />
-      <span class="underline"></span>
-      <span class="field__label-wrap" aria-hidden="true">
-        <span class="field__label">{{ inputText }}</span>
-      </span>
-    </div>
-  </div>
-</template>
-
-<script>
-import { defineComponent } from "vue";
-
-export default defineComponent({
-  name: "SignFormInput",
-  props: ["inputText", "ok"],
-
-  data() {
-    return {
-      inputSent: "",
-    };
-  },
-
-  watch: {
-    ok: {
-      handler() {
-        if (!this.ok) {
-          this.$refs.input.focus();
-        }
-      },
-    },
-  },
-});
-</script>
-
-<style scoped>
-div {
+.field {
   width: 70%;
 }
 
@@ -68,10 +23,10 @@ div {
 }
 
 /*
-=====
-CORE STYLES
-=====
-*/
+    =====
+    CORE STYLES
+    =====
+    */
 
 .field {
   --uiFieldBorderWidth: var(--fieldBorderWidth, 2px);
@@ -92,6 +47,7 @@ CORE STYLES
   border-bottom: var(--uiFieldBorderWidth) solid
     var(--fieldBorderColor, rgba(0, 0, 0, 0.25));
   color: var(--ion-color-primary-contrast);
+  background-color: var(--ion-color-secondary);
 }
 
 .field__input:focus {
@@ -175,8 +131,7 @@ CORE STYLES
   transition-delay: 0;
 }
 
-
-.underline{
+.underline {
   transition: all 0.5s;
   display: inline-block;
   bottom: 3%;
@@ -187,11 +142,30 @@ CORE STYLES
   height: 4%;
   background-color: var(--ion-color-primary-tint);
 }
-input:focus + .underline{
+input:focus + .underline {
   width: 83%;
 }
 
 .field__input.focus {
   background: #ebdfdf;
 }
-</style>
+
+
+/* 
+TEMPLATE template
+
+<div class="field field_v2" ref="item">
+      <input
+        id="last-name"
+        :class="[!this.ok ? 'focus' : '', 'field__input']"
+        placeholder=" "
+        v-model="inputSent"
+        ref="input"
+        required
+      />
+      <span class="underline"></span>
+      <span class="field__label-wrap" aria-hidden="true">
+        <span class="field__label">{{ inputText }}</span>
+      </span>
+    </div>
+*/

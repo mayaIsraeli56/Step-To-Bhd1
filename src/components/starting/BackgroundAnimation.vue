@@ -52,8 +52,8 @@ export default {
         }
       }
 
-      this.$refs.waveImg.className = "";
-      this.$refs.waveImg2.className = "";
+      this.$refs.waveImg.className = " ";
+      this.$refs.waveImg2.className = " ";
       this.$refs.waveImg.classList.add(classWave1);
       this.$refs.waveImg2.classList.add(classWave2);
       this.lastChosen = this.signOption;
@@ -65,32 +65,32 @@ export default {
 <style scoped>
 img {
   position: absolute;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   z-index: -1;
-  left: 0vw;
+  left: 0;
 }
 
 .starting-pg {
-  top: 10vh;
-  left: 10vw;
+  top: 10%;
+  left: 10%;
   transform: rotate(20deg) scale(150%);
   opacity: 0.4;
 }
 
 @keyframes from-opening {
   0% {
-    top: 10vh;
-    left: 10vw;
+    top: 10%;
+    left: 10%;
     opacity: 0.4;
     transform: rotate(20deg) scale(150%);
   }
 
   100% {
-    top: 0vh;
+    top: 0;
     opacity: 1;
     transform: rotate(0deg);
-    left: 0vw;
+    left: 0;
     width: 100%;
   }
 }
@@ -101,34 +101,34 @@ img {
 
 @keyframes slide-down {
   0% {
-    top: 0vh;
+    top: 0;
     transform: rotate(0deg);
-    left: 0vw;
+    left: 0;
     width: 100%;
   }
 
   100% {
-    top: 30vh;
-    left: 5vw;
+    top: 30%;
+    left: 5%;
     transform: scaleX(130%) rotate(10deg);
   }
 }
 
 @keyframes slide-up {
   0% {
-    top: 0vh;
-    left: 0vw;
+    top: 0;
+    left: 0;
     width: 100%;
   }
 
   100% {
-    top: -100vh;
+    top: -100%;
   }
 }
 
 @keyframes slide-up2 {
   0% {
-    top: 85vh;
+    top: 85%;
   }
 
   60% {
@@ -142,7 +142,7 @@ img {
 }
 
 #wave2 {
-  top: 100vh;
+  top: 100%;
 }
 
 .wave-anim-d {
@@ -157,55 +157,55 @@ img {
 }
 
 .wave-anim-d-r {
-  top: 30vh;
-  left: 5vw;
+  top: 30%;
+  left: 5%;
   transform: scaleX(130%) rotate(10deg);
   animation: slide-down-r 2s ease-in-out forwards;
 }
 .wave2-anim-d-r {
-  top: 100vh;
+  top: 100%;
   animation: slide2-down-r 2s ease-in-out forwards;
 }
 .wave-anim-u-r {
-  top: -100vh;
+  top: -100%;
   animation: slide-up-r 2s ease-in-out forwards;
 }
 
 .wave2-anim-u-r {
-  top: 0vh;
+  top: 0;
   animation: slide-up2-r 2s ease-in-out forwards;
 }
 
 @keyframes slide-down-r {
   0% {
-    top: 30vh;
-    left: 5vw;
+    top: 30%;
+    left: 5%;
     transform: scaleX(130%) rotate(10deg);
   }
 
   100% {
-    top: -100vh;
+    top: -100%;
     transform: rotate(0deg);
-    left: 0vw;
+    left: 0;
     width: 100%;
   }
 }
 
 @keyframes slide-up-r {
   0% {
-    top: -100vh;
+    top: -100%;
   }
 
   100% {
-    top: 30vh;
-    left: 5vw;
+    top: 30%;
+    left: 5%;
     transform: scaleX(130%) rotate(10deg);
   }
 }
 
 @keyframes slide-up2-r {
   0% {
-    top: 0vh;
+    top: 0;
     transform: scaleX(100%) rotate(0deg);
   }
 
@@ -214,13 +214,13 @@ img {
   }
 
   100% {
-    top: 100vh;
+    top: 100%;
   }
 }
 
 @keyframes slide2-down-r {
   0% {
-    top: 100vh;
+    top: 100%;
     transform: scaleX(100%) rotate(0deg);
   }
 
@@ -229,7 +229,7 @@ img {
   }
 
   100% {
-    top: 0vh;
+    top: 0;
   }
 }
 </style>

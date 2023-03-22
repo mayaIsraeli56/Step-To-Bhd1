@@ -21,7 +21,7 @@
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: "SignFormInput",
+  name: "ReuseInput",
   props: ["inputText", "ok"],
 
   data() {

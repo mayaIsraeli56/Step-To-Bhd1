@@ -5,21 +5,6 @@
     :centeredSlides="true"
     :initialSlide="2"
     :slideToClickedSlide="true"
-    :breakpoints="{
-      '640': {
-        slidesPerView: 3,
-        spaceBetween: 20,
-      },
-      '768': {
-        slidesPerView: 4,
-        spaceBetween: 40,
-      },
-      '1024': {
-        slidesPerView: 5,
-        spaceBetween: 50,
-      },
-    }"
-    :modules="modules"
     class="mySwiper homeSwiper"
     ref="mySwiper"
     @slideChange="swiperChange($event, 'change')"
@@ -56,12 +41,7 @@ export default {
       spaceBet: 5,
       slideNum: 5,
       activeIndex: null,
-    };
-  },
-
-  setup() {
-    return {
-      modules: [],
+      opacity: true,
     };
   },
 
@@ -81,7 +61,7 @@ export default {
 
     naviAnim() {
       let swiper = this.$refs.mySwiper.$el;
-      swiper.style.transition = "1s ease";
+      swiper.style.transition = "0.7s ease";
       swiper.style.marginTop = "-8vh";
 
       for (let i = 1; i < this.slideNum + 1; i++) {
@@ -94,22 +74,15 @@ export default {
 
     slideAnim() {
       for (let i = 1; i < this.slideNum + 1; i++) {
-        this.$el.querySelector(`.slide${i}`).style.top = "0vh";
+        this.$el.querySelector(`.slide${i}`).style.top = "0";
         this.$el.querySelector(`.slide${i}`).style.transition = "0.5s";
-      }
-
-      let slide = [".swiper-slide-prev", `.swiper-slide-next`];
-
-      for (let i = 0; i < slide.length; i++) {
-        if (this.$el.querySelector(slide[i])) {
-          this.$el.querySelector(slide[i]).style.opacity = "1";
-        }
       }
     },
   },
 
   mounted() {
     this.$watch("activeIndex", () => {
+      this.opacity = false;
       this.slideAnim();
     });
 
@@ -121,17 +94,16 @@ export default {
 <style scoped>
 .swiper {
   position: relative;
-  margin-top: 10vh;
-  width: 100vw;
-  height: 35vh;
+  margin-top: 15%;
+  width: 100%;
+  height: 35%;
 }
 
 .swiper-slide {
   text-align: center;
-  font-size: 2vh;
   background: var(--ion-color-secondary-contrast);
   border-radius: 100%;
-  height: 15vh;
+  height: 48%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: -webkit-flex;
@@ -148,22 +120,24 @@ export default {
 }
 
 .swiper-slide:not(.swiper-slide-active) {
-  transform: scale(80%) ;
-  opacity: 0.8;
+  transform: scale(80%);
+  opacity: 0;
+  animation: fade 0.7s ease-out 0.3s forwards;
 }
 
 .swiper-slide-next,
 .swiper-slide-prev {
-  opacity: 0.9;
+  opacity: 0;
+  animation: fade 1s ease-out 0.3s forwards;
 }
 
 .swiper-slide-active {
-  opacity: 1;
-}
-
-.swiper-slide-active {
+  opacity: 0;
+  animation: fade 1s ease-out 0.3s forwards;
   transform: translateY(20%);
+  font-size:  large;
 }
+
 .up {
   transform: translateY(0%);
 }

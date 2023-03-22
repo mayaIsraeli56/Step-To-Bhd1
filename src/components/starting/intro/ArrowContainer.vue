@@ -41,7 +41,7 @@ export default {
 .arrow-container {
   position: absolute;
   width: 25vw;
-  margin: 3vh 0;
+  margin: 0;
   height: 94vh;
   left: 50%;
   transform: translateX(-50%);

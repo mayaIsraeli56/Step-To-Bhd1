@@ -1,20 +1,26 @@
 <template>
-  <ion-img :src="icon"></ion-img>
-  <ion-text class="text-dark-plain note"
-    >לחצו על הפרק לפתיחת תתי - הנושאים</ion-text
-  >
-  <ion-img
-    :src="require('@/assets/media1/HomePage/arrow-back.png')"
-    class="arrow"
-    @click="$emit('backToSubMenu')"
-  ></ion-img>
+  <transition-group tag="div" class="container" appear name="fade">
+    <ion-img :src="icon" class="icon" :key="0"></ion-img>
+    <ion-text class="text-dark-plain note" :key="1"
+      >לחצו על הפרק לפתיחת תתי - הנושאים</ion-text
+    >
+    <ion-img
+      :key="2"
+      :src="require('@/assets/media1/HomePage/arrow-back.png')"
+      class="arrow"
+      @click="$emit('backToSubMenu')"
+    ></ion-img>
+  </transition-group>
+
   <div>
     <ion-content>
       <ion-list>
-        <div class="card" v-for="(sec, index) in sections" :key="index">
-          <ion-text class="text-dark-plain num">{{ index + 1 }}</ion-text>
-          <ion-text class="text-dark-plain title">{{ sec.title }}</ion-text>
-        </div>
+        <transition-group tag="div" class="container" appear name="fade">
+          <div class="card" v-for="(sec, index) in sections" :key="index" @click="choseSubSubChapter(`slide${index}`)" :ref="'slide' + index">
+            <ion-text class="text-dark-plain num">{{ index + 1 }}</ion-text>
+            <ion-text class="text-dark-plain title">{{ sec.title }}</ion-text>
+          </div>
+        </transition-group>
       </ion-list>
     </ion-content>
   </div>
@@ -43,7 +49,11 @@ export default {
       this.sections = module.sections;
     });
   },
-  methods: {},
+  methods: {
+    choseSubSubChapter(chosenSlide) {
+      console.log(chosenSlide)
+    }
+  },
 };
 </script>
 
@@ -63,15 +73,15 @@ ion-img {
 .card {
   background-color: #fafafa;
   height: 14vh;
-  width: 85vw;
+  width: 85%;
   border-radius: 5vh;
   display: flex;
   align-items: center;
   justify-content: flex-start;
   margin: auto;
-  margin-top: 2.5vh;
-  margin-bottom: 2.5vh;
-  padding: 1vh 3vw;
+  margin-top: 5%;
+  margin-bottom: 2.5%;
+  padding: 1% 3%;
 }
 
 ion-content {
@@ -97,5 +107,8 @@ ion-content {
   height: 3.1vh;
   top: 1.5vh;
   right: 4vw;
+}
+.icon {
+  height: 10vh;
 }
 </style>

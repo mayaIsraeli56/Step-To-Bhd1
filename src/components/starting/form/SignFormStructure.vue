@@ -6,25 +6,23 @@
     @leave="leave"
     appear
     mode="out-in"
+    class="inputs"
   >
-    <sign-form-input
+    <reuse-inupt
       v-for="(data, index) in userData"
       :data-index="index"
       :key="index"
       :inputText="data.inputText"
-      :userData="userData"
-      :userInput="data.userInput"
-      :formSent="formSent"
       :ok="data.ok"
-      @sendToFire="checkFileds"
-    ></sign-form-input>
+      @updateInputs="updateInputs"
+    ></reuse-inupt>
 
     <ion-button
       v-if="btnOn"
       color="light"
       class="signbtn"
       :data-index="4"
-      @click.prevent="formSent++"
+      @click.prevent="checkFileds"
       >{{ text[1] }}
     </ion-button>
 
@@ -38,7 +36,7 @@
     </ion-button>
 
     <p v-if="errMsg && btnOn && !forgotPass" :data-index="4">{{ errMsg }}</p>
-    <div class="arrow" :data-index="6" v-if="btnOn" >
+    <div class="arrow" :data-index="6" v-if="btnOn">
       {{ text[0] }}
       <arrow-animation :deg="0"></arrow-animation>
     </div>
@@ -46,7 +44,6 @@
 
   <transition @before-enter="beforeEnter" @enter="enter" @leave="leave" appear
     ><sign-form-forgot
-  
       v-if="forgotPass"
       @closeForgot="forgotPass = false"
       :oldEmail="userData[0].userInput"
@@ -55,7 +52,7 @@
 </template>
 
 <script>
-import SignFormInput from "./SignFormInput.vue";
+import ReuseInupt from "@/components/reuse/InputReuse.vue";
 import SignFormForgot from "./SignFormForgot.vue";
 import ArrowAnimation from "../intro/ArrowAnimation.vue";
 import { defineComponent } from "vue";
@@ -70,7 +67,12 @@ import {
 
 export default defineComponent({
   name: "SignFormStructure",
-  components: { SignFormInput, SignFormForgot, ArrowAnimation, IonButton },
+  components: {
+    ReuseInupt,
+    SignFormForgot,
+    ArrowAnimation,
+    IonButton,
+  },
   props: ["signOption"],
   emits: ["signOptChanged"],
 
@@ -83,7 +85,7 @@ export default defineComponent({
         { input: "verify", inputText: "אימות הסיסמה", userInput: "", ok: true },
         {
           input: "fullName",
-          inputText: "אתם יכולים לקרוא לי...",
+          inputText: "קראו לי...",
           userInput: "",
           ok: true,
         },
@@ -92,7 +94,6 @@ export default defineComponent({
       errMsg: "",
       btnOn: false,
       text: [],
-      formSent: 0,
       forgotPass: false,
     };
   },
@@ -127,6 +128,10 @@ export default defineComponent({
   },
 
   methods: {
+    updateInputs(inputKey, inputSent) {
+      this.userData[inputKey].userInput = inputSent;
+    },
+
     checkFileds() {
       let email = this.userData[0].userInput;
       let password = this.userData[1].userInput;
@@ -245,7 +250,7 @@ export default defineComponent({
           break;
         case "diff-password":
           this.errMsg = "הסיסמאות לא תואמות";
-          notOk.push(1);
+          notOk.push(1, 2);
           break;
         case "no-ver-password":
           this.errMsg = "הקלד את הסיסמה שנית";
@@ -297,54 +302,58 @@ export default defineComponent({
 </script>
 
 <style scoped>
-
 div {
   display: flex;
   flex-direction: column;
-  width: 55vw;
+  width: 100%;
+  margin-top: 2%;
+}
+
+.inputs {
+  width: 70%;
 }
 
 ion-button.signbtn {
   --background: var(--ion-color-light);
-  padding-top: 0.5vh !important;
-  padding-bottom: 0.5vh !important;
-  padding-left: 3vh !important;
-  padding-right: 3vh !important;
-  margin: 3vh;
+  padding: 0;
+  margin: 20%;
+  margin-top: 6%;
   margin-bottom: 0vh;
   font-weight: 600;
-  font-size: 2.5vh;
+  font-size: 90%;
   --border-radius: 2vh;
+  height: 5vh !important;
 }
 
 .arrow {
   position: absolute;
-  right: 0;
-  bottom: 2vh;
-  height: 10vh;
-  width: 100vw;
+  align-self: center;
+  bottom: 2%;
+  height: 10%;
+  width: 100%;
   display: flex;
   align-items: center;
   flex-direction: column;
-  font-size: 2.3vh;
+  font-size: 100%;
   color: var(--ion-color-secondary);
 }
 .arrow > div {
-  width: 15vw;
+  width: 20%;
 }
 
 p {
-  width: 50vw;
+  width: 100%;
   text-align: center;
-  font-size: 5vw;
+  font-size: 92%;
   margin-left: auto;
   margin-right: auto;
 }
 
 .forgot {
   text-decoration: underline;
-  font-size: 2vh;
-  margin-bottom: 2vh;
+  font-size: 80%;
+  margin-bottom: 0;
+  --border-radius: 10vh;
 }
 
 .forgot:active {
@@ -355,5 +364,4 @@ p {
   display: flex;
   flex-direction: column;
 }
-
 </style>

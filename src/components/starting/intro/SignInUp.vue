@@ -34,17 +34,20 @@
   
   <style scoped>
   .sign {
-    width: 100vw;
+    width: 100%;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+    height: fit-content;
   }
   .sign > .action {
-    font-size: 2.5vh;
+    font-size: 100%;
+    padding: 2% 0%;
   }
   .sign > .content {
-    font-size: 7vh;
+    font-size: 200%;
     font-weight: bold;
-    padding: 0vh 10vw 3vh 10vw;
+    padding: 0% 10% 0% 10%;
   }
   </style>
   

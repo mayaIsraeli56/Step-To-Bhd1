@@ -1,7 +1,7 @@
 <template>
   <swiper
     :centeredSlides="true"
-    :initialSlide="0"
+    :initialSlide="$store.state.subChapter"
     :spaceBetween="5"
     :slidesPerView="1.3"
     :pagination="true"
@@ -42,8 +42,8 @@ export default {
     },
 
     chapterClicked() {
-      this.$emit('chapterChosen', this.activeIndex)
-      this.$store.commit('changeSubChapter', this.activeIndex)
+      this.$emit("chapterChosen", this.activeIndex);
+      this.$store.commit("changeSubChapter", this.activeIndex);
     },
 
     slideAnim() {
@@ -53,7 +53,7 @@ export default {
         this.$el.querySelector(`.slide${i}`).style.scale = "90%";
       }
 
-      this.$el.querySelector(`.swiper-slide-active`).style.top = "0vh";
+      this.$el.querySelector(`.swiper-slide-active`).style.top = "0";
       this.$el.querySelector(`.swiper-slide-active`).style.opacity = 1;
       this.$el.querySelector(`.swiper-slide-active`).style.scale = "100%";
     },
@@ -69,6 +69,7 @@ export default {
     this.slideAnim();
     this.$watch("activeIndex", () => {
       this.slideAnim();
+      this.$store.state.subChapter = this.activeIndex;
     });
   },
 };

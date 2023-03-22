@@ -31,3 +31,4 @@ const app = createApp(App).use(IonicVue).use(router).use(Vue3TouchEvents).use(st
 router.isReady().then(() => {
   app.mount("#app");
 });
+

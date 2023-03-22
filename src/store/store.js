@@ -3,7 +3,9 @@ import { createStore } from "vuex";
 export default createStore({
   state: {
     learnChapter: null,
-    naviUp:false
+    naviUp:false,
+    openMe: "",
+    subChapter: 0,
   },
   getters: {
   },
@@ -18,6 +20,10 @@ export default createStore({
 
     toNaviUp(state) {
       state.naviUp = true;
+    },
+
+    toOpen(state, componentName) {
+      state.openMe = componentName;
     },
   },
 

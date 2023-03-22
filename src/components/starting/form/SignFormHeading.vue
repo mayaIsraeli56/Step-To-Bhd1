@@ -46,7 +46,7 @@ export default defineComponent({
 
 <style scoped>
 h2 {
-  font-size: 6vh;
+  font-size: 3rem;
   font-weight: bold;
   --animate-duration: 0.8s;
 }

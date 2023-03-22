@@ -40,13 +40,13 @@
   <style scoped>
   .swipe-area {
     position: absolute;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     z-index: 2;
   }
   .swipe-area-d {
-    height: 30vh;
-    top: 70vh;
+    height: 25%;
+    top: 75%;
   }
   </style>
   

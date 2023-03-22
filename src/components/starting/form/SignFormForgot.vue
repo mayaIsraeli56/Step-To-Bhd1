@@ -1,19 +1,25 @@
 <template>
-  <div>
+  <div class="bkg">
     <ion-card>
       <ion-card-header>
         <ion-card-title>אז שכחת סיסמה...</ion-card-title>
       </ion-card-header>
 
       <ion-card-content>
-        <ion-item>
-          <ion-input
-            color="medium"
-            placeholder="המייל שלי"
-            lass="ion-label-sign"
+        
+        <div class="field field_v2" ref="item">
+          <input
+            :class="[this.showErorr ? 'focus' : '', 'field__input']"
+            placeholder=" "
             v-model="email"
-          ></ion-input>
-        </ion-item>
+            ref="input"
+            required
+          />
+          <span class="underline"></span>
+          <span class="field__label-wrap" aria-hidden="true">
+            <span class="field__label">המייל שלי</span>
+          </span>
+        </div>
         <ion-img :src="img" alt="exit" @click="$emit('closeForgot')"></ion-img>
         <ion-button @click="checkFiled">שלח לי מייל לאיפוס סיסמה</ion-button>
         <transition appear>
@@ -30,8 +36,6 @@ import {
   IonCardContent,
   IonCardHeader,
   IonCardTitle,
-  IonInput,
-  IonItem,
   IonButton,
   IonImg,
 } from "@ionic/vue";
@@ -45,8 +49,6 @@ export default defineComponent({
     IonCardContent,
     IonCardHeader,
     IonCardTitle,
-    IonInput,
-    IonItem,
     IonButton,
     IonImg,
   },
@@ -113,17 +115,21 @@ export default defineComponent({
 });
 </script>
 
+<style scoped src="@/theme/input.css"></style>
 <style scoped>
-div {
-  background-color: #4c4c5058;
-  width: 100vw !important;
-  height: 100vh;
+.bkg {
   position: absolute;
+  width: 100% !important;
+  height: 100%;
+  margin: 0 !important;
+  padding: 0;
   top: 0;
-  left: 0;
+
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #4c4c5058;
+  z-index: 2;
 }
 ion-card-header.ios {
   display: flex;
@@ -131,18 +137,18 @@ ion-card-header.ios {
 }
 
 ion-card-header {
-  margin-top: 4vh;
+  margin-top: 8%;
 }
 
 ion-button {
-  margin-top: -3vh;
+  margin-top: -5%;
 }
 
 ion-card {
-  height: 35vh;
-  width: 80vw;
+  height: 35%;
+  width: 80%;
   position: relative;
-  top: -6vh;
+  top: -6%;
   background-color: var(--ion-color-secondary);
   border-radius: 10%;
 }
@@ -152,12 +158,12 @@ ion-card-subtitle {
   color: var(--ion-color-medium-tint);
   text-shadow: none;
   font-weight: 650;
-  font-size: 2.7vh;
+  font-size: 180%;
 }
 
 ion-item {
   border-radius: 4vh;
-  width: 60vw;
+  width: 60%;
 }
 
 ion-card-content {
@@ -170,17 +176,17 @@ ion-card-content {
 ion-img {
   position: relative;
   top: -16vh;
-  left: 32vw;
-  width: 5vh;
+  left: 45%;
+  width: 12%;
   z-index: 3;
   --background-color: rgb(255, 247, 240);
-  padding: 1.5vh;
+  padding: 3%;
 }
 
 p {
   color: var(--ion-color-medium-tint);
-  margin-top: 1vh;
-  font-size: 2vh;
+  margin-top: 1%;
+  font-size: 2%;
 }
 
 .v-enter-active,
@@ -192,4 +198,11 @@ p {
 .v-leave-to {
   opacity: 0;
 }
+
+.field__input {
+  background: var(--ion-color-light);
+}
 </style>
+
+
+

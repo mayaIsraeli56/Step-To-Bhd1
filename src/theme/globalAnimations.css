@@ -25,6 +25,27 @@
   }
 }
 
+@keyframes slide-fade-scale {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fade {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+@keyframes fade-half {
+  from {opacity: 0;}
+  to {opacity: 0.5;}
+}
+
 /* openingAnimation */
 .fade-enter-from {
     opacity: 0;
@@ -53,3 +74,4 @@
   .fade-leave-active {
     transition: all 0.3s ease;
   }
+

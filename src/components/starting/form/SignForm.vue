@@ -13,6 +13,7 @@
 import { defineComponent } from "vue";
 import SignFormStructure from "./SignFormStructure.vue";
 import SignFormHeading from "./SignFormHeading.vue";
+
 import { db } from "@/firebase/firebaseInit";
 import { collection, getDocs } from "firebase/firestore";
 
@@ -29,6 +30,7 @@ export default defineComponent({
 
   mounted() {
     async () => {
+      await getDocs(collection(db, "chapter1"));
       const querySnapshot = await getDocs(collection(db, "chapter1"));
       querySnapshot.forEach((doc) => {
         console.log(doc.id, " => ", doc.data());
@@ -41,23 +43,26 @@ export default defineComponent({
 
 <style scoped>
 .form-page {
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0 !important;
 }
 sign-form-heading {
-  margin-top: 5vh;
-  margin-bottom: 0vh;
-  padding: 0vh 10vw 3vh 10vw;
+  margin-top: 4%;
+  margin-bottom: 0;
+  padding: 0 10% 3% 10%;
   background-color: aliceblue;
-  height: 10vh;
-  width: 50vw;
+  height: 10%;
+  width: 50%;
 }
 
 img {
-  margin-top: 6vh;
-  width: 12vh;
+  margin-top: 6%;
+  width: 20%;
 }
 </style>
