@@ -124,7 +124,6 @@ export default defineComponent({
   margin: 0 !important;
   padding: 0;
   top: 0;
-
   display: flex;
   justify-content: center;
   align-items: center;
@@ -137,21 +136,25 @@ ion-card-header.ios {
 }
 
 ion-card-header {
-  margin-top: 8%;
+  margin: 0%;
 }
 
 ion-button {
-  margin-top: -5%;
+  margin: 4%;
 }
 
 ion-card {
+  position: relative;
   height: 35%;
   width: 80%;
-  position: relative;
-  top: -6%;
+  top: -8%;
   background-color: var(--ion-color-secondary);
   border-radius: 10%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 }
+
 
 ion-card-title,
 ion-card-subtitle {
@@ -174,13 +177,14 @@ ion-card-content {
 }
 
 ion-img {
-  position: relative;
-  top: -16vh;
-  left: 45%;
+  position: absolute;
+  display: block;
+  top: -80%;
+  right: 5%;
   width: 12%;
   z-index: 3;
-  --background-color: rgb(255, 247, 240);
   padding: 3%;
+  --background-color: rgb(255, 247, 240);
 }
 
 p {
