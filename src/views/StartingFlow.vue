@@ -9,7 +9,7 @@
 <script lang="ts">
 import { IonContent, IonPage } from '@ionic/vue';
 import { defineComponent } from 'vue';
-import StartingPages from "@/components/starting/StartingPage.vue";
+import StartingPages from "@/components/starting/base/StartingPage.vue";
 
 export default defineComponent({
   name: 'StartingFlow',

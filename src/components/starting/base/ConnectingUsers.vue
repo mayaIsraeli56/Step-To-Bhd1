@@ -8,10 +8,10 @@
 </template>
 
 <script>
-import ArrowContainer from "./intro/ArrowContainer.vue";
-import SignsContainer from "./intro/SignsContainer.vue";
+import ArrowContainer from "../intro/ArrowContainer.vue";
+import SignsContainer from "../intro/SignsContainer.vue";
 import SwipeArea from "./SwipeArea.vue";
-import SignForm from "./form/SignForm.vue";
+import SignForm from "../form/SignForm.vue";
 
 export default {
   name: "ConnectingUsers",

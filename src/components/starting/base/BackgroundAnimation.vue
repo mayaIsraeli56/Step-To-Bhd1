@@ -3,13 +3,13 @@
     <img
       class="starting-pg"
       ref="waveImg"
-      src="./../../assets/media1/openingScreen/wave1.png"
+      src="@/assets/media1/openingScreen/wave1.png"
     />
     <img
       id="wave2"
       class=""
       ref="waveImg2"
-      src="./../../assets/media1/openingScreen/dark-wave-back.png"
+      src="@/assets/media1/openingScreen/dark-wave-back.png"
     />
   </div>
 </template>

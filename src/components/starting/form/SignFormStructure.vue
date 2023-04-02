@@ -175,7 +175,6 @@ export default defineComponent({
       immediate: true,
       handler() {
         this.btnOn = !this.btnOn;
-        this.errMsg = "";
         this.$emit("signOptChanged");
 
         this.userData = [];
