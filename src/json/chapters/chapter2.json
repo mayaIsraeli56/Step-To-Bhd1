@@ -5,16 +5,8 @@
   
     "sections": [
       {
-        "title": "",
-        "text": [
-          "",
-          "",
-          "",
-          "",
-          "",
-          ""
-        ],
-        "sub-sections": [
+        "title": "",  
+        "subSections": [
           {
             "title": "",
             "text": []
@@ -23,15 +15,7 @@
       },
       {
         "title": "",
-        "text": [
-          "",
-          "",
-          "",
-          "",
-          "",
-          ""
-        ],
-        "sub-sections": [
+        "subSections": [
           {
             "title": "",
             "text": []
@@ -40,15 +24,7 @@
       },
       {
         "title": "",
-        "text": [
-          "",
-          "",
-          "",
-          "",
-          "",
-          ""
-        ],
-        "sub-sections": [
+        "subSections": [
           {
             "title": "",
             "text": []

@@ -22,6 +22,13 @@
     <ion-text v-if="showHeading" :key="2" ref="text" class="text">
       {{ text }}</ion-text
     >
+    <ion-img
+      :src="searchSrc"
+      alt="search-icon"
+      class="search"
+      v-if="learnChapter != null"
+      :key="3"
+    ></ion-img>
   </transition-group>
 </template>
 
@@ -39,14 +46,14 @@ export default defineComponent({
     return {
       bhdlogoSrc: require("@/assets/media1/openingScreen/bhd-logo.png"),
       stepLogoSrc: require("@/assets/media1/openingScreen/horizontal-logo-text.png"),
+      searchSrc: require("@/assets/media1/HomePage/magnifying-glass.png"),
       text: "",
       showHeading: false,
-
       textArray: ["אנשים", "בחנים", "מקראות", "משחקים", "הסכתים"],
     };
   },
 
-  computed: mapState(["learnChapter"]),
+  computed: mapState("learning", ["learnChapter"]),
 
   created() {
     const unwatch = this.$watch("firstOpened", () => {
@@ -133,5 +140,12 @@ ion-text {
 .text {
   position: relative;
   top: 0;
+}
+
+.search {
+  position: absolute;
+  height: 20%;
+  left: 5%;
+  top: 10%;
 }
 </style>

@@ -22,6 +22,7 @@ import { Swiper } from "swiper/vue";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
+import { mapMutations } from "vuex";
 
 export default {
   name: "SubMenuSwiper",
@@ -37,13 +38,18 @@ export default {
   },
 
   methods: {
+
+    ...mapMutations("learning", [
+      "changeSubChapter",
+    ]),
+
     swiperChange(e) {
       this.activeIndex = toRaw(e).activeIndex;
     },
 
     chapterClicked() {
       this.$emit("chapterChosen", this.activeIndex);
-      this.$store.commit("changeSubChapter", this.activeIndex);
+      this.changeSubChapter(this.activeIndex);
     },
 
     slideAnim() {
@@ -69,7 +75,6 @@ export default {
     this.slideAnim();
     this.$watch("activeIndex", () => {
       this.slideAnim();
-      this.$store.state.subChapter = this.activeIndex;
     });
   },
 };

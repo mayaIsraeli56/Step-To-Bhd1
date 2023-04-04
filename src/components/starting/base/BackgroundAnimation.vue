@@ -25,7 +25,7 @@ export default {
   },
   mounted() {
     setTimeout(() => {
-      this.$refs.waveImg.className = "";
+      this.$refs.waveImg.className = " ";
       this.$refs.waveImg.classList.add("to-opting-pg");
     }, this.openingTime);
   },

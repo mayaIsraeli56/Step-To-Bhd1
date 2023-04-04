@@ -14,10 +14,10 @@
 <script>
 import { IonContent, IonPage } from "@ionic/vue";
 import { defineComponent } from "vue";
-import HomeTopLogo from "@/components/home/HomeTopLogo.vue";
-import HomeNavigation from "@/components/home/HomeNavigation.vue";
-import HomeBottom from "@/components/home/HomeBottom.vue";
-import HomeSubMenu from "@/components/home/HomeSubMenu.vue";
+import HomeTopLogo from "@/components/home/base/HomeTopLogo.vue";
+import HomeNavigation from "@/components/home/base/HomeNavigation.vue";
+import HomeBottom from "@/components/home/base/HomeBottom.vue";
+import HomeSubMenu from "@/components/home/base/HomeSubMenu.vue";
 import { mapState } from "vuex";
 
 export default defineComponent({
@@ -29,15 +29,16 @@ export default defineComponent({
       firstOpened: true,
       slideNum: null,
       openChapter: null,
-      openNavi: true
+      openNavi: true,
     };
   },
 
-  computed: mapState(["learnChapter"]),
+  computed: {
+  ...mapState("learning", ["learnChapter"]),
+  },
 
   methods: {
     swiperChanged(slideNum) {
-      console.log("g")
       this.firstOpened = false;
       this.slideNum = slideNum;
     },

@@ -29,6 +29,7 @@ import SubMenuSwiper from "../SubMenuSwiper.vue";
 import { SwiperSlide } from "swiper/vue";
 import ChapterInfo from "@/json/ChapterInfo";
 import ChoseSubChapter from "./ChoseSubChapter.vue";
+import { mapMutations } from "vuex";
 
 export default {
   name: "SubMenu2",
@@ -49,13 +50,18 @@ export default {
   },
   
   methods: {
+    ...mapMutations("learning", [
+      "notLearningChapter",
+      "toNaviUp"
+    ]),
+
     openChapter() {
       this.openSubChapters = true;
     },
     backToSubMenu() {
       this.openSubChapters = false;
-      this.$store.commit("notLearningChapter");
-      this.$store.commit("toNaviUp");
+      this.notLearningChapter();
+      this.toNaviUp();
     },
   },
 };

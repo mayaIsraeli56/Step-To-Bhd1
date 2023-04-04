@@ -86,7 +86,7 @@ export default {
       this.slideAnim();
     });
 
-    if (this.$store.state.naviUp) this.naviAnim();
+    if (this.$store.state.learning.naviUp) this.naviAnim();
   },
 };
 </script>

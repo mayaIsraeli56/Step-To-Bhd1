@@ -16,9 +16,34 @@
     <ion-content>
       <ion-list>
         <transition-group tag="div" class="container" appear name="fade">
-          <div class="card" v-for="(sec, index) in sections" :key="index" @click="choseSubSubChapter(`slide${index}`)" :ref="'slide' + index">
-            <ion-text class="text-dark-plain num">{{ index + 1 }}</ion-text>
-            <ion-text class="text-dark-plain title">{{ sec.title }}</ion-text>
+          <div
+            v-for="(sec, index) in sections"
+            :key="index"
+            @click="choseSubSubChapter(`slide${index}`)"
+            :ref="'slide' + index"
+          >
+            <div class="card">
+              <ion-text class="text-dark-plain num">{{ index + 1 }}</ion-text>
+              <ion-text class="text-dark-plain title">{{ sec.title }}</ion-text>
+            </div>
+
+            
+            <div class="card-details">
+              <div class="line"></div>
+              
+              <div
+                class="sub-container"
+                v-for="(sub, i) in sec.subSections"
+                :key="i"
+              >
+                <ion-text class="text-dark-plain num-sub">
+                  {{ `${index + 1}.${i + 1}` }}</ion-text
+                >
+                <ion-text class="text-dark-plain title-sub">{{
+                  sub.title
+                }}</ion-text>
+              </div>
+            </div>
           </div>
         </transition-group>
       </ion-list>
@@ -27,6 +52,7 @@
 </template>
 <script>
 import { IonImg, IonText, IonContent, IonList } from "@ionic/vue";
+import { mapState } from "vuex";
 
 export default {
   name: "ChoseSubChapter",
@@ -35,24 +61,28 @@ export default {
 
   data() {
     return {
-      chapterNum: this.$store.state.learnChapter,
       icon: null,
       sections: null,
     };
   },
+
+  computed: {
+    ...mapState("learning", ["learnChapter"]),
+  },
+
   mounted() {
     this.icon = require(`@/assets/media1/HomePage/chapter-logo/${
-      this.chapterNum + 1
+      this.learnChapter + 1
     }.png`);
 
-    import(`@/json/chapters/chapter${this.chapterNum + 1}`).then((module) => {
+    import(`@/json/chapters/chapter${this.learnChapter + 1}`).then((module) => {
       this.sections = module.sections;
     });
   },
   methods: {
     choseSubSubChapter(chosenSlide) {
-      console.log(chosenSlide)
-    }
+      console.log(chosenSlide);
+    },
   },
 };
 </script>
@@ -66,8 +96,8 @@ ion-img {
 
 .note {
   position: relative;
-  top: -2vh;
-  font-size: 2.5vh;
+  top: -2.5vh;
+  font-size: 2.2vh;
 }
 
 .card {
@@ -110,5 +140,47 @@ ion-content {
 }
 .icon {
   height: 10vh;
+}
+
+.card-details {
+  background-color: #fafafa;
+  width: 85%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  margin: auto;
+  margin-bottom: 5%;
+  padding: 2%;
+  margin-top: -10%;
+  border-radius: 0 0 5vh 5vh;
+}
+
+.line {
+  width: 120%;
+  padding: 0.8%;
+  top: -10%;
+  background-color: var(--ion-color-secondary-tint);
+}
+
+.sub-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  align-self: flex-start;
+  margin: 3% 0;
+}
+
+.title-sub {
+  font-size: 1rem;
+  margin-right: 6vw;
+  text-align: right;
+  width: 80%;
+}
+
+.num-sub {
+  font-size: 1rem;
+  font-weight: 400;
+  margin-right: 2.5vw;
 }
 </style>
