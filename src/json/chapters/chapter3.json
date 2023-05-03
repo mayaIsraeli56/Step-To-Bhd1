@@ -1,48 +1,35 @@
 {
-    "title": "הפסיפס הישראלי",
-    "description": "",
+  "title": "",
+  "description": "",
 
-    "section1": [
-      {
-        "title": "",
-        "text": [
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          ""
-        ],
-        "subSections": [
-          {
-            "title": "",
-            "text": [
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              ""
-            ]
-          },
-          {
-            "title": "",
-            "text": [
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              ""
-            ]
-          }
-        ]
-      }
-    ],
-  
-    "text": [{ "title": "", "text": "" }]
-  }
-  
+
+  "sections": [
+    {
+      "title": "",  
+      "subSections": [
+        {
+          "title": "",
+          "text": []
+        }
+      ]
+    },
+    {
+      "title": "",
+      "subSections": [
+        {
+          "title": "",
+          "text": []
+        }
+      ]
+    },
+    {
+      "title": "",
+      "subSections": [
+        {
+          "title": "",
+          "text": []
+        }
+      ]
+    }
+  ]
+}

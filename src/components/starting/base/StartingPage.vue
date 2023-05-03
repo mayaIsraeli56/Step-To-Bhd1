@@ -29,7 +29,7 @@ export default {
   data() {
     return {
       toClose: false,
-      timeForScreen: 500,
+      timeForScreen: 5000,
       signOption: null,
     };
   },

@@ -1,8 +1,8 @@
 <template>
-  <div>
+ 
     <img :src="getImgUrl(logoNum)" />
     <h2>{{text[logoNum]}}</h2>
-  </div>
+ 
 </template>
 
 <script>
@@ -25,17 +25,33 @@ export default {
 
 <style scoped>
 h2 {
-  position: relative;
+  position: absolute;
   color: var(--ion-color-medium);
-  font-size: x-large !important;
-  margin-top: 5%;
+  font-size: 90% !important;
   text-shadow: none;
+  top: 90%;
 }
 
 img {
   position: relative;
   transform: scale(80%);
-  margin-top: 30%;
   transition: 0.3s;
+  top: -5%;
 }
+
+
+
+@media only screen and (max-height: 600px){
+  h2 {
+    font-size: 70% !important;
+  }
+}
+
+@media only screen and (max-height: 400px){
+  h2 {
+    margin-top: 130%;
+    font-size: 60% !important;
+  }
+}
+
 </style>

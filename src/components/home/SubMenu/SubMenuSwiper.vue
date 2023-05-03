@@ -38,9 +38,8 @@ export default {
   },
 
   methods: {
-
     ...mapMutations("learning", [
-      "changeSubChapter",
+      "changeChapter",
     ]),
 
     swiperChange(e) {
@@ -49,7 +48,7 @@ export default {
 
     chapterClicked() {
       this.$emit("chapterChosen", this.activeIndex);
-      this.changeSubChapter(this.activeIndex);
+      this.changeChapter(this.activeIndex);
     },
 
     slideAnim() {

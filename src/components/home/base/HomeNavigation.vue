@@ -107,7 +107,9 @@ export default {
   display: -webkit-box;
   display: -ms-flexbox;
   display: -webkit-flex;
-  display: flex;
+  display: flex;flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
   -webkit-box-pack: center;
   -ms-flex-pack: center;
   -webkit-justify-content: center;
@@ -135,7 +137,7 @@ export default {
   opacity: 0;
   animation: fade 1s ease-out 0.3s forwards;
   transform: translateY(20%);
-  font-size:  large;
+  font-size:  100%;
 }
 
 .up {

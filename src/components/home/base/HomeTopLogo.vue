@@ -1,6 +1,6 @@
 <template>
-  <transition-group tag="div" class="container" appear name="fade">
-    <div class="cirele" :key="0"></div>
+  <transition-group tag="div"  :class="[learnSubSec != null ? 'smalle-container':'' , 'container' ]" appear name="fade">
+    <div :class="[learnSubSec != null ? 'smalle-div':'' , 'cirele' ]" :key="0"></div>
     <ion-img
       :src="stepLogoSrc"
       alt="step-logo"
@@ -16,7 +16,7 @@
       v-if="firstOpened"
       :key="2"
     ></ion-img>
-    <ion-text class="num" :key="3" ref="num"
+    <ion-text class="num" :key="3" ref="num" 
       >פרק {{ learnChapter + 1 }}
     </ion-text>
     <ion-text v-if="showHeading" :key="2" ref="text" class="text">
@@ -53,7 +53,7 @@ export default defineComponent({
     };
   },
 
-  computed: mapState("learning", ["learnChapter"]),
+  computed: mapState("learning", ["learnChapter", "learnSubSec"]),
 
   created() {
     const unwatch = this.$watch("firstOpened", () => {
@@ -84,6 +84,19 @@ export default defineComponent({
           this.$refs.num.$el.style.opacity = 0;
           this.$refs.text.$el.style.top = "0";
           this.text = this.textArray[this.slideNum];
+        }
+      },
+    },
+
+    learnSubSec: {
+      handler() {
+        if (this.learnSubSec != null) {
+              this.$refs.num.$el.style.opacity = 0;   
+              this.$refs.text.$el.style.top = "-30%";
+              this.$refs.text.$el.style.fontSize = "120%";
+        } else {
+          this.$refs.num.$el.style.opacity = 1;
+          this.$refs.text.$el.style.top = "0";
         }
       },
     },
@@ -129,6 +142,13 @@ ion-text {
   position: absolute;
 }
 
+.smalle-container {
+  height: 10vh;
+}
+.smalle-div {
+  border-radius: 4vh;
+  height: 20vh;
+}
 .num {
   display: block;
   font-size: 90%;
