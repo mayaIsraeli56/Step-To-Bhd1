@@ -1,6 +1,14 @@
 <template>
-  <transition-group tag="div"  :class="[learnSubSec != null ? 'smalle-container':'' , 'container' ]" appear name="fade">
-    <div :class="[learnSubSec != null ? 'smalle-div':'' , 'cirele' ]" :key="0"></div>
+  <transition-group
+    tag="div"
+    :class="[learnSubSec != null ? 'smalle-container' : '', 'container']"
+    appear
+    name="fadeA"
+  >
+    <div
+      :class="[learnSubSec != null ? 'smalle-div' : '', 'cirele']"
+      :key="0"
+    ></div>
     <ion-img
       :src="stepLogoSrc"
       alt="step-logo"
@@ -16,7 +24,7 @@
       v-if="firstOpened"
       :key="2"
     ></ion-img>
-    <ion-text class="num" :key="3" ref="num" 
+    <ion-text class="num" :key="3" ref="num"
       >פרק {{ learnChapter + 1 }}
     </ion-text>
     <ion-text v-if="showHeading" :key="2" ref="text" class="text">
@@ -91,9 +99,9 @@ export default defineComponent({
     learnSubSec: {
       handler() {
         if (this.learnSubSec != null) {
-              this.$refs.num.$el.style.opacity = 0;   
-              this.$refs.text.$el.style.top = "-30%";
-              this.$refs.text.$el.style.fontSize = "120%";
+          this.$refs.num.$el.style.opacity = 0;
+          this.$refs.text.$el.style.top = "-15%";
+          this.$refs.text.$el.style.fontSize = "130%";
         } else {
           this.$refs.num.$el.style.opacity = 1;
           this.$refs.text.$el.style.top = "0";

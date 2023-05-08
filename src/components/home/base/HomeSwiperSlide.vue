@@ -49,8 +49,15 @@ img {
 
 @media only screen and (max-height: 400px){
   h2 {
-    margin-top: 130%;
-    font-size: 60% !important;
+    margin-top: 10%;
+    font-size: 50% !important;
+  }
+}
+
+@media only screen and (min-height: 900px){
+  h2 {
+    margin-top: 15%;
+    font-size: 130% !important;
   }
 }
 

@@ -1,7 +1,7 @@
 <template>
-  <transition-group tag="div" class="container" appear name="fade">
-    <ion-img :src="icon" class="icon" :key="0"></ion-img>
-    <ion-text class="text-dark-plain note" :key="1"
+  <transition-group tag="div" class="container" appear name="fadeA" >
+    <ion-img :src="icon" :key="0" :class="[learnSubSec != null? 'close' : '', 'icon']"></ion-img>
+    <ion-text :key="1" :class="[learnSubSec != null? 'close' : '', 'text-dark-plain', 'note']"
       >לחצו על הפרק לפתיחת תתי - הנושאים</ion-text
     >
     <ion-img
@@ -15,6 +15,7 @@
 <script>
 import { IonImg, IonText } from "@ionic/vue";
 import { mapState } from "vuex";
+
 
 export default {
   name: "ChoseSubTop",
@@ -30,7 +31,7 @@ export default {
   },
 
   computed: {
-    ...mapState("learning", ["learnChapter"]),
+    ...mapState("learning", ["learnChapter", "learnSubSec"]),
   },
 
   mounted() {
@@ -63,4 +64,11 @@ ion-img {
 .icon {
   height: 10vh;
 }
+
+.close {
+  height: 0;
+  clip-path: inset(0 0 100% 0);
+  transition: all 0.5s ease;
+}
+
 </style>

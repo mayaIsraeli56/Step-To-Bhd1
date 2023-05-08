@@ -5,14 +5,14 @@
         tag="div"
         class="container"
         appear
-        name="fade"
+        name="fadeA"
         mode="out-in"
       >
         <div
           v-for="(sec, secNum) in sections"
           :key="secNum"
           class="section"
-          :class="[secNum == learnSec? 'chosenSec' : '', 'section']"
+          :class="[secNum == learnSec? 'chosen-sec' : '', 'section']"
           :ref="'sec' + secNum"
         >
        
@@ -30,6 +30,7 @@
             :key="secNum"
             :ref="'slide' + secNum"
             class="sub-sec-menu"
+            v-if="learnSubSec == null"
           >
           </sub-sec-cards>
         </div>
@@ -82,18 +83,21 @@ ion-content {
   direction: ltr;
   --ion-background-color: transparent;
   height: 66vh;
+  transition: all 1s ease-in-out;
 }
 
 ion-list {
   min-height: 66vh;
+  transition: all 1s ease-in-out;
 }
 .section {
   transition: all 1s ease;
 }
 .full-page {
-  height: 100%;
+  top: -3.1vh;
+  height: 90%;
 }
-.chosenSec {
+.chosen-sec {
   width: 100%;
   margin-top: 5%;
 }

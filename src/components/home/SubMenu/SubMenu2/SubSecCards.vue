@@ -1,12 +1,13 @@
 <template>
   <transition name="slideD" appear>
-    <div class="card-details" v-if="!closeMe && learnSubSec == null">
+    <div class="card-details" v-if="!closeMe">
       <div class="line"></div>
 
       <div class="sub-container" v-for="(sub, subNum) in subSections" :key="subNum" @click="choseSubSec(subNum)">
         <ion-text class="text-dark-plain num-sub">
           {{ `${secNum + 1}.${subNum + 1}` }}</ion-text
         >
+  
         <ion-text class="text-dark-plain title-sub">{{ sub.title }}</ion-text>
       </div>
     </div>
@@ -78,14 +79,14 @@ export default {
 
 .title-sub {
   font-size: 1rem;
-  margin-right: 6vw;
+  margin-right: 1.1rem;
   text-align: right;
-  width: 80%;
+  width: 100%;
 }
 
 .num-sub {
   font-size: 1rem;
   font-weight: 400;
-  margin-right: 2.5vw;
+  margin-right: 0.3rem;
 }
 </style>

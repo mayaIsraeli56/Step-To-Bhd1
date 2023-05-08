@@ -1,5 +1,5 @@
 <template>
-  <chose-sub-top @backToSubMenu="$emit('backToSubMenu')" v-if="learnSubSec == null"></chose-sub-top>
+  <chose-sub-top @backToSubMenu="$emit('backToSubMenu')" ></chose-sub-top>
   <sub-sec-menu></sub-sec-menu>
 </template>
 <script>
@@ -17,3 +17,4 @@ export default {
   },
 };
 </script>
+
