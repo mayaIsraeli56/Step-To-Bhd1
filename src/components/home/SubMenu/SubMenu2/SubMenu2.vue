@@ -12,28 +12,31 @@
         :class="'slide' + n"
         ref="slide"
       >
+        <ion-img
+          :src="require('@/assets/media1/HomePage/bookmark.png')"
+          :key="0"
+          class="bookmark"
+        ></ion-img>
         <div class="circle">{{ n }}</div>
         <div class="title">{{ this.ChapterInfo[n - 1].title }}</div>
         <div class="text">{{ this.ChapterInfo[n - 1].text }}</div>
       </swiper-slide></slot
     >
   </sub-menu-swiper>
-  <chose-sub-chapter
-    v-if="openSubChapters"
-    @backToSubMenu="backToSubMenu"
-  ></chose-sub-chapter>
+  <chose-sub-chapter v-if="openSubChapters"></chose-sub-chapter>
 </template>
 
 <script>
+import { IonImg } from "@ionic/vue";
 import SubMenuSwiper from "../SubMenuSwiper.vue";
 import { SwiperSlide } from "swiper/vue";
 import ChapterInfo from "@/json/ChapterInfo";
 import ChoseSubChapter from "./ChoseSubChapter.vue";
-import { mapMutations } from "vuex";
+import { mapState, mapMutations, mapActions } from "vuex";
 
 export default {
   name: "SubMenu2",
-  components: { SubMenuSwiper, SwiperSlide, ChoseSubChapter },
+  components: { IonImg, SubMenuSwiper, SwiperSlide, ChoseSubChapter },
 
   data() {
     return {
@@ -45,23 +48,32 @@ export default {
     };
   },
 
+  computed: {
+    ...mapState("returning", ["backToSubMenu2"]),
+  },
+
   created() {
     this.slidesNum = this.ChapterInfo.length;
   },
-  
+
   methods: {
-    ...mapMutations("learning", [
-      "notLearningChapter",
-      "toNaviUp"
-    ]),
+    ...mapMutations("learning", ["notLearningChapter", "toNaviUp"]),
+    ...mapActions("returning", ["toggleBackBtn", "closeBackFunc"]),
 
     openChapter() {
       this.openSubChapters = true;
     },
-    backToSubMenu() {
-      this.openSubChapters = false;
-      this.notLearningChapter();
-      this.toNaviUp();
+  },
+
+  watch: {
+    backToSubMenu2: {
+      handler() {
+        if (this.backToSubMenu2 == true) {
+          this.openSubChapters = false;
+          this.notLearningChapter();
+          this.toNaviUp();
+        }
+      },
     },
   },
 };
@@ -99,6 +111,12 @@ export default {
   text-shadow: none;
 }
 
+.bookmark {
+  position: absolute;
+  height: 8%;
+  left: 10%;
+}
+
 .title {
   position: relative;
   top: -7vh;
@@ -123,7 +141,6 @@ export default {
   height: 25vh;
   font-weight: 500;
 }
-
 </style>
 
 <style>

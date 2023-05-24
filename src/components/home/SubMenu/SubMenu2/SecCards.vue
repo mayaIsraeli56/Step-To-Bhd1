@@ -1,28 +1,35 @@
 <template>
   <div
-    :class="[secNum == learnSec ? 'chosenCard' : '', 'card']"
+    :class="[secNum == learnSec ? 'chosen-card' : '', 'card']"
     :ref="'card' + secNum"
   >
-    <ion-text class="text-dark-plain num" v-if="learnSubSec == null">
-      {{ secNum + 1 }}</ion-text
-    >
-    <ion-text class="text-dark-plain num-s" v-else>
-      {{ secNum + 1 }}.{{ learnSubSec + 1 }}</ion-text
-    >
-
+   
+      <ion-text
+        class="num text-dark-plain"
+        v-if="learnSubSec == null"
+        :key="1"
+        >{{ secNum + 1 }}</ion-text
+      >
+      <ion-text class="s-num text-dark-plain" v-else :key="2"
+        >{{ secNum + 1 }}.{{ learnSubSec + 1 }}</ion-text
+      >
+   
     <ion-text
-      :class="[secNum == learnSec ? 'title-s' : '', 'text-dark-plain title']"
+      :class="[
+        secNum == learnSec ? 'title-big' : '',
+        'text-dark-plain title',
+      ]"
       >{{ sec.title }}
 
       <ion-text
         class="text-dark-plain title sub-title"
         v-if="learnSubSec != null"
       >
-        {{ " - " + sec.subSections[learnSubSec].title  }}</ion-text
+        {{ " - " + sec.subSections[learnSubSec].title }}</ion-text
       >
     </ion-text>
 
-    <transition name="slideD" appear>
+    <transition name="slideD-forward" appear>
       <div class="text" v-if="secNum == learnSec">
         <ion-text
           :class="[secNum == learnSec ? 'text-chosen' : '', 'text-dark-plain']"
@@ -48,12 +55,20 @@ export default {
     return {
       sections: null,
       closeSubMenu: -1,
+      smallTitle: true,
     };
   },
 
   computed: {
     ...mapState("learning", ["learnChapter", "learnSec", "learnSubSec"]),
   },
+
+  // methods: {
+  //   toggleTitle() {
+
+  //   }
+  // },
+  
 };
 </script>
 
@@ -71,12 +86,13 @@ export default {
   margin-bottom: 1.8%;
   padding: 1% 3%;
   flex-wrap: wrap;
+  transition: all 1s ease;
 }
-.chosenCard {
+.chosen-card {
   height: fit-content;
   width: 92%;
   padding-top: 5%;
-  margin-top: 0%;
+  margin-top: 5%;
   margin-bottom: 10%;
 }
 
@@ -85,27 +101,32 @@ export default {
   font-weight: 600;
   margin-right: 0.3rem;
 }
+.s-num {
+  display: flex;
+  flex-wrap: nowrap;
+}
 .title {
   font-size: 1.1rem;
   margin-right: 1rem;
   text-align: right;
   width: 80%;
+  transition: all 1s ease;
 }
 
 @media only screen and (max-height: 550px) {
-
   .num {
     font-size: 1.5rem;
     font-weight: 600;
-    
+    display: flex;
+    flex-wrap: nowrap;
   }
+
   .title {
     font-size: 0.8rem;
   }
-
 }
 
-.title-s {
+.title-big{
   font-size: 1.3rem;
   font-weight: 700;
 }

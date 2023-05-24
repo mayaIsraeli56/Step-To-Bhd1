@@ -1,14 +1,17 @@
 <template>
   <transition-group
     tag="div"
-    :class="[learnSubSec != null ? 'smalle-container' : '', 'container']"
+    class="container"
+    ref="container"
     appear
     name="fadeA"
   >
     <div
-      :class="[learnSubSec != null ? 'smalle-div' : '', 'cirele']"
+      class="circle"
+      ref="circle"
       :key="0"
     ></div>
+
     <ion-img
       :src="stepLogoSrc"
       alt="step-logo"
@@ -34,8 +37,16 @@
       :src="searchSrc"
       alt="search-icon"
       class="search"
-      v-if="learnChapter != null"
+      v-show="learnChapter != null && learnSubSec == null"
       :key="3"
+    ></ion-img>
+
+    <ion-img
+      :key="3"
+      :src="require('@/assets/media1/HomePage/arrow-back.png')"
+      class="arrow"
+      v-if="showBackBtn"
+      @click="playBackFunc('backToSubMenu2')"
     ></ion-img>
   </transition-group>
 </template>
@@ -43,7 +54,7 @@
 <script>
 import { defineComponent } from "vue";
 import { IonImg, IonText } from "@ionic/vue";
-import { mapState } from "vuex";
+import { mapState, mapActions } from "vuex";
 
 export default defineComponent({
   name: "HomeTopLogo",
@@ -61,7 +72,14 @@ export default defineComponent({
     };
   },
 
-  computed: mapState("learning", ["learnChapter", "learnSubSec"]),
+  computed: {
+    ...mapState("learning", ["learnChapter", "learnSubSec"]),
+    ...mapState("returning", ["showBackBtn", "backToSubMenu2", "backToSubSecMenu"]),
+  },
+
+  methods: {
+    ...mapActions("returning", ["playBackFunc"])
+  },
 
   created() {
     const unwatch = this.$watch("firstOpened", () => {
@@ -102,12 +120,19 @@ export default defineComponent({
           this.$refs.num.$el.style.opacity = 0;
           this.$refs.text.$el.style.top = "-15%";
           this.$refs.text.$el.style.fontSize = "130%";
+          this.$refs.container.$el.style.height = "10vh";
+          this.$refs.circle.style.height = "20vh";
+          this.$refs.circle.style.borderRadius = "4vh";
         } else {
           this.$refs.num.$el.style.opacity = 1;
           this.$refs.text.$el.style.top = "0";
+          this.$refs.container.$el.style.height = "18%";
+          this.$refs.circle.style.height = "200%";
+          this.$refs.circle.style.borderRadius = "100%";
         }
       },
     },
+
   },
 });
 </script>
@@ -119,6 +144,7 @@ export default defineComponent({
   left: 0;
   width: 100%;
   height: 18%;
+  transition: all 1s ease;
 }
 .bhd-logo {
   position: relative;
@@ -141,13 +167,14 @@ ion-text {
   transition: 1s;
 }
 
-.cirele {
+.circle {
   width: 100%;
   height: 200%;
   transform: translateY(-50%);
   border-radius: 100%;
   background-color: #83a9ad;
   position: absolute;
+  transition: all 1s ease;
 }
 
 .smalle-container {
@@ -172,8 +199,15 @@ ion-text {
 
 .search {
   position: absolute;
-  height: 20%;
-  left: 5%;
-  top: 10%;
+  height: 3vh;
+  top: 1.5vh;
+  left: 4vw;
+}
+
+.arrow {
+  position: absolute;
+  height: 3vh;
+  top: 1.5vh;
+  right: 4vw;
 }
 </style>

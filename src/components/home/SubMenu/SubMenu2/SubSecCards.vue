@@ -15,8 +15,7 @@
 </template>
 <script>
 import { IonText } from "@ionic/vue";
-import { mapMutations } from "vuex";
-import { mapState } from "vuex";
+import { mapState, mapMutations, mapActions } from "vuex";
 
 export default {
   name: "SubSecCards",
@@ -32,10 +31,12 @@ export default {
       "changeSec",
       "changeSubSec"
     ]),
+    ...mapActions("returning", ["setReturningFunc"]),
 
     choseSubSec(subSec) {
       this.changeSec(this.secNum);
       this.changeSubSec(subSec);
+      this.setReturningFunc(1);
     },
 
   },

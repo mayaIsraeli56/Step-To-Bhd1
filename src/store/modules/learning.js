@@ -19,6 +19,11 @@ export default {
       state.learnChapter = activeIndex;
     },
 
+    removeSubAndSec(state) {
+      state.learnSec = null;
+      state.learnSubSec = null;
+    },
+
     changeSec(state, sec) {
       state.learnSec = sec;
     },

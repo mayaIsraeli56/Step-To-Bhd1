@@ -128,7 +128,7 @@
     transform: translateY(100%);
   }
 }
-
+/* ////////////slideD//////////// */
 .slideD-enter-from {
   clip-path: inset(0 0 100% 0);
   height: 0;
@@ -163,4 +163,26 @@
 .slideD-leave-active {
   position: absolute;
 }
+
+/* ////////////slideD-delay//////////// */
+
+.slideD-forward-enter-from {
+  clip-path: inset(0 0 100% 0);
+  height: 0;
+  opacity: 0;
+}
+
+.slideD-forward-enter-to {
+  clip-path: inset(0);
+  height: 100vh;
+  opacity: 1;
+}
+
+
+
+.slideD-forward-enter-active,
+.slideD-forward-move {
+  transition: all 1s ease-in;
+}
+
 

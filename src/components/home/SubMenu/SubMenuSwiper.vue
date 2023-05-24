@@ -42,6 +42,7 @@ export default {
       "changeChapter",
     ]),
 
+
     swiperChange(e) {
       this.activeIndex = toRaw(e).activeIndex;
     },
