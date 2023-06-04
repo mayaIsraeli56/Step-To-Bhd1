@@ -137,6 +137,8 @@
 
 .slideD-enter-to {
   clip-path: inset(0);
+  height: fit-content ;
+  opacity: 1;
 }
 
 .slideD-leave-from {
@@ -168,13 +170,13 @@
 
 .slideD-forward-enter-from {
   clip-path: inset(0 0 100% 0);
-  height: 0;
+  height: 0 !important;
   opacity: 0;
 }
 
 .slideD-forward-enter-to {
   clip-path: inset(0);
-  height: 100vh;
+  height: fit-content ;
   opacity: 1;
 }
 

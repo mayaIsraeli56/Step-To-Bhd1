@@ -1,6 +1,6 @@
 <template>
   <transition name="slideD" appear>
-    <div class="card-details" v-if="!closeMe">
+    <div class="card-details" v-if="openSubMenu == secNum">
       <div class="line"></div>
 
       <div class="sub-container" v-for="(sub, subNum) in subSections" :key="subNum" @click="choseSubSec(subNum)">
@@ -19,7 +19,7 @@ import { mapState, mapMutations, mapActions } from "vuex";
 
 export default {
   name: "SubSecCards",
-  props: ["secNum", "subSections", "closeMe"],
+  props: ["secNum", "subSections"],
   components: { IonText },
 
   data() {
@@ -42,7 +42,7 @@ export default {
   },
 
   computed: {
-    ...mapState("learning", ["learnSubSec"]),
+    ...mapState("learning", ["learnSubSec", "openSubMenu"]),
   },
 };
 </script>

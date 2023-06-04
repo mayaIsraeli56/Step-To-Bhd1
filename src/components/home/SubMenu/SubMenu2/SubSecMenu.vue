@@ -25,8 +25,7 @@
           <sub-sec-cards
             :secNum="secNum"
             :subSections="sec.subSections"
-            :closeMe="secNum != closeSubMenu"
-            :key="secNum"
+            :key="secNum + 1"
             :ref="'slide' + secNum"
             class="sub-sec-menu"
             v-if="learnSubSec == null"
@@ -50,31 +49,46 @@ export default {
   data() {
     return {
       sections: null,
-      closeSubMenu: -1,
+      unableOpening: true,
     };
   },
 
   computed: {
-    ...mapState("learning", ["learnChapter", "learnSec", "learnSubSec"]),
+    ...mapState("learning", [
+      "learnChapter",
+      "learnSec",
+      "learnSubSec",
+      "openSubMenu",
+    ]),
     ...mapState("returning", ["backToSubSecMenu"]),
   },
 
   methods: {
-    ...mapMutations("learning", ["removeSubAndSec"]),
+    ...mapMutations("learning", ["removeSubAndSec", "openingSubMenu"]),
 
     openSubSecCard(chosenSlide) {
-      if (chosenSlide == this.closeSubMenu) {
-        this.closeSubMenu = -1;
+      if (this.unableOpening) {
+        return;
+      }
+      
+      if (chosenSlide == this.openSubMenu) {
+        this.openingSubMenu(-1);
       } else {
-        this.closeSubMenu = chosenSlide;
+        this.openingSubMenu(chosenSlide);
       }
     },
   },
 
   mounted() {
+    this.openingSubMenu(-1);
+
     import(`@/json/chapters/chapter${this.learnChapter + 1}`).then((module) => {
       this.sections = module.sections;
     });
+
+    setTimeout(() => {
+      this.unableOpening = false;
+    }, 500);
   },
 
   watch: {

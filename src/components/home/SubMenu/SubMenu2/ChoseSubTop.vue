@@ -1,5 +1,5 @@
 <template>
-  <transition-group class="container" appear name="fadeA">
+  <transition-group appear name="fadeA">
     <ion-img
       :src="icon"
       :key="0"

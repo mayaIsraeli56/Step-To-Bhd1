@@ -7,7 +7,7 @@ export default {
     learnSec: null,
     learnSubSec: null,
     naviUp: false,
-    openMe: "",
+    openSubMenu: -1,
     subChapter: 0,
     bookmark: [],
   },
@@ -32,16 +32,16 @@ export default {
       state.learnSubSec = subsec;
     },
 
+    openingSubMenu(state, sub) {
+      state.openSubMenu = sub;
+    },
+
     notLearningChapter(state) {
       state.learnChapter = null;
     },
 
     toNaviUp(state) {
       state.naviUp = true;
-    },
-
-    toOpen(state, componentName) {
-      state.openMe = componentName;
     },
 
     toggleBookMark(state, chapterToAdd) {

@@ -47,6 +47,7 @@ export default {
       }
       if (state.returningFunc == "backToSubSecMenu") {
         commit("learning/removeSubAndSec", null, { root: true });
+        commit("learning/openingSubMenu", -1, { root: true });
       }
 
       await commit("playBackFunc");
