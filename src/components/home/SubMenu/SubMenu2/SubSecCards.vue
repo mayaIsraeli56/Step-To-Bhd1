@@ -3,11 +3,16 @@
     <div class="card-details" v-if="openSubMenu == secNum">
       <div class="line"></div>
 
-      <div class="sub-container" v-for="(sub, subNum) in subSections" :key="subNum" @click="choseSubSec(subNum)">
+      <div
+        class="sub-container"
+        v-for="(sub, subNum) in subSections"
+        :key="subNum"
+        @click="choseSubSec(subNum)"
+      >
         <ion-text class="text-dark-plain num-sub">
           {{ `${secNum + 1}.${subNum + 1}` }}</ion-text
         >
-  
+
         <ion-text class="text-dark-plain title-sub">{{ sub.title }}</ion-text>
       </div>
     </div>
@@ -27,10 +32,8 @@ export default {
   },
 
   methods: {
-    ...mapMutations("learning", [
-      "changeSec",
-      "changeSubSec"
-    ]),
+    ...mapMutations("learning", ["changeSec"]),
+    ...mapActions("learning", ["changeSubSec"]),
     ...mapActions("returning", ["setReturningFunc"]),
 
     choseSubSec(subSec) {
@@ -38,7 +41,6 @@ export default {
       this.changeSubSec(subSec);
       this.setReturningFunc(1);
     },
-
   },
 
   computed: {

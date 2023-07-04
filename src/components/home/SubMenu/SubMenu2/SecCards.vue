@@ -62,12 +62,6 @@ export default {
   computed: {
     ...mapState("learning", ["learnChapter", "learnSec", "learnSubSec"]),
   },
-
-  // methods: {
-  //   toggleTitle() {
-
-  //   }
-  // },
   
 };
 </script>

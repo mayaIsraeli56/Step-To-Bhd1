@@ -8,7 +8,7 @@
     :modules="modules"
     class="mySwiper"
     @slideChange="swiperChange"
-    @click="chapterClicked"
+    @click="slideClicked"
   >
     <slot></slot>
   </swiper>
@@ -22,7 +22,7 @@ import { Swiper } from "swiper/vue";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
-import { mapMutations } from "vuex";
+import { mapActions } from "vuex";
 
 export default {
   name: "SubMenuSwiper",
@@ -38,18 +38,22 @@ export default {
   },
 
   methods: {
-    ...mapMutations("learning", [
-      "changeChapter",
-    ]),
-
+    ...mapActions("learning", ["changeChapter"]),
 
     swiperChange(e) {
       this.activeIndex = toRaw(e).activeIndex;
     },
 
-    chapterClicked() {
-      this.$emit("chapterChosen", this.activeIndex);
-      this.changeChapter(this.activeIndex);
+    slideClicked() {
+      switch (this.parent) {
+        case 2:
+          this.$emit("chapterChosen", this.activeIndex);
+          this.changeChapter(this.activeIndex);
+          break;
+        case 3:
+          // code block
+          break;
+      }
     },
 
     slideAnim() {

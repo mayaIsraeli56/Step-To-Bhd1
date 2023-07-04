@@ -2,9 +2,15 @@
   <ion-page>
     <ion-content :fullscreen="true" class="ion-content-start no-scroll">
       <div class="back">
-        <home-top-logo :firstOpened="firstOpened" :slideNum="slideNum"></home-top-logo>
-        <home-navigation v-if="openNavi" @swiper-changed="swiperChanged"></home-navigation>
-        <home-bottom ref="bottom" :firstOpened="firstOpened"></home-bottom>
+        <home-top-logo
+          :firstOpened="firstOpened"
+          :slideNum="slideNum"
+        ></home-top-logo>
+        <home-navigation
+          v-if="showNavi"
+          @swiper-changed="swiperChanged"
+        ></home-navigation>
+        <home-bottom :firstOpened="firstOpened"></home-bottom>
         <home-sub-menu v-if="!firstOpened" :slideNum="slideNum"></home-sub-menu>
       </div>
     </ion-content>
@@ -22,7 +28,14 @@ import { mapState } from "vuex";
 
 export default defineComponent({
   name: "HomePage",
-  components: { IonContent, IonPage, HomeTopLogo, HomeNavigation, HomeBottom, HomeSubMenu},
+  components: {
+    IonContent,
+    IonPage,
+    HomeTopLogo,
+    HomeNavigation,
+    HomeBottom,
+    HomeSubMenu,
+  },
 
   data() {
     return {
@@ -34,21 +47,13 @@ export default defineComponent({
   },
 
   computed: {
-  ...mapState("learning", ["learnChapter"]),
+    ...mapState("navigation", ["showNavi"]),
   },
 
   methods: {
     swiperChanged(slideNum) {
       this.firstOpened = false;
       this.slideNum = slideNum;
-    },
-  },
-
-  watch: {
-    learnChapter: {
-      handler() {
-        this.openNavi = !this.openNavi
-      },
     },
   },
 });

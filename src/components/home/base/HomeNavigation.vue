@@ -3,7 +3,7 @@
     :slidesPerView="perView"
     :spaceBetween="spaceBet"
     :centeredSlides="true"
-    :initialSlide="2"
+    :initialSlide="stage"
     :slideToClickedSlide="true"
     class="mySwiper homeSwiper"
     ref="mySwiper"
@@ -21,6 +21,7 @@ import { Swiper, SwiperSlide } from "swiper/vue";
 
 import HomeSwiperSlide from "./HomeSwiperSlide.vue";
 import { toRaw } from "vue";
+import { mapState, mapMutations } from "vuex";
 
 import "swiper/css";
 
@@ -45,12 +46,19 @@ export default {
     };
   },
 
+  computed: {
+    ...mapState("navigation", ["stage"]),
+  },
+
   methods: {
+    ...mapMutations("navigation", ["setStage"]),
+
     swiperChange(e, type) {
       if (type == "click" || this.swiperClicked) {
         this.swiperClicked = true;
         this.swiperChanged++;
         this.activeIndex = toRaw(e).activeIndex;
+        this.setStage(this.activeIndex);
 
         if (this.swiperChanged >= 0) {
           this.swiperChanged == 1 ? this.naviAnim() : "";
@@ -86,7 +94,7 @@ export default {
       this.slideAnim();
     });
 
-    if (this.$store.state.learning.naviUp) this.naviAnim();
+    if (this.$store.state.navigation.naviUp) this.naviAnim();
   },
 };
 </script>
@@ -107,7 +115,8 @@ export default {
   display: -webkit-box;
   display: -ms-flexbox;
   display: -webkit-flex;
-  display: flex;flex-direction: column;
+  display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: space-between;
   -webkit-box-pack: center;
@@ -137,7 +146,7 @@ export default {
   opacity: 0;
   animation: fade 1s ease-out 0.3s forwards;
   transform: translateY(20%);
-  font-size:  100%;
+  font-size: 100%;
 }
 
 .up {

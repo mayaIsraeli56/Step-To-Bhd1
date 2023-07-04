@@ -6,7 +6,6 @@ export default {
     learnChapter: null,
     learnSec: null,
     learnSubSec: null,
-    naviUp: false,
     openSubMenu: -1,
     subChapter: 0,
     bookmark: [],
@@ -15,33 +14,34 @@ export default {
   getters: {},
 
   mutations: {
+    ////////////////Chapter////////////////
     changeChapter(state, activeIndex) {
       state.learnChapter = activeIndex;
-    },
-
-    removeSubAndSec(state) {
-      state.learnSec = null;
-      state.learnSubSec = null;
-    },
-
-    changeSec(state, sec) {
-      state.learnSec = sec;
-    },
-
-    changeSubSec(state, subsec) {
-      state.learnSubSec = subsec;
-    },
-
-    openingSubMenu(state, sub) {
-      state.openSubMenu = sub;
     },
 
     notLearningChapter(state) {
       state.learnChapter = null;
     },
 
-    toNaviUp(state) {
-      state.naviUp = true;
+    ////////////////Sec////////////////
+
+    changeSec(state, sec) {
+      state.learnSec = sec;
+    },
+
+    ////////////////Sub////////////////
+    removeSubAndSec(state) {
+      state.learnSec = null;
+      state.learnSubSec = null;
+    },
+
+    changeSubSec(state, subsec) {
+      state.learnSubSec = subsec;
+    },
+
+    ////////////////Other////////////////
+    openingSubMenu(state, sub) {
+      state.openSubMenu = sub;
     },
 
     toggleBookMark(state, chapterToAdd) {
@@ -52,5 +52,25 @@ export default {
     },
   },
 
-  actions: {},
+  actions: {
+    changeChapter({ commit }, activeIndex) {
+      commit("changeChapter", activeIndex);
+      commit("navigation/hideNavi", null, { root: true });
+    },
+
+    notLearningChapter({ commit }) {
+      commit("notLearningChapter");
+      commit("navigation/showNavi", null, { root: true });
+    },
+
+    changeSubSec({ commit }, subsec) {
+      commit("changeSubSec", subsec);
+      commit("navigation/smallNavi", null, { root: true });
+    },
+
+    removeSubAndSec({ commit }) {
+      commit("removeSubAndSec");
+      commit("navigation/bigNavi", null, { root: true });
+    },
+  },
 };

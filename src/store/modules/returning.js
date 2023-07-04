@@ -6,11 +6,12 @@ export default {
     showBackBtn: false,
     returningFunc: "",
     funcNum: null,
-    returningFuncs: ["backToSubMenu2", "backToSubSecMenu"],
+    returningFuncs: ["backToSubMenu2", "backToSubSecMenu", "backToSubMenu3"],
 
     // list of Back functions
     backToSubMenu2: false,
     backToSubSecMenu: false,
+    backToSubMenu3: false,
   },
 
   getters: {},
@@ -20,10 +21,13 @@ export default {
       state.showBackBtn = !state.showBackBtn;
     },
 
+    showBackBtn(state) {
+      state.showBackBtn = true;
+    },
+
     setReturningFunc(state, funcNum) {
       state.funcNum = funcNum;
       state.returningFunc = state.returningFuncs[funcNum];
-      state.showBackBtn = true;
     },
 
     playBackFunc(state) {
@@ -36,25 +40,39 @@ export default {
   },
 
   actions: {
-    setReturningFunc({ commit }, funcName) {
-      commit("toggleBackBtn");
-      commit("setReturningFunc", funcName);
+    setReturningFunc({ commit, state }, funcNum) {
+      if (!state.showBackBtn) commit("showBackBtn");
+      commit("setReturningFunc", funcNum);
     },
 
-    async playBackFunc({ commit, state }) {
-      if (state.returningFunc == "backToSubMenu2") {
+    async playBackFunc({ commit, dispatch, state }) {
+      if (state.returningFunc.substring(6, 13) == "SubMenu") {
         commit("toggleBackBtn");
+        commit("navigation/toNaviUp", null, { root: true });
       }
-      if (state.returningFunc == "backToSubSecMenu") {
-        commit("learning/removeSubAndSec", null, { root: true });
-        commit("learning/openingSubMenu", -1, { root: true });
+
+      switch (state.funcNum) {
+        case 0: // backToSubMenu2
+        dispatch("learning/notLearningChapter", null, { root: true });
+          break;
+        case 1: // backToSubSecMenu
+          dispatch("learning/removeSubAndSec", null, { root: true });
+          commit("learning/openingSubMenu", -1, { root: true });
+          break;
+        case 2: // backToSubMenu3
+          commit("navigation/bigNavi", null, { root: true });
+          commit("navigation/showNavi", null, { root: true });
+          commit("games/cleanGameType", null, { root: true });
+          break;
+        default:
       }
 
       await commit("playBackFunc");
       commit("closeBackFunc");
 
-      commit("setReturningFunc", state.funcNum -1);
+      commit("setReturningFunc", state.funcNum - 1);
     },
+
     someAction({ dispatch, commit, getters, rootGetters }) {
       // getters.someGetter // -> 'foo/someGetter'
       // rootGetters.someGetter // -> 'someGetter'

@@ -64,7 +64,7 @@ export default {
   },
 
   methods: {
-    ...mapMutations("learning", ["removeSubAndSec", "openingSubMenu"]),
+    ...mapMutations("learning", ["openingSubMenu"]),
 
     openSubSecCard(chosenSlide) {
       if (this.unableOpening) {

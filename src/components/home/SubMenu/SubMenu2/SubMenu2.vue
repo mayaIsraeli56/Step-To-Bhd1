@@ -30,9 +30,9 @@
 import { IonImg } from "@ionic/vue";
 import SubMenuSwiper from "../SubMenuSwiper.vue";
 import { SwiperSlide } from "swiper/vue";
-import ChapterInfo from "@/json/ChapterInfo";
+import ChapterInfo from "@/json/chapters/ChapterInfo";
 import ChoseSubChapter from "./ChoseSubChapter.vue";
-import { mapState, mapMutations, mapActions } from "vuex";
+import { mapState, mapMutations } from "vuex";
 
 export default {
   name: "SubMenu2",
@@ -57,8 +57,7 @@ export default {
   },
 
   methods: {
-    ...mapMutations("learning", ["notLearningChapter", "toNaviUp"]),
-    ...mapActions("returning", ["toggleBackBtn", "closeBackFunc"]),
+    ...mapMutations("navigation", ["toNaviUp"]),
 
     openChapter() {
       this.openSubChapters = true;
@@ -68,10 +67,8 @@ export default {
   watch: {
     backToSubMenu2: {
       handler() {
-        if (this.backToSubMenu2 == true) {
+        if (this.backToSubMenu2) {
           this.openSubChapters = false;
-          this.notLearningChapter();
-          this.toNaviUp();
         }
       },
     },

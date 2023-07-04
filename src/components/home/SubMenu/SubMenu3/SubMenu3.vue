@@ -1,79 +1,149 @@
 <template>
-  <div class="games">
-    <ion-text class="text-dark-plain note"
+  <div class="games" v-if="gameType == null">
+    <ion-text class="text-dark-plain note animate__animated" ref="note"
       >בחרו את הפרקים אותם תרצו לתרגל</ion-text
     >
 
     <div class="box">
-      <div class="blue-circle text-dark-plain" v-for="n in noChapters" :key="n" @click="choseChap(n)">
+      <div
+        v-for="n in noChapters"
+        :key="n"
+        :class="[
+          chapterChosen[n - 1] ? 'circle-chosen' : '',
+          'blue-circle text-dark-plain',
+        ]"
+        @click="choseChap(n)"
+      >
         {{ n }}
       </div>
     </div>
-    <ion-text class="character-name">xxxxxxxxxxxxxxxxxxxx</ion-text>
-    <sub-menu-swiper
-      :parent="2"
-      :slidesNum="slidesNum"
-      @chapterChosen="openChapter"
-      v-if="!openSubChapters"
-    >
+    <ion-text class="character-name" :style="{ opacity: opacity }">{{
+      lastChosen
+    }}</ion-text>
+
+    <sub-menu-swiper :parent="3" :slidesNum="slidesNum">
       <slot
         ><swiper-slide
-          v-for="n in this.GamesInfo.length"
+          v-for="n in this.gamesInfo.length" 
           :key="n"
           :class="'slide' + n"
           ref="slide"
+          @click="choseGame(n)"
         >
-          <div class="circle">{{ n }}</div>
-          <div class="title">{{ this.GamesInfo[n - 1].title }}</div>
-          <div class="text">{{ this.GamesInfo[n - 1].text }}</div>
+          <div class="circle">
+            <ion-img
+              class="game-icon"
+              :src="require(`@/assets/media1/HomePage/games/icons/${n}.png`)"
+            ></ion-img>
+          </div>
+          <div class="title">{{ this.gamesInfo[n - 1].title }}</div>
+          <div class="text">{{ this.gamesInfo[n - 1].text }}</div>
         </swiper-slide></slot
       >
     </sub-menu-swiper>
   </div>
+
+  <cards-game v-if="gameType == 1"></cards-game>
+  <time-game v-if="gameType == 2"></time-game>
+  <thinking-game v-if="gameType == 3"></thinking-game>
+  <trivia-game v-if="gameType == 4"></trivia-game>
 </template>
 
 <script>
 import SubMenuSwiper from "../SubMenuSwiper.vue";
+import TimeGame from "./Games/TimeGame.vue";
+import ThinkingGame from "./Games/ThinkingGame.vue";
+import CardsGame from "./Games/CardsGame.vue";
+import TriviaGame from "./Games/TriviaGame.vue";
+
 import { SwiperSlide } from "swiper/vue";
-import GamesInfo from "@/json/GamesInfo.json";
-import { IonText } from "@ionic/vue";
+import gamesInfo from "@/json/games/gamesInfo.json";
+import ChapterInfo from "@/json/chapters/ChapterInfo";
+import { IonText, IonImg } from "@ionic/vue";
 
 import { mapState, mapMutations, mapActions } from "vuex";
 
 export default {
   name: "SubMenu3",
-  components: { SubMenuSwiper, SwiperSlide, IonText },
+  components: {
+    SubMenuSwiper,
+    SwiperSlide,
+    IonText,
+    IonImg,
+    TimeGame,
+    ThinkingGame,
+    CardsGame,
+    TriviaGame,
+  },
 
   data() {
     return {
       slidesNum: null,
-      GamesInfo: GamesInfo,
+      gamesInfo: gamesInfo,
+      ChapterInfo: ChapterInfo,
       noChapters: 10,
+      lastChosen: "last",
+      chapterChosen: [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+      ],
+      opacity: 0,
     };
   },
 
   computed: {
-    ...mapState("returning", ["backToSubMenu2"]),
+    ...mapState("returning", ["backToSubMenu3"]),
+    ...mapState("games", ["gameType"]),
   },
 
   created() {
-    this.slidesNum = this.GamesInfo.length;
+    this.slidesNum = this.gamesInfo.length;
   },
 
   methods: {
+    ...mapActions("games", ["setGameType"]),
+    ...mapMutations("navigation", ["hideNavi", "toggleMiniIcon"]),
+    ...mapActions("returning", ["setReturningFunc"]),
 
     choseChap(noChap) {
-      console.log(noChap);
+      this.opacity = !this.chapterChosen[noChap - 1] ? 1 : 0;
+      this.lastChosen = this.ChapterInfo[noChap - 1].title;
+      this.chapterChosen[noChap - 1] = !this.chapterChosen[noChap - 1];
+    },
+
+    choseGame(noGame) {
+      if (this.lastChosen == "last") {
+        this.$refs.note.$el.classList.add("animate__flash");
+
+        setTimeout(() => {
+          this.$refs.note.$el.classList.remove("animate__flash");
+        }, 500);
+        return;
+      }
+
+      setTimeout(() => {
+        this.toggleMiniIcon();
+      }, 500);
+
+      this.setReturningFunc(2);
+      this.setGameType(noGame);
+      this.hideNavi();
     },
   },
 
   watch: {
     backToSubMenu3: {
       handler() {
-        if (this.backToSubMenu2 == true) {
-          this.openSubChapters = false;
-          this.notLearningChapter();
-          this.toNaviUp();
+        if (this.backToSubMenu3) {
+          this.toggleMiniIcon();
         }
       },
     },
@@ -82,6 +152,9 @@ export default {
 </script>
 
 <style scoped>
+.games > * {
+  transition: opacity 0.2s linear;
+}
 .swiper-slide {
   background-color: #fafafa;
   border-radius: 7%;
@@ -108,6 +181,10 @@ export default {
   color: var(--ion-color-medium);
   text-shadow: none;
 }
+.game-icon {
+  width: 7vh;
+  height: 7vh;
+}
 
 .title {
   position: relative;
@@ -125,7 +202,7 @@ export default {
 .text {
   position: relative;
   transform: translateY(-70%);
-  font-size: 80%;
+  font-size: 2.5vh;
   padding: 0%;
   color: var(--ion-color-medium);
   text-shadow: none;
@@ -136,8 +213,8 @@ export default {
 
 .blue-circle {
   background: var(--ion-color-primary-tint-light);
-  height: 5.5vh;
-  width: 5.5vh;
+  height: 5vh;
+  width: 5vh;
   margin: 1%;
   border-radius: 100%;
   display: flex;
@@ -145,6 +222,7 @@ export default {
   justify-content: center;
   font-size: 100%;
   font-weight: 800;
+  transition: 0.2s linear;
 }
 
 .box {
@@ -156,7 +234,6 @@ export default {
   grid-template-columns: auto auto auto auto auto;
   row-gap: 10%;
   column-gap: 0%;
-  margin-bottom: 3%;
   align-items: center;
   justify-items: center;
 }
@@ -164,16 +241,26 @@ export default {
 .character-name {
   color: var(--ion-color-primary-tint);
   text-shadow: none;
+  font-size: 2.5vh;
 }
 .note {
   position: relative;
-  font-size: 80%;
+  font-size: 2.5vh;
   opacity: 0.8;
 }
 
 .games {
   position: relative;
   top: -7%;
+}
+
+.circle-chosen {
+  background-color: var(--ion-color-primary);
+  color: var(--ion-color-secondary-tint);
+}
+
+.mySwiper {
+  margin-top: 2vh;
 }
 </style>
 

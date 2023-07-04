@@ -6,11 +6,7 @@
     appear
     name="fadeA"
   >
-    <div
-      class="circle"
-      ref="circle"
-      :key="0"
-    ></div>
+    <div class="circle" ref="circle" :key="0"></div>
 
     <ion-img
       :src="stepLogoSrc"
@@ -27,12 +23,14 @@
       v-if="firstOpened"
       :key="2"
     ></ion-img>
+
     <ion-text class="num" :key="3" ref="num"
       >פרק {{ learnChapter + 1 }}
     </ion-text>
     <ion-text v-if="showHeading" :key="2" ref="text" class="text">
       {{ text }}</ion-text
     >
+
     <ion-img
       :src="searchSrc"
       alt="search-icon"
@@ -46,8 +44,17 @@
       :src="require('@/assets/media1/HomePage/arrow-back.png')"
       class="arrow"
       v-if="showBackBtn"
-      @click="playBackFunc('backToSubMenu2')"
+      @click="playBackFunc()"
     ></ion-img>
+
+    <ion-img
+      v-if="miniIcon"
+      :key="4"
+      :src="require(`@/assets/media1/HomePage/icons-nevi/${stage}.png`)"
+      class="mini-icon"
+    ></ion-img>
+
+    <ion-img :key="4" v-if="icon != null" :src="icon" class="arrow"></ion-img>
   </transition-group>
 </template>
 
@@ -69,16 +76,41 @@ export default defineComponent({
       text: "",
       showHeading: false,
       textArray: ["אנשים", "בחנים", "מקראות", "משחקים", "הסכתים"],
+      icon: null,
     };
   },
 
   computed: {
     ...mapState("learning", ["learnChapter", "learnSubSec"]),
-    ...mapState("returning", ["showBackBtn", "backToSubMenu2", "backToSubSecMenu"]),
+    ...mapState("games", ["gameType"]),
+    ...mapState("navigation", ["bigNavi", "stage", "miniIcon"]),
+    ...mapState("returning", [
+      "showBackBtn",
+      "backToSubMenu2",
+      "backToSubSecMenu",
+    ]),
   },
 
   methods: {
-    ...mapActions("returning", ["playBackFunc"])
+    ...mapActions("returning", ["playBackFunc"]),
+
+    miniTop() {
+      this.$refs.num.$el.style.opacity = 0;
+      this.$refs.text.$el.style.top = "-15%";
+      this.$refs.text.$el.style.fontSize = "130%";
+      this.$refs.container.$el.style.height = "10vh";
+      this.$refs.circle.style.height = "20vh";
+      this.$refs.circle.style.borderRadius = "4vh";
+    },
+
+    maxTop() {
+      this.$refs.text.$el.style.top = "0";
+      this.$refs.container.$el.style.height = "18%";
+      this.$refs.circle.style.height = "200%";
+      this.$refs.circle.style.borderRadius = "100%";
+      this.$refs.text.$el.style.fontSize = "180%";
+      if (this.learnChapter != null) this.$refs.num.$el.style.opacity = 1;
+    },
   },
 
   created() {
@@ -96,6 +128,7 @@ export default defineComponent({
         this.text = this.textArray[this.slideNum];
       },
     },
+
     learnChapter: {
       handler() {
         if (this.learnChapter != null) {
@@ -103,36 +136,32 @@ export default defineComponent({
             (module) => {
               this.text = module.title;
               this.$refs.num.$el.style.opacity = 1;
-              this.$refs.text.$el.style.fontSize = "140%";
             }
           );
         } else {
           this.$refs.num.$el.style.opacity = 0;
-          this.$refs.text.$el.style.top = "0";
           this.text = this.textArray[this.slideNum];
         }
       },
     },
 
-    learnSubSec: {
+    gameType: {
       handler() {
-        if (this.learnSubSec != null) {
-          this.$refs.num.$el.style.opacity = 0;
-          this.$refs.text.$el.style.top = "-15%";
-          this.$refs.text.$el.style.fontSize = "130%";
-          this.$refs.container.$el.style.height = "10vh";
-          this.$refs.circle.style.height = "20vh";
-          this.$refs.circle.style.borderRadius = "4vh";
+        if (this.gameType != null) {
+          import(`@/json/games/gamesInfo`).then((module) => {
+            this.text = module[this.gameType-1].title;
+          });
         } else {
-          this.$refs.num.$el.style.opacity = 1;
-          this.$refs.text.$el.style.top = "0";
-          this.$refs.container.$el.style.height = "18%";
-          this.$refs.circle.style.height = "200%";
-          this.$refs.circle.style.borderRadius = "100%";
+          this.text = this.textArray[this.slideNum];
         }
       },
     },
 
+    bigNavi: {
+      handler() {
+        this.bigNavi ? this.maxTop() : this.miniTop();
+      },
+    },
   },
 });
 </script>
@@ -160,11 +189,11 @@ export default defineComponent({
 
 ion-text {
   position: relative;
-  font-size: 5vh;
-  top: 3.2vh;
+  font-size: 180%;
+  top: 3vh;
   text-shadow: none;
   font-weight: 600;
-  transition: 1s;
+  transition: all 1s ease;
 }
 
 .circle {
@@ -209,5 +238,13 @@ ion-text {
   height: 3vh;
   top: 1.5vh;
   right: 4vw;
+}
+
+.mini-icon {
+  position: absolute;
+  transition: all 1s ease;
+  top: 15%;
+  left: 5%;
+  height: 7vh;
 }
 </style>

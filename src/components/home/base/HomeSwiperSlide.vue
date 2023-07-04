@@ -1,8 +1,6 @@
 <template>
- 
-    <img :src="getImgUrl(logoNum)" />
-    <h2>{{text[logoNum]}}</h2>
- 
+  <img :src="getImgUrl(logoNum)" />
+  <h2>{{ text[logoNum] }}</h2>
 </template>
 
 <script>
@@ -11,13 +9,12 @@ export default {
   props: ["logoNum"],
   data() {
     return {
-      icons: ["people", "exam", "book", "play", "microphone"],
       text: ["אנשים", "בחנים", "מקראות", "משחקים", "הסכתים"],
     };
   },
   methods: {
     getImgUrl(num) {
-      return require("@/assets/media1/HomePage/icons-nevi/" + this.icons[num] + ".png");
+      return require("@/assets/media1/HomePage/icons-nevi/" + num + ".png");
     },
   },
 };
@@ -39,26 +36,23 @@ img {
   top: -5%;
 }
 
-
-
-@media only screen and (max-height: 600px){
+@media only screen and (max-height: 600px) {
   h2 {
     font-size: 70% !important;
   }
 }
 
-@media only screen and (max-height: 400px){
+@media only screen and (max-height: 400px) {
   h2 {
     margin-top: 10%;
     font-size: 50% !important;
   }
 }
 
-@media only screen and (min-height: 900px){
+@media only screen and (min-height: 900px) {
   h2 {
     margin-top: 15%;
     font-size: 130% !important;
   }
 }
-
 </style>
