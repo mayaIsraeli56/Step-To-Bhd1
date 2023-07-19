@@ -45,8 +45,8 @@
 
   <cards-game v-if="gameType == 1"></cards-game>
   <time-game v-if="gameType == 2"></time-game>
-  <thinking-game v-if="gameType == 3"></thinking-game>
-  <trivia-game v-if="gameType == 4"></trivia-game>
+  <trivia-game v-if="gameType == 3"></trivia-game>
+  <thinking-game v-if="gameType == 4"></thinking-game>
 </template>
 
 <script>

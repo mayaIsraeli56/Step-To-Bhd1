@@ -90,16 +90,6 @@ export default {
       this.unableOpening = false;
     }, 500);
   },
-
-  watch: {
-    backToSubSecMenu: {
-      handler() {
-        if (this.backToSubSecMenu == true) {
-          console.log("in sub sec manu watcher remove if not used");
-        }
-      },
-    },
-  },
 };
 </script>
 

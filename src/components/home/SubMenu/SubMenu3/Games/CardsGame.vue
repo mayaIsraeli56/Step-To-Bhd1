@@ -12,7 +12,9 @@
           >
         </div>
         <div class="flip-card-back card">
-          <ion-text class="text-dark-plain"> {{ cards[cardNum].ans }}</ion-text>
+          <ion-text class="text-dark-plain cntnt">
+            {{ cards[cardNum].ans }}</ion-text
+          >
         </div>
       </div>
     </div>
@@ -76,7 +78,7 @@ export default {
   height: 90%;
 }
 .note {
-  font-size: 2.5vh;
+  font-size: 75%;
 }
 
 .btns {
@@ -89,8 +91,8 @@ export default {
 /* The flip card container - set the width and height to whatever you want. We have added the border property to demonstrate that the flip itself goes out of the box on hover (remove perspective if you don't want the 3D effect */
 .flip-card {
   background-color: transparent;
-  width: 90%;
-  height: 60%;
+  width: 85%;
+  height: 70%;
   border: 1px solid #f1f1f1;
   perspective: 100%; /* Remove this if you don't want the 3D effect */
 }
@@ -153,7 +155,8 @@ ion-button {
 }
 .card {
   padding: 4%;
-  font-size: 83%;
+  font-size: 75%;
+  transform-style: preserve-3d;
   transition: all 1s ease;
 }
 
