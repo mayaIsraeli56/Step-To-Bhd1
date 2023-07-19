@@ -3,22 +3,16 @@
     :class="[secNum == learnSec ? 'chosen-card' : '', 'card']"
     :ref="'card' + secNum"
   >
-   
-      <ion-text
-        class="num text-dark-plain"
-        v-if="learnSubSec == null"
-        :key="1"
-        >{{ secNum + 1 }}</ion-text
-      >
-      <ion-text class="s-num text-dark-plain" v-else :key="2"
-        >{{ secNum + 1 }}.{{ learnSubSec + 1 }}</ion-text
-      >
-   
+    <ion-text class="num text-dark-plain" v-if="learnSubSec == null" :key="1">{{
+      secNum + 1
+    }}</ion-text>
+    
+    <ion-text class="s-num text-dark-plain" v-else :key="2"
+      >{{ secNum + 1 }}.{{ learnSubSec + 1 }}</ion-text
+    >
+
     <ion-text
-      :class="[
-        secNum == learnSec ? 'title-big' : '',
-        'text-dark-plain title',
-      ]"
+      :class="[secNum == learnSec ? 'title-big' : '', 'text-dark-plain title']"
       >{{ sec.title }}
 
       <ion-text
@@ -62,7 +56,6 @@ export default {
   computed: {
     ...mapState("learning", ["learnChapter", "learnSec", "learnSubSec"]),
   },
-  
 };
 </script>
 
@@ -120,7 +113,7 @@ export default {
   }
 }
 
-.title-big{
+.title-big {
   font-size: 1.3rem;
   font-weight: 700;
 }

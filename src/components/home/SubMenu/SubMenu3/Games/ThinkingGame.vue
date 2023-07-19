@@ -3,6 +3,7 @@
     <ion-text class="text-dark-plain note">
       לחצו על הכרטיסייה כדי לראות את התשובה</ion-text
     >
+
     <ion-content>
       <ion-list>
         <transition-group
@@ -13,28 +14,28 @@
           mode="out-in"
         >
           <div
-            v-for="(card, i) in cards"
+            v-for="(ques, i) in questions"
             :key="i"
-            class="section"
-            :class="[secNum == learnSec ? 'chosen-sec' : '', 'section']"
-            :ref="'sec' + secNum"
+            class="card-structure"
+            :ref="'card' + i"
           >
-            <sec-cards
+            <ion-card @click="toggleCard(i)" class="card">
+              <ion-text class="text-dark-plain qes">
+                {{ questions[i].qes }}</ion-text
+              >
+            </ion-card>
+
+            <ion-card
               :secNum="secNum"
               :sec="sec"
-              @click="openSubSecCard(i)"
-              v-if="secNum == learnSec || learnSec == null"
-            ></sec-cards>
-  
-            <sub-sec-cards
-              :secNum="secNum"
-              :subSections="sec.subSections"
-              :key="secNum + 1"
-              :ref="'slide' + secNum"
-              class="sub-sec-menu"
-              v-if="learnSubSec == null"
+              class="card ans"
+              @click="toggleCard(i)"
+              v-if="isCardShown(i)"
             >
-            </sub-sec-cards>
+              <ion-text class="text-dark-plain">
+                {{ questions[i].ans }}</ion-text
+              >
+            </ion-card>
           </div>
         </transition-group>
       </ion-list>
@@ -43,52 +44,39 @@
 </template>
 
 <script>
-import { IonList, IonText, IonContent } from "@ionic/vue";
-import cards from "@/json/games/cards.json";
+import { IonList, IonText, IonContent, IonCard } from "@ionic/vue";
+import questions from "@/json/games/thinkingGame.json";
 
 export default {
   name: "ThinkingGame",
-  components: { IonList, IonText, IonContent },
+  components: { IonList, IonText, IonContent, IonCard },
 
   data() {
     return {
-      cards: cards,
+      questions: questions,
+      cardNum: 0,
+      cardVisible: [],
     };
   },
+  mounted() {
+    for (let i = 0; i < questions.length; i++) {
+      this.cardVisible[i] = false;
+    }
+  },
 
-  methods: {},
+  methods: {
+    toggleCard(cardNum) {
+      this.cardVisible[cardNum] = !this.cardVisible[cardNum];
+    },
+
+    isCardShown(cardNum) {
+      return this.cardVisible[cardNum];
+    },
+  },
 };
 </script>
 
 <style scoped>
-.think {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
-  height: 90%;
-}
-.note {
-  font-size: 80%;
-}
-
-.card {
-  background-color: #d9e3e4;
-  height: 14vh;
-  width: 85%;
-  border-radius: 3vh;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  margin: auto;
-  margin-top: 5%;
-  margin-bottom: 1.8%;
-  padding: 1% 3%;
-  flex-wrap: wrap;
-  transition: all 1s ease;
-  box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
-}
-
 ion-content {
   direction: ltr;
   --ion-background-color: transparent;
@@ -98,12 +86,52 @@ ion-content {
 
 ion-list {
   padding: 0;
-  min-height: 50vh;
+  min-height: 100%;
   transition: all 1s ease-in-out;
-  background-color: #ecadad6f;
+}
+
+.think {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  height: 90%;
+}
+.note {
+  font-size: 80%;
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+
+.card {
+  background-color: #d9e3e4;
+  height: 8vh;
+  width: 85%;
+  border-radius: 3vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  margin-top: 5%;
+  margin-bottom: 0;
+  padding: 1% 3%;
+  flex-wrap: wrap;
+  transition: all 1s ease;
+  box-shadow: rgba(0, 0, 0, 0.228) 0px 3px 5px;
+  z-index: 1;
 }
 
 .ans {
   background-color: #fafafa;
+  border-radius: 0 0 3vh 3vh;
+  height: fit-content;
+  margin-top: -10%;
+  font-size: 1rem;
+  padding: 15% 5% 5% 5%;
+  z-index: 0;
+}
+
+.qes {
+  font-size: 1.4rem;
 }
 </style>

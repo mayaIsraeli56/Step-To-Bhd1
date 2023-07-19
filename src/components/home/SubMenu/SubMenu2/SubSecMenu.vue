@@ -28,7 +28,7 @@
             :key="secNum + 1"
             :ref="'slide' + secNum"
             class="sub-sec-menu"
-            v-if="learnSubSec == null"
+            :class="[learnSubSec != null? 'close' : '', 'sub-sec-menu']"
           >
           </sub-sec-cards>
         </div>
@@ -106,9 +106,7 @@ ion-list {
   min-height: 66vh;
   transition: all 1s ease-in-out;
 }
-.section {
-  transition: all 1s ease;
-}
+
 .full-page {
   top: -3.1vh;
   height: 90%;
@@ -116,5 +114,8 @@ ion-list {
 .chosen-sec {
   width: 100%;
   margin-top: 5%;
+}
+.close {
+  height: 0;
 }
 </style>
