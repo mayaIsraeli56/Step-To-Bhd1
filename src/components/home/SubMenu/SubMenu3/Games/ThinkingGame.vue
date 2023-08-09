@@ -26,11 +26,8 @@
             </ion-card>
 
             <ion-card
-              :secNum="secNum"
-              :sec="sec"
-              class="card ans"
+              :class="['card ans', isCardShown(i) ? 'open' : 'close']"
               @click="toggleCard(i)"
-              v-if="isCardShown(i)"
             >
               <ion-text class="text-dark-plain">
                 {{ questions[i].ans }}</ion-text
@@ -45,7 +42,8 @@
 
 <script>
 import { IonList, IonText, IonContent, IonCard } from "@ionic/vue";
-import questions from "@/json/games/thinkingGame.json";
+import { mapState } from "vuex";
+import allQuestions from "@/json/games/thinkingGame.json";
 
 export default {
   name: "ThinkingGame",
@@ -53,13 +51,26 @@ export default {
 
   data() {
     return {
-      questions: questions,
+      questions: [],
       cardNum: 0,
       cardVisible: [],
     };
   },
+
+  computed: {
+    ...mapState("games", ["chosenChapters"]),
+  },
+
+  beforeMount() {
+    allQuestions.forEach((chap, i) => {
+      chap.forEach((ques) => {
+        if (this.chosenChapters.includes(i + 1)) this.questions.push(ques);
+      });
+    });
+  },
+
   mounted() {
-    for (let i = 0; i < questions.length; i++) {
+    for (let i = 0; i < this.questions.length; i++) {
       this.cardVisible[i] = false;
     }
   },
@@ -79,15 +90,16 @@ export default {
 <style scoped>
 ion-content {
   direction: ltr;
-  --ion-background-color: transparent;
+  --ion-background-color: var(--ion-color-secondary-tint);
   height: 90%;
-  transition: all 1s ease-in-out;
+  transition: all 0.5s ease-in-out;
 }
 
 ion-list {
   padding: 0;
   min-height: 100%;
-  transition: all 1s ease-in-out;
+  transition: all 0.5s ease-in-out;
+  --ion-background-color: var(--ion-color-secondary-tint);
 }
 
 .think {
@@ -116,7 +128,7 @@ ion-list {
   margin-bottom: 0;
   padding: 1% 3%;
   flex-wrap: wrap;
-  transition: all 1s ease;
+  transition: all 0.5s ease;
   box-shadow: rgba(0, 0, 0, 0.228) 0px 3px 5px;
   z-index: 1;
 }
@@ -126,12 +138,26 @@ ion-list {
   border-radius: 0 0 3vh 3vh;
   height: fit-content;
   margin-top: -10%;
-  font-size: 1rem;
+  font-size: 1.1rem;
   padding: 15% 5% 5% 5%;
   z-index: 0;
+  transition: all 0.5s ease;
+  box-shadow: none;
 }
 
 .qes {
   font-size: 1.4rem;
+}
+
+.close {
+  clip-path: inset(0 0 100% 0);
+  opacity: 0;
+  height: 0;
+  padding: 5% 5% 5% 5%;
+}
+
+.open {
+  clip-path: inset(0);
+  opacity: 1;
 }
 </style>

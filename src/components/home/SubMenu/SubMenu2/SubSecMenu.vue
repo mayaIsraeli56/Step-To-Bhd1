@@ -11,8 +11,13 @@
         <div
           v-for="(sec, secNum) in sections"
           :key="secNum"
-          class="section"
-          :class="[secNum == learnSec ? 'chosen-sec' : '', 'section']"
+          :class="[
+            secNum == learnSec
+              ? 'chosen-sec section'
+              : learnSec != null
+              ? 'close'
+              : 'section',
+          ]"
           :ref="'sec' + secNum"
         >
           <sec-cards
@@ -25,10 +30,11 @@
           <sub-sec-cards
             :secNum="secNum"
             :subSections="sec.subSections"
-            :key="secNum + 1"
             :ref="'slide' + secNum"
-            class="sub-sec-menu"
-            :class="[learnSubSec != null? 'close' : '', 'sub-sec-menu']"
+            :class="[
+              learnSubSec != null || openSubMenu != secNum ? 'close' : 'open',
+              'sub-sec-menu',
+            ]"
           >
           </sub-sec-cards>
         </div>
@@ -70,7 +76,7 @@ export default {
       if (this.unableOpening) {
         return;
       }
-      
+
       if (chosenSlide == this.openSubMenu) {
         this.openingSubMenu(-1);
       } else {
@@ -97,25 +103,47 @@ export default {
 ion-content {
   direction: ltr;
   --ion-background-color: transparent;
-  height: 66vh;
-  transition: all 1s ease-in-out;
+  height: 66dvh;
+  transition: all 0.5s ease-in-out;
 }
 
 ion-list {
   padding: 0;
-  min-height: 66vh;
-  transition: all 1s ease-in-out;
+  min-height: 66dvh;
+  transition: all 0.5s ease-in-out;
 }
 
 .full-page {
-  top: -3.1vh;
+  top: -3.1dvh;
   height: 90%;
+}
+
+.container {
+  background-color:transparent;
 }
 .chosen-sec {
   width: 100%;
   margin-top: 5%;
 }
+
+.section {
+  min-height: 14dvh;
+  margin-top: 5%;
+}
+
+.sub-sec-menu {
+  transition: all 0.5s ease-in-out;
+}
 .close {
-  height: 0;
+  clip-path: inset(0 0 100% 0);
+  height: 0 !important;
+  opacity: 0;
+  overflow: hidden;
+}
+
+.open {
+  clip-path: inset(0);
+  height: fit-content;
+  opacity: 1;
 }
 </style>

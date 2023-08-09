@@ -1,6 +1,6 @@
 <template>
   <transition name="slideD" appear>
-    <div class="card-details" v-if="openSubMenu == secNum">
+    <div class="card-details" >
       <div class="line"></div>
 
       <div
@@ -58,7 +58,6 @@ export default {
   align-items: center;
   justify-content: flex-start;
   margin: auto;
-  margin-bottom: 5%;
   padding: 2%;
   margin-top: -10%;
   border-radius: 0 0 3vh 3vh;

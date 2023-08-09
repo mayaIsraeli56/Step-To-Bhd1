@@ -6,12 +6,13 @@ export default {
     showBackBtn: false,
     returningFunc: "",
     funcNum: null,
-    returningFuncs: ["backToSubMenu2", "backToSubSecMenu", "backToSubMenu3"],
+    returningFuncs: ["backToSubMenu2", "backToSubSecMenu", "backToSubMenu3", "backToSubMenu1"],
 
     // list of Back functions
     backToSubMenu2: false,
     backToSubSecMenu: false,
     backToSubMenu3: false,
+    backToSubMenu1: false,
   },
 
   getters: {},
@@ -62,7 +63,13 @@ export default {
         case 2: // backToSubMenu3
           commit("navigation/bigNavi", null, { root: true });
           commit("navigation/showNavi", null, { root: true });
+          commit("navigation/toggleMiniIcon", null, { root: true });
           commit("games/cleanGameType", null, { root: true });
+          break;
+        case 3: // backToSubMenu1
+          commit("navigation/bigNavi", null, { root: true });
+          commit("navigation/showNavi", null, { root: true });
+          commit("navigation/toggleMiniIcon", null, { root: true });
           break;
         default:
       }

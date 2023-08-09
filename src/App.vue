@@ -27,6 +27,7 @@ export default defineComponent({
   },
   methods: {
     resizeHandler() {
+
    let width= window.innerWidth
    let height= window.innerHeight
 

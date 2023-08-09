@@ -4,27 +4,18 @@
       >בחרו את הפרקים אותם תרצו לתרגל</ion-text
     >
 
-    <div class="box">
-      <div
-        v-for="n in noChapters"
-        :key="n"
-        :class="[
-          chapterChosen[n - 1] ? 'circle-chosen' : '',
-          'blue-circle text-dark-plain',
-        ]"
-        @click="choseChap(n)"
-      >
-        {{ n }}
-      </div>
-    </div>
-    <ion-text class="character-name" :style="{ opacity: opacity }">{{
-      lastChosen
-    }}</ion-text>
+    <chose-chaptes-circels
+      :explanation="[]"
+      :noCircles="noChapters"
+      :circlesInfo="circlesInfo"
+      :maxChoose="noChapters"
+      @circlesChosen="circlesChosen"
+    ></chose-chaptes-circels>
 
     <sub-menu-swiper :parent="3" :slidesNum="slidesNum">
       <slot
         ><swiper-slide
-          v-for="n in this.gamesInfo.length" 
+          v-for="n in this.gamesInfo.length"
           :key="n"
           :class="'slide' + n"
           ref="slide"
@@ -44,17 +35,20 @@
   </div>
 
   <cards-game v-if="gameType == 1"></cards-game>
-  <time-game v-if="gameType == 2"></time-game>
-  <trivia-game v-if="gameType == 3"></trivia-game>
+  <trivia-game
+    v-if="gameType == 3 || gameType == 2"
+    :type="gameType"
+    :exam="-1"
+  ></trivia-game>
   <thinking-game v-if="gameType == 4"></thinking-game>
 </template>
 
 <script>
 import SubMenuSwiper from "../SubMenuSwiper.vue";
-import TimeGame from "./Games/TimeGame.vue";
 import ThinkingGame from "./Games/ThinkingGame.vue";
 import CardsGame from "./Games/CardsGame.vue";
-import TriviaGame from "./Games/TriviaGame.vue";
+import TriviaGame from "./Games/Trivia/TriviaGame.vue";
+import ChoseChaptesCircels from "@/components/reuse/ChoseChaptesCircels.vue";
 
 import { SwiperSlide } from "swiper/vue";
 import gamesInfo from "@/json/games/gamesInfo.json";
@@ -68,12 +62,12 @@ export default {
   components: {
     SubMenuSwiper,
     SwiperSlide,
-    IonText,
     IonImg,
-    TimeGame,
+    IonText,
     ThinkingGame,
     CardsGame,
     TriviaGame,
+    ChoseChaptesCircels,
   },
 
   data() {
@@ -81,46 +75,32 @@ export default {
       slidesNum: null,
       gamesInfo: gamesInfo,
       ChapterInfo: ChapterInfo,
+      circlesInfo: [],
       noChapters: 10,
       lastChosen: "last",
-      chapterChosen: [
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-      ],
+      chapterChosen: [],
       opacity: 0,
     };
   },
 
   computed: {
     ...mapState("returning", ["backToSubMenu3"]),
-    ...mapState("games", ["gameType"]),
+    ...mapState("games", ["gameType", "chosenChapters"]),
   },
 
   created() {
     this.slidesNum = this.gamesInfo.length;
+    for (let i = 0; i < this.noChapters; i++)
+      this.circlesInfo[i] = this.ChapterInfo[i].title;
   },
 
   methods: {
-    ...mapActions("games", ["setGameType"]),
     ...mapMutations("navigation", ["hideNavi", "toggleMiniIcon"]),
+    ...mapActions("games", ["setGameType", "addOrRemoveChap"]),
     ...mapActions("returning", ["setReturningFunc"]),
 
-    choseChap(noChap) {
-      this.opacity = !this.chapterChosen[noChap - 1] ? 1 : 0;
-      this.lastChosen = this.ChapterInfo[noChap - 1].title;
-      this.chapterChosen[noChap - 1] = !this.chapterChosen[noChap - 1];
-    },
-
     choseGame(noGame) {
-      if (this.lastChosen == "last") {
+      if (this.chosenChapters.length == 0) {
         this.$refs.note.$el.classList.add("animate__flash");
 
         setTimeout(() => {
@@ -137,17 +117,16 @@ export default {
       this.setGameType(noGame);
       this.hideNavi();
     },
-  },
 
-  watch: {
-    backToSubMenu3: {
-      handler() {
-        if (this.backToSubMenu3) {
-          this.toggleMiniIcon();
-        }
-      },
+    circlesChosen(listOfCircles, noChap) {
+      this.chapterChosen = [...listOfCircles];
+      this.addOrRemoveChap(noChap);
+      this.opacity = !this.chapterChosen[noChap] ? 1 : 0;
+      this.lastChosen = this.ChapterInfo[noChap].title;
+      this.chapterChosen[noChap] = !this.chapterChosen[noChap];
     },
   },
+
 };
 </script>
 
@@ -245,7 +224,7 @@ export default {
 }
 .note {
   position: relative;
-  font-size: 2.5vh;
+  font-size: 2.7vh;
   opacity: 0.8;
 }
 

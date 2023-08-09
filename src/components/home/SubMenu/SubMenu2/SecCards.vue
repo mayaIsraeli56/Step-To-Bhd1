@@ -6,7 +6,7 @@
     <ion-text class="num text-dark-plain" v-if="learnSubSec == null" :key="1">{{
       secNum + 1
     }}</ion-text>
-    
+
     <ion-text class="s-num text-dark-plain" v-else :key="2"
       >{{ secNum + 1 }}.{{ learnSubSec + 1 }}</ion-text
     >
@@ -69,11 +69,11 @@ export default {
   align-items: center;
   justify-content: flex-start;
   margin: auto;
-  margin-top: 5%;
+  margin-top: 0%;
   margin-bottom: 1.8%;
   padding: 1% 3%;
   flex-wrap: wrap;
-  transition: all 1s ease;
+  transition: all 0.5s ease;
 }
 .chosen-card {
   height: fit-content;
@@ -97,7 +97,7 @@ export default {
   margin-right: 1rem;
   text-align: right;
   width: 80%;
-  transition: all 1s ease;
+  transition: all 0.5s ease;
 }
 
 @media only screen and (max-height: 550px) {

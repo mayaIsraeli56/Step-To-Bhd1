@@ -60,7 +60,8 @@ http://ionicframework.com/docs/theming/ */
 	--ion-color-light-shade: #dbd8d0;
 	--ion-color-light-tint: #faf7ee;
 
-  --ion-toolbar-color: var(--ion-color-light)
+  --ion-toolbar-color: var(--ion-color-light);
+  --ion-white: #fafafa;
 }
 
 @media (prefers-color-scheme: dark) {

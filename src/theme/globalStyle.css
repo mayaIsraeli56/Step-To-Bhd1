@@ -27,14 +27,14 @@
 
 html,
 body {
-  height: 100vh;
+  height: 100dvh;
   scroll-behavior: smooth;
   overflow: hidden;
 }
 
 html {
   display: table;
-  margin: auto;
+  margin: 0;
 }
 
 body {
@@ -64,8 +64,8 @@ body {
 }
 
 .bhd-logo {
-  height: 10vh;
-  margin: 2vh;
+  height: 10dvh;
+  margin: 2dvh;
   filter: sepia(30%);
   filter: grayscale(30%);
   filter: contrast(80%);
@@ -86,7 +86,7 @@ ion-content.ion-content-start {
 
 .homeSwiper .swiper-slide-active h2 {
   font-weight: 600;
-  font-size: 2.5vh;
+  font-size: 2.5dvh;
   transition: 0.3s;
 }
 

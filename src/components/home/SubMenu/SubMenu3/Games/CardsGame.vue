@@ -43,6 +43,7 @@
 
 <script>
 import { IonText, IonButton, IonImg } from "@ionic/vue";
+import { mapState } from "vuex";
 import cards from "@/json/games/cards.json";
 
 export default {
@@ -52,9 +53,22 @@ export default {
   data() {
     return {
       arrow: require("@/assets/media1/HomePage/arrow-back.png"),
-      cards: cards,
+      cards: [],
       cardNum: 0,
     };
+  },
+
+  computed: {
+    ...mapState("games", ["chosenChapters"]),
+  },
+
+  beforeMount() {
+    cards.forEach((chap,i) => {
+      chap.forEach((ques) => {
+        if(this.chosenChapters.includes(i+1))
+        this.cards.push(ques);
+      });
+    });
   },
 
   methods: {
