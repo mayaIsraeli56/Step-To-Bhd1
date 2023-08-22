@@ -144,7 +144,7 @@ export default defineComponent({
 
     gameType: {
       handler() {
-        if (this.gameType != null) {
+        if (this.gameType != null && this.gameType < 5) { // a game but not a test
           import(`@/json/games/gamesInfo`).then((module) => {
             this.text = module[this.gameType - 1].title;
           });

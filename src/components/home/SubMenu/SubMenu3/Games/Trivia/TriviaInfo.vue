@@ -1,8 +1,15 @@
 <template>
-  <div class="info">
-    <div class="clock-part" v-if="type == 2">
+  <div :class="[type == 5 ? 'info-test' : '', 'info']">
+    <div
+      v-if="type == 2 || type == 5"
+      :class="[
+        type == 5 ? 'clock-part-test' : '',
+        stage == 'end' ? 'transparent' : '',
+        'clock-part',
+      ]"
+    >
       <ion-img
-        class="trivia-icon clock-icn"
+        :class="[type == 5 ? 'clock-icn-test' : '', 'trivia-icon clock-icn']"
         :src="require(`@/assets/media1/HomePage/games/trivia/time.png`)"
       ></ion-img>
       <div class="time">
@@ -24,13 +31,14 @@
       ></ion-img>
     </div>
 
-    <div class="test" v-else>
-
+    <div class="test" v-if="type == 5">
       <ion-button
         v-for="n in 10"
         :key="n"
-        class="circle"        
-      >{{n}}</ion-button>
+        :class="['circle', circleClass(n)]"
+        @click="changeQuest(n)"
+        >{{ n }}</ion-button
+      >
     </div>
 
     <div class="checkd-part" v-if="type == 2 || type == 3">
@@ -44,11 +52,12 @@
 </template>
 
 <script>
-import { IonImg, IonText,IonButton } from "@ionic/vue";
+import { IonImg, IonText, IonButton } from "@ionic/vue";
+import { mapState, mapActions } from "vuex";
 
 export default {
   name: "TriviaGame",
-  components: { IonImg, IonText,IonButton },
+  components: { IonImg, IonText, IonButton },
   props: ["type", "noCorrect", "noWrong", "stage"],
 
   data() {
@@ -56,17 +65,25 @@ export default {
       life: 3,
       min: 1,
       sec: 0,
+      isPicked: false,
+      timeout: null,
     };
   },
 
+  computed: {
+    ...mapState("games", ["testAnswers", "_questNum"]),
+  },
+
   methods: {
+    ...mapActions("games", ["updatequestNum"]),
+
     countDownTimer() {
       if (this.min == 0 && this.sec == 0) {
         this.$emit("endGame");
         return;
       }
 
-      setTimeout(() => {
+      this.timeout = setTimeout(() => {
         if (this.sec > 0) this.sec--;
         else {
           this.min--;
@@ -75,16 +92,41 @@ export default {
         this.countDownTimer();
       }, 1000);
     },
+
+    changeQuest(n) {
+      // n = 1-10
+      this.updatequestNum(n - 1);
+    },
+
+    circleClass(n) {
+      if (this.stage == "game") {
+        return this.testAnswers[n - 1].picked == -1 ? "" : "answered";
+      } else {
+        return this.testAnswers[n - 1].correct == this.testAnswers[n - 1].picked
+          ? "correct"
+          : "wronge";
+      }
+    },
   },
 
   watch: {
     stage: {
       immediate: true,
       handler() {
-        if (this.type == 2 && this.stage == "game") {
-          this.min = 1;
-          this.sec = 0;
-          this.countDownTimer();
+        if (this.stage == "game") {
+          if (this.type == 2) {
+            // tirivia
+            this.min = 1;
+            this.sec = 0;
+            this.countDownTimer();
+          } else if (this.type == 5) {
+            // test
+            this.min = 10;
+            this.sec = 0;
+            this.countDownTimer();
+          }
+        } else if(this.stage == "end") {
+          clearTimeout(this.timeout);
         }
       },
     },
@@ -100,6 +142,15 @@ export default {
   align-items: center;
 }
 
+.info-test {
+  height: 12%;
+  flex-direction: column;
+}
+
+.time {
+  font-size: 100%;
+}
+
 .trivia-icon {
   display: inline-block;
   width: 30%;
@@ -110,6 +161,17 @@ export default {
 .clock-part {
   width: 50%;
   display: flex;
+}
+
+.hearts {
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+}
+
+.clock-part-test {
+  width: 100%;
+  height: 40%;
+  margin-bottom: 2%;
 }
 .heart {
   margin: 2%;
@@ -140,29 +202,80 @@ export default {
   margin: 2%;
   margin-left: 5%;
   width: 15%;
+  height: 100%;
   position: relative;
   right: 0;
 }
 
-.circle {
-  --border-radius: 100%;
-width: 9%;
-
-
-margin: 0;
-padding: 0;
+.clock-icn-test {
+  margin: 0%;
+  height: 100%;
+  padding: 0 0 0 3%;
 }
 .test {
   width: 100%;
-  height: 50%;
-  display: flex;
-  align-items: space-around;
-  justify-content: center;
+  height: 100%;
+  display: grid;
+  grid-template-columns: auto auto auto auto auto auto auto auto auto auto;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  justify-content: space-between;
+}
+
+.circle {
+  min-width: 0px;
+  --border-radius: 100%;
+  --margin: 0;
+  margin: 0;
+  --background: var(--ion-color-primary-tint-light);
+  color: var(--ion-color-medium);
+  font-weight: 700;
+  width: 90%;
+  height: 100%;
+  aspect-ratio: 1 / 1;
+}
+
+.answered {
+  transition: all 1s ease;
+  color: var(--ion-color-secondary);
+  --background: var(--ion-color-primary-tint);
 }
 
 .popIn {
   animation: popIn 1s ease-in-out;
   -webkit-animation: popIn 1s ease-in-out;
+}
+
+.transparent {
+  opacity: 0;
+  transition: all 0.5s ease;
+}
+
+.correct {
+  --background: var(--ion-color-success);
+}
+.wronge {
+  --background: var(--ion-color-danger);
+}
+
+@media only screen and (min-height: 800px) {
+  .info-test {
+    height: 10%;
+  }
+
+  .time {
+    font-size: 120%;
+  }
+
+  .circle {
+    width: 95%;
+  }
+}
+@media only screen and (min-height: 1000px) {
+  .circle {
+    width: 110%;
+  }
 }
 
 @keyframes popIn {

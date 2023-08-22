@@ -8,14 +8,12 @@
     delay="500"
     v-if="showMe"
   >
- 
-  <div class="white-part" :key="0">
-      <div class="card" >
+    <div class="white-part" :key="0">
+      <div class="card">
         <ion-text class="text-dark-plain endTxt"> המשחק הסתיים</ion-text>
       </div>
       <div class="line"></div>
     </div>
-
 
     <div class="txt" :key="0">
       <ion-text class="text-dark-plain good-job">
@@ -34,6 +32,9 @@
       </div>
     </div>
 
+    <ion-button shape="round" size="large" :key="0" v-if="type == 5" @click="$emit('showReview')"
+      >איפה טעיתי ?  
+    </ion-button>
     <ion-button shape="round" size="large" @click="$emit('tryAgain')" :key="0"
       >נסה שוב
     </ion-button>
@@ -88,7 +89,7 @@ export default {
   width: 100%;
 }
 .end {
-  height: 120%;
+  height: 70%;
   display: flex;
   align-items: center;
   justify-content: space-around;

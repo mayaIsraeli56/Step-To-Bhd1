@@ -1,10 +1,10 @@
 <template>
   <transition appear name="fadeA">
-    <div class="ques" v-if="stage == 'game'">
+    <div class="ques" v-if="stage == 'game' || stage == 'review'">
       <div class="ques-part" :key="0">
         <div class="ques-card">
-          <ion-text class="text-dark-plain" v-model="questNum">
-            {{ questions[questNum].ques }}</ion-text
+          <ion-text class="text-dark-plain" v-model="_questNum">
+            {{ questions[_questNum].ques }}</ion-text
           >
         </div>
         <div class="line"></div>
@@ -12,49 +12,68 @@
 
       <div class="answers">
         <button
-          :disabled="answered"
-          :class="['ans']"
+          :disabled="answered || stage != 'game'"
+          :class="[
+            testAnswers[_questNum].picked == n ? 'picked' : 'unpicked',
+            'ans',
+            answerClass(n),
+          ]"
           v-for="n in 4"
           :key="n"
           @click="ansPicked(n)"
           :ref="'ans' + n"
         >
-          <ion-text class="text-dark-plain" v-model="questNum">
-            {{ questions[questNum][n] }}</ion-text
+          <ion-text class="text-dark-plain" :ref="`quest${n}`" v-model="_questNum">
+            {{ questions[_questNum][n] }}</ion-text
           >
         </button>
       </div>
+
+      <ion-button
+        shape="round"
+        size="large"
+        v-if="type == 5"
+        :class="[allAnswered || stage == 'review'? '' : 'transparent']"
+        @click="reset"
+        :key="0"
+        >סיימתי</ion-button
+      >
     </div>
+
+
   </transition>
 </template>
 
 <script>
-import { IonText } from "@ionic/vue";
+import { IonText, IonButton } from "@ionic/vue";
 import allQuestions from "@/json/games/trivia.json";
-import test from "@/json/games/trivia.json";
-import { mapState } from "vuex";
+import test from "@/json/games/tests.json";
+import { mapState, mapActions } from "vuex";
 
 export default {
   name: "TriviaQuestions",
   props: ["type", "noWrong", "stage", "noCorrect", "exam"],
-  components: { IonText },
+  components: { IonText, IonButton },
 
   data() {
     return {
       questions: [],
       nofQuestions: 0,
-      questNum: 0,
       answered: false,
+      allAnswered: false,
+      numOfAnswered: 0,
     };
   },
 
   computed: {
-    ...mapState("games", ["chosenChapters"]),
+    ...mapState("games", ["chosenChapters", "testAnswers", "_questNum"]),
   },
 
   beforeMount() {
     // copy all relavent questions
+
     if (this.type != 5) {
+      // trivia
       allQuestions.forEach((chap, i) => {
         chap.forEach((ques) => {
           ques.answered = false;
@@ -63,69 +82,148 @@ export default {
         });
       });
     } else {
+      // test
+      let correct = [];
       test[this.exam].forEach((ques) => {
-        ques.answered = false;
         this.questions.push({ ...ques });
+        correct.push(ques.correct);
       });
+
+      this.updateCorrectAns(correct); // send to store correct answers - for triviaInfo
     }
 
     this.nofQuestions = this.questions.length;
-    this.questNum = this.getNext();
+    this.updatequestNum(this.getNext());
   },
 
   methods: {
+    ...mapActions("games", [
+      "updateCorrectAns",
+      "updatePickedAns",
+      "nextQuestNum",
+      "updatequestNum",
+      "resetPicked",
+    ]),
+
+    answerClass(n) {
+      if (this.stage == "game")
+        return this.testAnswers[this._questNum].picked == n
+          ? "picked"
+          : "unpicked";
+
+      //review
+      let picked = this.testAnswers[this._questNum].picked;
+      let correct = this.testAnswers[this._questNum].correct;
+
+      if (n == picked) {
+        return picked == correct ? "correct" : "wrong";
+      }
+      if (n == correct) return "correct";
+    },
+
     getNext() {
-      let next;
+      if (this.type != 5) {
+        // trivia - randome questions
+        let next;
+        do {
+          next = Math.floor(Math.random() * (this.nofQuestions - 0));
+        } while (this.questions[next].answered);
+        return next;
+      }
 
-      do {
-        next = Math.floor(Math.random() * (this.nofQuestions - 0));
-      } while (this.questions[next].answered);
-
-      return next;
+      // test - questions by order
+      return this._questNum != this.testAnswers.length - 1
+        ? this._questNum + 1
+        : this._questNum;
     },
 
     reset() {
       this.answered = false;
 
-      this.questions.forEach((ques) => {
-        ques.answered = false;
-      }); // restart - all questions were not answered
+      if (this.type != 5) {
+        this.questions.forEach((ques) => {
+          ques.answered = false;
+        }); // restart - all questions were not answered
+        this.updatequestNum(this.getNext());
+      } else {
+        this.updatequestNum(0); // first
+      }
 
-      this.questNum = this.getNext();
+      this.allAnswered = false;
+      this.numOfAnswered = 0;
       this.$emit("EndGame"); // hearts game and gime ended
     },
 
     ansPicked(hisAnswer) {
-     
-      if (this.type != 5) {
-        let correct = this.questions[this.questNum].correct; // num of correct ans
-        this.answered = true;
+      this.type != 5
+        ? this.ansPickedGame(hisAnswer)
+        : this.ansPickedTest(hisAnswer);
+    },
 
-        this.$refs["ans" + hisAnswer][0].style.backgroundColor = "#edd1d1";
-        this.$refs["ans" + correct][0].style.backgroundColor = "#c9d4b9";
+    ansPickedGame(hisAnswer) {
+      let correct = this.questions[this._questNum].correct; // num of correct ans
+      let timeout = 1200;
+      this.answered = true;
 
-        if (hisAnswer == correct) {
-          this.questions[this.questNum].answered = true;
-          this.$emit("correct");
-        } else {
-          this.$emit("wrong");
+      this.$refs["ans" + hisAnswer][0].style.backgroundColor = "var(--ion-color-danger)";
+      this.$refs["ans" + correct][0].style.backgroundColor = "var(--ion-color-success)";
+
+      if (hisAnswer == correct) {
+        this.questions[this._questNum].answered = true;
+        this.$emit("correct", 1);
+      } else {
+        this.$emit("wrong", 1);
+      }
+
+      setTimeout(() => {
+        if (
+          (this.type == 3 && this.noWrong == 3) ||
+          this.noCorrect == this.nofQuestions
+        ) {
+          this.reset();
+          return;
         }
 
-        setTimeout(() => {
-          if (
-            (this.type == 3 && this.noWrong == 3) ||
-            this.noCorrect == this.nofQuestions
-          ) {
-            this.reset();
-            return;
-          }
+        this.updatequestNum(this.getNext());
 
-          this.questNum = this.getNext();
-          this.answered = false;
-          this.$refs["ans" + hisAnswer][0].style.backgroundColor = "#d9e3e4";
-          this.$refs["ans" + correct][0].style.backgroundColor = "#d9e3e4";
-        }, 1200);
+        this.answered = false;
+
+        // reset colors for the next question
+        this.$refs["ans" + hisAnswer][0].style.backgroundColor =
+          "var(--ion-color-tertiary)";
+        this.$refs["ans" + correct][0].style.backgroundColor =
+          "var(--ion-color-tertiary)";
+      }, timeout);
+    },
+
+    ansPickedTest(hisAnswer) {
+      let correct = this.questions[this._questNum].correct; // num of correct ans
+      let picked = this.testAnswers[this._questNum].picked;
+      let timeout = 700;
+      this.answered = true;
+
+      if (picked == -1) this.numOfAnswered++; // first time answered
+
+      this.updatePickedAns({
+        _questNum: this._questNum,
+        hisAnswer: hisAnswer,
+      });
+
+      if (hisAnswer == correct) {
+        if (picked != -1) this.$emit("wrong", -1);
+        this.$emit("correct", 1);
+      } else {
+        if (picked != -1) this.$emit("correct", -1);
+        this.$emit("wrong", 1);
       }
+
+      if (this.numOfAnswered == this.nofQuestions) this.allAnswered = true;
+
+      setTimeout(() => {
+        if (picked == -1) this.updatequestNum(this.getNext());
+
+        this.answered = false;
+      }, timeout);
     },
   },
 };
@@ -137,22 +235,23 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 10% 0 5% 0;
-  max-height: 85%;
+  padding: 5% 0 5% 0;
+  max-height: 90%;
   margin: 1% 0;
+  height: 100%;
 }
 
 .ques-card {
   background-color: #fafafa;
   width: 100%;
-  max-height: 13rem;
+  height: 10rem;
   border-radius: 2vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 10% 2%;
+  padding: 0% 3%;
   transition: all 0.5s ease;
-  font-size: 1.2rem;
+  font-size: 100%;
 }
 
 .line {
@@ -166,21 +265,28 @@ export default {
 
 .answers {
   display: flex;
+  height: 70%;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  justify-content: space-around;
+  align-items: space-between;
   width: 100%;
   margin: 5% 0%;
 }
 
 @media only screen and (max-width: 600px) {
   .answers {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
     margin: 2% 0;
+  }
+}
+
+@media only screen and (max-height: 600px) {
+  .answers {
+    height: 100%;
+  }
+}
+@media only screen and (min-height: 750px) {
+  .answers {
+    padding-bottom: 35%;
   }
 }
 
@@ -195,12 +301,13 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #d9e3e4;
-  margin: 3% 0%;
+  background-color: var(--ion-color-tertiary);
   width: 100%;
   padding: 4% 0;
   border-radius: 3vh;
   transition: all 0.5s ease;
+  font-size: 1rem;
+  transition: all 1s ease;
 }
 
 .endTxt {
@@ -214,5 +321,23 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.transparent {
+  opacity: 0;
+  transition: all 0.5s ease;
+}
+
+.unpicked {
+  background-color: var(--ion-color-tertiary);
+}
+.picked {
+  background-color: var(--ion-color-secondary-shade);
+}
+.correct {
+  background-color: var(--ion-color-success);
+}
+.wrong {
+  background-color: var(--ion-color-danger);
 }
 </style>

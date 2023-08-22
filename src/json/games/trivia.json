@@ -2,20 +2,20 @@
   [
     {
       "ques": "1   loarm What is Lorem Ipsum Lorem Ipsum is simply dummy text of the",
-      "1": "1a",
-      "2": "2a",
+      "1": "1aקרט'קדטא",
+      "2": "2a אאאאאא",
       "3": "3a",
       "4": "4a",
-      "correct": "1",
+      "correct":1,
       "answered": false
     },
     {
       "ques": "2loarm What is Lorem Ipsum Lorem Ipsum is simply dummy text of the",
-      "1": "1b",
+      "1": "1bככככככככככ ",
       "2": "2b",
       "3": "3b",
       "4": "4b",
-      "correct": "1",
+      "correct":1,
       "answered": false
     },
     {
@@ -24,7 +24,7 @@
       "2": "2c",
       "3": "3c",
       "4": "4c",
-      "correct": "1",
+      "correct":1,
       "answered": false
     },
     {
@@ -33,7 +33,7 @@
       "2": "2d",
       "3": "3d",
       "4": "4d",
-      "correct": "1",
+      "correct":1,
       "answered": false
     }
   ],
@@ -44,7 +44,7 @@
       "2": "2a",
       "3": "3a",
       "4": "4a",
-      "correct": "1",
+      "correct":1,
       "answered": false
     },
     {
@@ -53,7 +53,7 @@
       "2": "2b",
       "3": "3b",
       "4": "4b",
-      "correct": "1",
+      "correct":1,
       "answered": false
     },
     {
@@ -62,7 +62,7 @@
       "2": "2c",
       "3": "3c",
       "4": "4c",
-      "correct": "1",
+      "correct":1,
       "answered": false
     },
     {
@@ -71,7 +71,7 @@
       "2": "2d",
       "3": "3d",
       "4": "4d",
-      "correct": "1",
+      "correct":1,
       "answered": false
     }
   ],
@@ -82,7 +82,7 @@
       "2": "2a",
       "3": "3a",
       "4": "4a",
-      "correct": "1",
+      "correct":1,
       "answered": false
     },
     {
@@ -91,7 +91,7 @@
       "2": "2b",
       "3": "3b",
       "4": "4b",
-      "correct": "1",
+      "correct":1,
       "answered": false
     },
     {
@@ -100,7 +100,7 @@
       "2": "2c",
       "3": "3c",
       "4": "4c",
-      "correct": "1",
+      "correct":1,
       "answered": false
     },
     {
@@ -109,7 +109,7 @@
       "2": "2d",
       "3": "3d",
       "4": "4d",
-      "correct": "1",
+      "correct":1,
       "answered": false
     }
   ],
@@ -120,7 +120,7 @@
       "2": "2a",
       "3": "3a",
       "4": "4a",
-      "correct": "1",
+      "correct":1,
       "answered": false
     },
     {
@@ -129,7 +129,7 @@
       "2": "2b",
       "3": "3b",
       "4": "4b",
-      "correct": "1",
+      "correct":1,
       "answered": false
     },
     {
@@ -138,7 +138,7 @@
       "2": "2c",
       "3": "3c",
       "4": "4c",
-      "correct": "1",
+      "correct":1,
       "answered": false
     },
     {
@@ -147,7 +147,7 @@
       "2": "2d",
       "3": "3d",
       "4": "4d",
-      "correct": "1",
+      "correct":1,
       "answered": false
     }
   ],
@@ -158,7 +158,7 @@
       "2": "2a",
       "3": "3a",
       "4": "4a",
-      "correct": "1",
+      "correct":1,
       "answered": false
     },
     {
@@ -167,7 +167,7 @@
       "2": "2b",
       "3": "3b",
       "4": "4b",
-      "correct": "1",
+      "correct":1,
       "answered": false
     },
     {
@@ -176,7 +176,7 @@
       "2": "2c",
       "3": "3c",
       "4": "4c",
-      "correct": "1",
+      "correct":1,
       "answered": false
     },
     {
@@ -185,7 +185,7 @@
       "2": "2d",
       "3": "3d",
       "4": "4d",
-      "correct": "1",
+      "correct":1,
       "answered": false
     }
   ],
@@ -196,7 +196,7 @@
       "2": "2a",
       "3": "3a",
       "4": "4a",
-      "correct": "1",
+      "correct":1,
       "answered": false
     },
     {
@@ -205,7 +205,7 @@
       "2": "2b",
       "3": "3b",
       "4": "4b",
-      "correct": "1",
+      "correct":1,
       "answered": false
     },
     {
@@ -214,7 +214,7 @@
       "2": "2c",
       "3": "3c",
       "4": "4c",
-      "correct": "1",
+      "correct":1,
       "answered": false
     },
     {
@@ -223,7 +223,7 @@
       "2": "2d",
       "3": "3d",
       "4": "4d",
-      "correct": "1",
+      "correct":1,
       "answered": false
     }
   ],
@@ -234,7 +234,7 @@
       "2": "2a",
       "3": "3a",
       "4": "4a",
-      "correct": "1",
+      "correct":1,
       "answered": false
     },
     {
@@ -243,7 +243,7 @@
       "2": "2b",
       "3": "3b",
       "4": "4b",
-      "correct": "1",
+      "correct":1,
       "answered": false
     },
     {
@@ -252,7 +252,7 @@
       "2": "2c",
       "3": "3c",
       "4": "4c",
-      "correct": "1",
+      "correct":1,
       "answered": false
     },
     {
@@ -261,7 +261,7 @@
       "2": "2d",
       "3": "3d",
       "4": "4d",
-      "correct": "1",
+      "correct":1,
       "answered": false
     }
   ],
@@ -272,7 +272,7 @@
       "2": "2a",
       "3": "3a",
       "4": "4a",
-      "correct": "1",
+      "correct":1,
       "answered": false
     },
     {
@@ -281,7 +281,7 @@
       "2": "2b",
       "3": "3b",
       "4": "4b",
-      "correct": "1",
+      "correct":1,
       "answered": false
     },
     {
@@ -290,7 +290,7 @@
       "2": "2c",
       "3": "3c",
       "4": "4c",
-      "correct": "1",
+      "correct":1,
       "answered": false
     },
     {
@@ -299,7 +299,7 @@
       "2": "2d",
       "3": "3d",
       "4": "4d",
-      "correct": "1",
+      "correct":1,
       "answered": false
     }
   ],
@@ -310,7 +310,7 @@
       "2": "2a",
       "3": "3a",
       "4": "4a",
-      "correct": "1",
+      "correct":1,
       "answered": false
     },
     {
@@ -319,7 +319,7 @@
       "2": "2b",
       "3": "3b",
       "4": "4b",
-      "correct": "1",
+      "correct":1,
       "answered": false
     },
     {
@@ -328,7 +328,7 @@
       "2": "2c",
       "3": "3c",
       "4": "4c",
-      "correct": "1",
+      "correct":1,
       "answered": false
     },
     {
@@ -337,7 +337,7 @@
       "2": "2d",
       "3": "3d",
       "4": "4d",
-      "correct": "1",
+      "correct":1,
       "answered": false
     }
   ],
@@ -348,7 +348,7 @@
       "2": "2a",
       "3": "3a",
       "4": "4a",
-      "correct": "1",
+      "correct":1,
       "answered": false
     },
     {
@@ -357,7 +357,7 @@
       "2": "2b",
       "3": "3b",
       "4": "4b",
-      "correct": "1",
+      "correct":1,
       "answered": false
     },
     {
@@ -366,7 +366,7 @@
       "2": "2c",
       "3": "3c",
       "4": "4c",
-      "correct": "1",
+      "correct":1,
       "answered": false
     },
     {
@@ -375,7 +375,7 @@
       "2": "2d",
       "3": "3d",
       "4": "4d",
-      "correct": "1",
+      "correct":1,
       "answered": false
     }
   ]

@@ -5,6 +5,20 @@ export default {
   state: {
     gameType: null,
     chosenChapters: [],
+    // test
+    _questNum: -1,
+    testAnswers: [
+      { correct: -1, picked: -1 },
+      { correct: -1, picked: -1 },
+      { correct: -1, picked: -1 },
+      { correct: -1, picked: -1 },
+      { correct: -1, picked: -1 },
+      { correct: -1, picked: -1 },
+      { correct: -1, picked: -1 },
+      { correct: -1, picked: -1 },
+      { correct: -1, picked: -1 },
+      { correct: -1, picked: -1 },
+    ],
   },
 
   getters: {},
@@ -31,6 +45,22 @@ export default {
         state.chosenChapters.splice(i, 0, chapterNum);
       }
     },
+
+    updateCorrectAns(state, correct) {
+      state.testAnswers.forEach((ques, i) => (ques.correct = correct[i]));
+    },
+
+    updatePickedAns(state, update) {
+      state.testAnswers[state._questNum].picked = update.hisAnswer;
+    },
+
+    updatequestNum(state, num) {
+      state._questNum = num;
+    },
+
+    resetPicked(state) {
+      state.testAnswers.forEach((ques) => (ques.picked = -1));
+    },
   },
 
   actions: {
@@ -41,6 +71,34 @@ export default {
 
     addOrRemoveChap({ commit }, chapterNum) {
       commit("addOrRemoveChap", chapterNum);
+    },
+
+    // test
+    updateCorrectAns({ commit }, correct) {
+      commit("updateCorrectAns", correct);
+    },
+
+    updatePickedAns({ commit }, update) {
+      commit("updatePickedAns", update);
+    },
+
+    updatequestNum({ commit }, num) {
+      commit("updatequestNum", num);
+    },
+
+    resetPicked({ commit }) {
+      commit("resetPicked");
+    },
+
+    exitTest({commit}) {
+      commit("cleanGameType");
+      commit("updatequestNum", -1);
+      commit("resetPicked");
+    },
+
+    exitGame({commit}) {
+      commit("cleanGameType");
+      commit("updatequestNum", -1);
     },
   },
 };

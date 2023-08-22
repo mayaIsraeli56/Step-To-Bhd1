@@ -5,7 +5,7 @@
         :explanation="explanation"
         :noCircles="noCircles"
         :circlesInfo="circlesInfo"
-        :maxChoose="1"
+        :chooseOne="true"
         @circlesChosen="circlesChosen"
       ></chose-chaptes-circels>
       <ion-button @click="startExam" class="btn" :disabled="exam == -1" 
@@ -66,6 +66,7 @@ export default {
       this.setReturningFunc(3);
       this.hideNavi();
       this.smallNavi();
+      this.setGameType(5)
 
       setTimeout(() => {
         this.toggleMiniIcon();

@@ -8,7 +8,7 @@
       :explanation="[]"
       :noCircles="noChapters"
       :circlesInfo="circlesInfo"
-      :maxChoose="noChapters"
+      :chooseOne="false"
       @circlesChosen="circlesChosen"
     ></chose-chaptes-circels>
 
@@ -77,9 +77,6 @@ export default {
       ChapterInfo: ChapterInfo,
       circlesInfo: [],
       noChapters: 10,
-      lastChosen: "last",
-      chapterChosen: [],
-      opacity: 0,
     };
   },
 
@@ -119,14 +116,9 @@ export default {
     },
 
     circlesChosen(listOfCircles, noChap) {
-      this.chapterChosen = [...listOfCircles];
-      this.addOrRemoveChap(noChap);
-      this.opacity = !this.chapterChosen[noChap] ? 1 : 0;
-      this.lastChosen = this.ChapterInfo[noChap].title;
-      this.chapterChosen[noChap] = !this.chapterChosen[noChap];
+      this.addOrRemoveChap(noChap)
     },
   },
-
 };
 </script>
 

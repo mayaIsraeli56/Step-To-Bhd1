@@ -16,13 +16,12 @@
         'blue-circle text-dark-plain',
       ]"
       @click="choseCirc(n)"
-      :disabled="noChosen >= maxChoose && !circlesChosen[n - 1]"
     >
       {{ n }}
     </button>
   </div>
   <ion-text class="character-name" :style="{ opacity: opacity }">{{
-    lastChosen
+    chosenTxt
   }}</ion-text>
 </template>
 
@@ -39,16 +38,19 @@ export default {
     "noCircles",
     "textAfterChoosing",
     "circlesInfo",
-    "maxChoose",
+    "chooseOne",
   ],
   emits: ["circlesChosen"],
 
   data() {
     return {
-      lastChosen: "last",
+      chosenTxt: "last",
+      chosenQueue: [],
       circlesChosen: [],
       noChosen: 0,
       opacity: 0,
+      lastChosen: -1,
+      CIRCELSECHOSEN2: [],
     };
   },
 
@@ -59,26 +61,50 @@ export default {
       column += "auto ";
       this.circlesChosen[i] = false;
     }
+
+    for (let i = 0; i < this.noCircles; i++) {
+      this.circlesChosen[i] = false;
+    }
     this.$refs.box.style.gridTemplateColumns = column;
   },
 
   methods: {
     choseCirc(noCirc) {
-      let lastChosenNum
+      if (!this.chooseOne) {
+        if (this.circlesChosen[noCirc - 1]) {
+          // remove selected
+          this.noChosen--;
+          this.opacity = 0;
+        } else {
+          // add selected
+          this.noChosen++;
+          this.opacity = 1;
+        }
 
-      if (this.circlesChosen[noCirc - 1]) { // remove selected
-        this.noChosen--;
-        this.opacity = 0;
-        lastChosenNum= -1;
-      } else { // add selected
-        this.noChosen++;
-        this.opacity = 1;
-        lastChosenNum= noCirc - 1;
+        this.chosenTxt = this.circlesInfo[noCirc - 1];
+        this.circlesChosen[noCirc - 1] = !this.circlesChosen[noCirc - 1];
+        this.$emit("circlesChosen", this.circlesChosen, noCirc - 1);
+      } else {
+        if (this.circlesChosen[noCirc - 1]) {
+          // remove selected
+          this.noChosen--;
+          this.opacity = 0;
+          this.lastChosen = -1;
+        } else if (this.lastChosen == -1) {
+          // no circle was selected
+          this.noChosen++;
+          this.opacity = 1;
+          this.lastChosen = noCirc - 1;
+        } else {
+          // switch circels
+          this.circlesChosen[this.lastChosen] = false;
+          this.lastChosen = noCirc - 1;
+        }
+
+        this.chosenTxt = this.circlesInfo[noCirc - 1];
+        this.circlesChosen[noCirc - 1] = !this.circlesChosen[noCirc - 1];
+        this.$emit("circlesChosen", this.circlesChosen, noCirc - 1);
       }
-
-      this.lastChosen = this.circlesInfo[noCirc - 1];
-      this.circlesChosen[noCirc - 1] = !this.circlesChosen[noCirc - 1];
-      this.$emit("circlesChosen", this.circlesChosen, lastChosenNum);
     },
   },
 };

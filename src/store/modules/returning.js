@@ -6,7 +6,12 @@ export default {
     showBackBtn: false,
     returningFunc: "",
     funcNum: null,
-    returningFuncs: ["backToSubMenu2", "backToSubSecMenu", "backToSubMenu3", "backToSubMenu1"],
+    returningFuncs: [
+      "backToSubMenu2",
+      "backToSubSecMenu",
+      "backToSubMenu3",
+      "backToSubMenu1",
+    ],
 
     // list of Back functions
     backToSubMenu2: false,
@@ -54,7 +59,7 @@ export default {
 
       switch (state.funcNum) {
         case 0: // backToSubMenu2
-        dispatch("learning/notLearningChapter", null, { root: true });
+          dispatch("learning/notLearningChapter", null, { root: true });
           break;
         case 1: // backToSubSecMenu
           dispatch("learning/removeSubAndSec", null, { root: true });
@@ -64,12 +69,13 @@ export default {
           commit("navigation/bigNavi", null, { root: true });
           commit("navigation/showNavi", null, { root: true });
           commit("navigation/toggleMiniIcon", null, { root: true });
-          commit("games/cleanGameType", null, { root: true });
+          dispatch("games/exitGame", null, { root: true });
           break;
         case 3: // backToSubMenu1
           commit("navigation/bigNavi", null, { root: true });
           commit("navigation/showNavi", null, { root: true });
           commit("navigation/toggleMiniIcon", null, { root: true });
+          dispatch("games/exitTest", -1, { root: true });
           break;
         default:
       }
