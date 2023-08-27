@@ -2,7 +2,7 @@
   <transition appear name="fadeA">
     <div class="card">
       <ion-text class="text-dark-plain title"> {{ title }}</ion-text>
-
+      <slot name="header"></slot>
       <div class="line"></div>
 
       <ion-text class="text-dark-plain text" v-for="(line, i) in text" :key="i">

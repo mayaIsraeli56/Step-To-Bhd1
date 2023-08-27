@@ -44,7 +44,6 @@
         <ion-text v-if="showHeading" ref="text" class="text" :key="5">
           {{ text }}</ion-text
         >
-
         <ion-img :key="6"
           :class="[!miniIcon || bigNavi  || !showBackBtn ? 'hide' : '', 'mini-icon']"
           :src="require(`@/assets/media1/HomePage/icons-nevi/${stage}.png`)"

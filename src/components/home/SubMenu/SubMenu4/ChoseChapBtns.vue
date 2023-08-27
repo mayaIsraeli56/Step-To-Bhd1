@@ -1,0 +1,175 @@
+<template>
+  <ion-text
+    class="text-dark-plain note animate__animated"
+    v-for="(line, i) in explanation"
+    :key="i"
+  >
+    {{ line }}</ion-text
+  >
+
+  <div class="box" ref="box">
+    <ion-text
+      v-for="n in noCircles"
+      :key="n"
+      :class="[
+        circlesChosen[n - 1] ? 'circle-chosen' : '',
+        'blue-circle text-dark-plain',
+      ]"
+      @click="choseCirc(n)"
+    >
+      <ion-text
+        :class="[
+          circlesChosen[n - 1] ? 'text-chosen' : '',
+          'text-dark-plain chap-num',
+        ]"
+      >
+        {{ n }}</ion-text
+      >
+      <ion-text
+        :class="[
+          circlesChosen[n - 1] ? 'text-chosen' : '',
+          'text-dark-plain names',
+        ]"
+        >{{ chapNames[n - 1] }}</ion-text
+      >
+    </ion-text>
+  </div>
+</template>
+
+<script>
+import { IonText } from "@ionic/vue";
+
+export default {
+  name: "ChoseChapBtns",
+  components: {
+    IonText,
+  },
+  props: [
+    "explanation",
+    "noCircles",
+    "textAfterChoosing",
+    "chapNames",
+    "chooseOne",
+  ],
+  emits: ["circlesChosen"],
+
+  data() {
+    return {
+      chosenTxt: "last",
+      chosenQueue: [],
+      circlesChosen: [],
+      noChosen: 0,
+      opacity: 0,
+      lastChosen: -1,
+      CIRCELSECHOSEN2: [],
+    };
+  },
+
+  mounted() {
+    let column = "";
+
+    for (let i = 0; i < this.noCircles / 2; i++) {
+      column += "auto ";
+      this.circlesChosen[i] = false;
+    }
+
+    for (let i = 0; i < this.noCircles; i++) {
+      this.circlesChosen[i] = false;
+    }
+    this.$refs.box.style.gridTemplateColumns = column;
+  },
+
+  methods: {
+    choseCirc(noCirc) {
+      if (!this.chooseOne) {
+        if (this.circlesChosen[noCirc - 1]) {
+          // remove selected
+          this.noChosen--;
+          this.opacity = 0;
+        } else {
+          // add selected
+          this.noChosen++;
+          this.opacity = 1;
+        }
+
+        this.chosenTxt = this.chapNames[noCirc - 1];
+        this.circlesChosen[noCirc - 1] = !this.circlesChosen[noCirc - 1];
+        this.$emit("circlesChosen", this.circlesChosen, noCirc - 1);
+      } else {
+        if (this.circlesChosen[noCirc - 1]) {
+          // remove selected
+          this.noChosen--;
+          this.opacity = 0;
+          this.lastChosen = -1;
+        } else if (this.lastChosen == -1) {
+          // no circle was selected
+          this.noChosen++;
+          this.opacity = 1;
+          this.lastChosen = noCirc - 1;
+        } else {
+          // switch circels
+          this.circlesChosen[this.lastChosen] = false;
+          this.lastChosen = noCirc - 1;
+        }
+
+        this.chosenTxt = this.chapNames[noCirc - 1];
+        this.circlesChosen[noCirc - 1] = !this.circlesChosen[noCirc - 1];
+        this.$emit("circlesChosen", this.circlesChosen, noCirc - 1);
+      }
+    },
+  },
+};
+</script>
+
+<style scoped>
+* {
+  transition: opacity 0.2s linear;
+}
+
+.blue-circle {
+  background: var(--ion-color-secondary-contrast);
+  height: 7rem;
+  width: 40%;
+  margin: 3% 0%;
+  border-radius: 5vh;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start;
+  font-size: 100%;
+  font-weight: 800;
+  transition: 0.2s linear;
+  padding: 3% 4%;
+}
+
+.box {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  height: fit-content;
+  padding: 5% 0%;
+  align-self: center;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.note {
+  position: relative;
+  font-size: 2.2vh;
+  opacity: 0.8;
+}
+
+.circle-chosen {
+  background-color: var(--ion-color-primary);
+  color: var(--ion-color-secondary-tint);
+}
+.text-chosen {
+  color: var(--ion-color-secondary-tint);
+}
+
+.chap-num {
+  font-weight: 900;
+  font-size: larger;
+}
+</style>

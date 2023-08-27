@@ -29,7 +29,7 @@
 import { IonText } from "@ionic/vue";
 
 export default {
-  name: "SubMenu3",
+  name: "ChoseChaptesCircels",
   components: {
     IonText,
   },

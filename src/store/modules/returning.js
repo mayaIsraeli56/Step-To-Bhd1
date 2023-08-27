@@ -11,6 +11,8 @@ export default {
       "backToSubSecMenu",
       "backToSubMenu3",
       "backToSubMenu1",
+      "backToSubMenu4",
+      "backToSubPod",
     ],
 
     // list of Back functions
@@ -18,6 +20,8 @@ export default {
     backToSubSecMenu: false,
     backToSubMenu3: false,
     backToSubMenu1: false,
+    backToSubMenu4: false,
+    backToSubPod: false,
   },
 
   getters: {},
@@ -76,6 +80,14 @@ export default {
           commit("navigation/showNavi", null, { root: true });
           commit("navigation/toggleMiniIcon", null, { root: true });
           dispatch("games/exitTest", -1, { root: true });
+          break;
+        case 4: // backToSubMenu4
+          commit("navigation/bigNavi", null, { root: true });
+          commit("navigation/showNavi", null, { root: true });
+          commit("navigation/toggleMiniIcon", null, { root: true });
+          break;
+        case 5: // backToSubPod
+        dispatch("podcasts/setSubChapter", -1, { root: true });
           break;
         default:
       }
