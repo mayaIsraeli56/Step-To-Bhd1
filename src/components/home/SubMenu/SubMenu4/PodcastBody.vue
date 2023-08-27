@@ -31,7 +31,6 @@ export default {
   mounted() {
     this.data = require(`@/json/podcasts/chapter${this.chapter+1}`);
     this.title = this.data.sections[this.subChapter].title;
-    console.log(this.$refs.mp3.innerHTML)
   },
 
   computed: {
