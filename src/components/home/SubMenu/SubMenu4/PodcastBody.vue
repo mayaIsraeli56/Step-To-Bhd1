@@ -8,18 +8,21 @@
     <ion-text class="text-dark-plain text"
       >{{ subChapter + 1 }} - {{ title }}
     </ion-text>
-    <audio :src="require(`@/assets/audio/chap${chapter+1}/${subChapter+1}.mp3`)" controls ref="mp3" ></audio>
+    <!-- <audio :src="require(`@/assets/audio/chap${chapter+1}/${subChapter+1}.mp3`)" controls ref="mp3" ></audio> -->
+    <audoi-timing></audoi-timing>
+    <audoi-func></audoi-func>
   </div>
 </template>
 
 <script>
+import AudoiTiming from "./AudioTiming.vue";
+import AudoiFunc from "./AudioFunc.vue";
 import { IonText, IonImg } from "@ionic/vue";
 import { mapState } from "vuex";
 
 export default {
   name: "PodcastBody",
-  components: { IonText, IonImg },
-  props: [""],
+  components: { AudoiTiming, AudoiFunc, IonText, IonImg },
 
   data() {
     return {
@@ -29,9 +32,8 @@ export default {
     };
   },
   mounted() {
-    this.data = require(`@/json/podcasts/chapter${this.chapter+1}`);
+    this.data = require(`@/json/chapters/chapter${this.chapter + 1}`);
     this.title = this.data.sections[this.subChapter].title;
-    console.log(this.$refs.mp3.innerHTML)
   },
 
   computed: {
@@ -62,6 +64,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 2% 0%;
 }
 
 ion-img::part(image) {
@@ -75,5 +78,6 @@ ion-img::part(image) {
   width: 95%;
   padding: 2%;
   border-radius: 3vh;
+  margin: 2% 0%;
 }
 </style>

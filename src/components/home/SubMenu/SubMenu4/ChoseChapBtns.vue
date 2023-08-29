@@ -30,8 +30,14 @@
           circlesChosen[n - 1] ? 'text-chosen' : '',
           'text-dark-plain names',
         ]"
-        >{{ chapNames[n - 1] }}</ion-text
-      >
+       
+        >{{
+          chapNames[n - 1].length < maxChar
+            ? chapNames[n - 1]
+            : chapNames[n - 1].substring(0, maxChar) + "... "
+        }}
+      </ion-text>
+      
     </ion-text>
   </div>
 </template>
@@ -62,6 +68,7 @@ export default {
       opacity: 0,
       lastChosen: -1,
       CIRCELSECHOSEN2: [],
+      maxChar: 45,
     };
   },
 
@@ -128,8 +135,8 @@ export default {
 
 .blue-circle {
   background: var(--ion-color-secondary-contrast);
-  height: 7rem;
-  width: 40%;
+  height: 8rem;
+  width: 45%;
   margin: 3% 0%;
   border-radius: 5vh;
   display: flex;
@@ -171,5 +178,9 @@ export default {
 .chap-num {
   font-weight: 900;
   font-size: larger;
+}
+
+.names {
+  font-size: 90%;
 }
 </style>
