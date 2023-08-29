@@ -1,5 +1,5 @@
 <template>
-  <transition-group appear name="fadeAbs" >
+  <transition-group appear name="fadeAbs">
     <ion-content v-if="subChapter == -1" :key="0">
       <ion-list>
         <div class="box">
@@ -23,7 +23,6 @@
 import CardWithLine from "@/components/reuse/CardWithLine.vue";
 import ChoseChapBtns from "./ChoseChapBtns.vue";
 import PodcastPlayer from "./PodcastPlayer.vue";
-import ChapterInfo from "@/json/chapters/ChapterInfo";
 import { IonContent, IonList } from "@ionic/vue";
 import { mapState, mapActions } from "vuex";
 
@@ -40,19 +39,22 @@ export default {
 
   data() {
     return {
-      ChapterInfo: ChapterInfo,
+      ChapterInfo: [],
       explanation: ["לחצו לבחירת הפרק להאזנה"],
       chapNames: [],
-      noCircles: 10,
+      noCircles: 0,
       title: "",
       disableBtn: true,
       chapChosen: false,
+      data: [],
     };
   },
 
   mounted() {
-    for (let i = 0; i < this.noCircles; i++)
-      this.chapNames[i] = this.ChapterInfo[i].title;
+    this.ChapterInfo = require(`@/json/chapters/chapter${this.chapter + 1}`);
+    this.noCircles = this.ChapterInfo.sections.length;
+    for (let i = 0; i < this.ChapterInfo.sections.length; i++)
+      this.chapNames[i] = this.ChapterInfo.sections[i].title;
 
     this.title =
       ` פרק ` + (this.chapter + 1) + "\t - \t" + this.chapNames[this.chapter];
