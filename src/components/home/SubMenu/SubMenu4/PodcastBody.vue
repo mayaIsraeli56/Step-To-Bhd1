@@ -8,36 +8,35 @@
     <ion-text class="text-dark-plain text"
       >{{ subChapter + 1 }} - {{ title }}
     </ion-text>
-    <!-- <audio :src="require(`@/assets/audio/chap${chapter+1}/${subChapter+1}.mp3`)" controls ref="mp3" ></audio> -->
-    <audoi-timing></audoi-timing>
     <audoi-func></audoi-func>
   </div>
 </template>
 
 <script>
-import AudoiTiming from "./AudioTiming.vue";
 import AudoiFunc from "./AudioFunc.vue";
 import { IonText, IonImg } from "@ionic/vue";
 import { mapState } from "vuex";
 
 export default {
   name: "PodcastBody",
-  components: { AudoiTiming, AudoiFunc, IonText, IonImg },
+  components: { AudoiFunc, IonText, IonImg },
 
   data() {
     return {
-      title: "",
-      data: [],
       isPlaying: false,
     };
-  },
-  mounted() {
-    this.data = require(`@/json/chapters/chapter${this.chapter + 1}`);
-    this.title = this.data.sections[this.subChapter].title;
   },
 
   computed: {
     ...mapState("podcasts", ["chapter", "subChapter"]),
+
+    data() {
+      return require(`@/json/chapters/chapter${this.chapter + 1}`);
+    },
+
+    title() {
+      return this.data.sections[this.subChapter].title;
+    },
   },
 
   methods: {},
@@ -79,5 +78,6 @@ ion-img::part(image) {
   padding: 2%;
   border-radius: 3vh;
   margin: 2% 0%;
+  font-size: 1rem;
 }
 </style>

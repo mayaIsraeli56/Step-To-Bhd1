@@ -2,11 +2,13 @@
   <div class="header">
     <ion-img
       class="mini-icon"
-      :src="require(`@/assets/media1/HomePage/chapter-logo/${chapter+1}.png`)"
+      :src="require(`@/assets/media1/HomePage/chapter-logo/${chapter + 1}.png`)"
     ></ion-img>
     <div class="text-box">
-      <ion-text class="text-dark-plain text" color="medium"> משמיע הסכת</ion-text>
-      <ion-text class="text-dark-plain name"> {{title}}</ion-text>
+      <ion-text class="text-dark-plain text" color="medium">
+        משמיע הסכת</ion-text
+      >
+      <ion-text class="text-dark-plain name"> {{ title }}</ion-text>
     </div>
   </div>
 </template>
@@ -24,20 +26,19 @@ export default {
   data() {
     return {
       ChapterInfo: ChapterInfo,
-      title: "",
     };
-  },
-
-  mounted() {
-    this.title =
-      ` פרק ` +
-      (this.chapter + 1) +
-      "\t - \t" +
-      this.ChapterInfo[this.chapter].title;
   },
 
   computed: {
     ...mapState("podcasts", ["chapter"]),
+    title() {
+      return (
+        ` פרק ` +
+        (this.chapter + 1) +
+        "\t - \t" +
+        this.ChapterInfo[this.chapter].title
+      );
+    },
   },
 
   methods: {},
@@ -46,11 +47,10 @@ export default {
 
 <style scoped>
 .header {
-    width: 95%;
+  width: 95%;
   display: flex;
   justify-content: flex-start;
   align-items: center;
-
 }
 .mini-icon {
   position: relative;
@@ -63,20 +63,19 @@ export default {
 }
 
 .text-box {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    margin-right: 5%;
-
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-right: 5%;
 }
 
 .text {
-    font-weight: 600;
-    font-size: 1rem;
-    opacity: 0.8;
+  font-weight: 600;
+  font-size: 1rem;
+  opacity: 0.8;
 }
 .name {
-    font-weight: 700;
+  font-weight: 700;
 }
 </style>
