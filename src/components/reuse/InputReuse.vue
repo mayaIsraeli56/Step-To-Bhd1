@@ -61,7 +61,7 @@ div {
 
 .field__input {
   background: var(--ion-color-secondary);
-  border-radius: 4vh;
+  border-radius: 4dvh;
   border: none;
   -webkit-appearance: none;
   -moz-appearance: none;

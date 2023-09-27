@@ -117,9 +117,9 @@ ion-list {
 
 .card {
   background-color: #d9e3e4;
-  height: 8vh;
+  height: 8dvh;
   width: 85%;
-  border-radius: 3vh;
+  border-radius: 3dvh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -135,7 +135,7 @@ ion-list {
 
 .ans {
   background-color: #fafafa;
-  border-radius: 0 0 3vh 3vh;
+  border-radius: 0 0 3dvh 3dvh;
   height: fit-content;
   margin-top: -10%;
   font-size: 1.1rem;

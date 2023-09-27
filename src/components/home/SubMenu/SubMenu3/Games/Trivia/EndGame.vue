@@ -76,7 +76,7 @@ export default {
   background-color: #fafafa;
   width: 100%;
   max-height: 13rem;
-  border-radius: 2vh;
+  border-radius: 2dvh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -110,6 +110,6 @@ export default {
   width: 95%;
   margin-top: 5%;
   height: 0.4rem;
-  border-radius: 2vh;
+  border-radius: 2dvh;
 }
 </style>

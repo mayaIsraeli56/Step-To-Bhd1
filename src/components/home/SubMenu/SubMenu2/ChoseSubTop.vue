@@ -45,19 +45,19 @@ export default {
 <style scoped>
 ion-img {
   position: relative;
-  height: 12vh;
-  top: -6vh;
+  height: 12dvh;
+  top: -6dvh;
 }
 
 .note {
   position: relative;
-  top: -2.5vh;
-  font-size: 2.2vh;
+  top: -2.5dvh;
+  font-size: 2.2dvh;
   transition: all 1s ease;
 }
 
 .icon {
-  height: 10vh;
+  height: 10dvh;
   transition: all 1s ease;
 }
 
@@ -70,9 +70,9 @@ ion-img {
   display: none;
 }
 .mini {
-  top: -7.5vh;
+  top: -7.5dvh;
   left: -40%;
-  height: 5vh;
+  height: 5dvh;
   transition: all 0.5s ease;
 }
 </style>

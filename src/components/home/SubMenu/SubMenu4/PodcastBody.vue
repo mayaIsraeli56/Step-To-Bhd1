@@ -55,7 +55,7 @@ export default {
 .photo {
   position: relative;
   transition: all 1s ease;
-  border-radius: 3vh;
+  border-radius: 3dvh;
   padding: 3%;
   width: 95%;
   z-index: 2;
@@ -76,7 +76,7 @@ ion-img::part(image) {
   font-weight: 700;
   width: 95%;
   padding: 2%;
-  border-radius: 3vh;
+  border-radius: 3dvh;
   margin: 2% 0%;
   font-size: 1rem;
 }

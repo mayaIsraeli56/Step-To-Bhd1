@@ -96,7 +96,7 @@ export default {
 .container {
   width: 100%;
   height: fit-content;
-  border-radius: 2vh;
+  border-radius: 2dvh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -109,7 +109,7 @@ export default {
 }
 
 .btn {
-  --border-radius: 3vh;
+  --border-radius: 3dvh;
   font-size: 100%;
 }
 </style>

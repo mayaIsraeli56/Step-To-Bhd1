@@ -60,7 +60,7 @@ export default {
   margin: auto;
   padding: 2%;
   margin-top: -10%;
-  border-radius: 0 0 3vh 3vh;
+  border-radius: 0 0 3dvh 3dvh;
   z-index: 1;
 }
 

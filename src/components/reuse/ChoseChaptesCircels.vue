@@ -117,16 +117,16 @@ export default {
 
 .circle {
   position: relative;
-  top: -5vh;
+  top: -5dvh;
   background-color: var(--ion-color-secondary-tint);
-  height: 10vh;
-  width: 10vh;
+  height: 10dvh;
+  width: 10dvh;
   border-radius: 100%;
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  padding-bottom: 1vh;
-  font-size: 3.5vh;
+  padding-bottom: 1dvh;
+  font-size: 3.5dvh;
   font-weight: 700;
   color: var(--ion-color-medium);
   text-shadow: none;
@@ -134,8 +134,8 @@ export default {
 
 .blue-circle {
   background: var(--ion-color-primary-tint-light);
-  height: 5vh;
-  width: 5vh;
+  height: 5dvh;
+  width: 5dvh;
   margin: 1%;
   border-radius: 100%;
   display: flex;
@@ -162,11 +162,11 @@ export default {
 .character-name {
   color: var(--ion-color-primary-tint);
   text-shadow: none;
-  font-size: 2.5vh;
+  font-size: 2.5dvh;
 }
 .note {
   position: relative;
-  font-size: 2.5vh;
+  font-size: 2.5dvh;
   opacity: 0.8;
 }
 

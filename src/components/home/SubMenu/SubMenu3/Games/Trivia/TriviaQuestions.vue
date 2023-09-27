@@ -245,7 +245,7 @@ export default {
   background-color: #fafafa;
   width: 100%;
   height: 10rem;
-  border-radius: 2vh;
+  border-radius: 2dvh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -259,7 +259,7 @@ export default {
   width: 95%;
   margin-top: 5%;
   height: 0.3rem;
-  border-radius: 2vh;
+  border-radius: 2dvh;
   height: 0.4rem;
 }
 
@@ -267,27 +267,9 @@ export default {
   display: flex;
   height: 70%;
   flex-direction: column;
-  justify-content: space-around;
-  align-items: space-between;
+  justify-content: flex-start;
   width: 100%;
   margin: 5% 0%;
-}
-
-@media only screen and (max-width: 600px) {
-  .answers {
-    margin: 2% 0;
-  }
-}
-
-@media only screen and (max-height: 600px) {
-  .answers {
-    height: 100%;
-  }
-}
-@media only screen and (min-height: 750px) {
-  .answers {
-    padding-bottom: 35%;
-  }
 }
 
 .ans {
@@ -304,10 +286,11 @@ export default {
   background-color: var(--ion-color-tertiary);
   width: 100%;
   padding: 4% 0;
-  border-radius: 3vh;
+  border-radius: 3dvh;
   transition: all 0.5s ease;
   font-size: 1rem;
   transition: all 1s ease;
+  margin: 2% 0;
 }
 
 .endTxt {

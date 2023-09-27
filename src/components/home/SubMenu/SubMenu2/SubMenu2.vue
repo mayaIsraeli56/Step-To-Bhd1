@@ -93,16 +93,16 @@ export default {
 
 .circle {
   position: relative;
-  top: -6vh;
+  top: -6dvh;
   background-color: var(--ion-color-secondary-tint);
-  height: 12vh;
-  width: 12vh;
+  height: 12dvh;
+  width: 12dvh;
   border-radius: 100%;
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  padding-bottom: 1.5vh;
-  font-size: 3.5vh;
+  padding-bottom: 1.5dvh;
+  font-size: 3.5dvh;
   font-weight: 700;
   color: var(--ion-color-medium);
   text-shadow: none;
@@ -116,26 +116,26 @@ export default {
 
 .title {
   position: relative;
-  top: -7vh;
+  top: -7dvh;
   width: 100%;
-  height: 10vh;
-  padding: 3vh;
+  height: 10dvh;
+  padding: 3dvh;
   color: var(--ion-color-medium);
   text-shadow: none;
   font-weight: 700;
-  font-size: 3vh;
-  border-bottom: solid 1vh var(--ion-color-secondary-tint);
+  font-size: 3dvh;
+  border-bottom: solid 1dvh var(--ion-color-secondary-tint);
 }
 
 .text {
   position: relative;
   transform: translateY(-17%);
-  font-size: 2.5vh;
+  font-size: 2.5dvh;
   padding: 2%;
   color: var(--ion-color-medium);
   text-shadow: none;
   width: 90%;
-  height: 25vh;
+  height: 25dvh;
   font-weight: 500;
 }
 </style>
@@ -147,7 +147,7 @@ export default {
 }
 
 .swiper-pagination-bullet-active {
-  margin-top: 10vh;
+  margin-top: 10dvh;
   background-color: var(--ion-color-primary);
 }
 </style>

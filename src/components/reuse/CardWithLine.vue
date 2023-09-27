@@ -33,7 +33,7 @@ export default {
 .card {
   background-color: #fafafa;
   width: 100%;
-  border-radius: 2vh;
+  border-radius: 2dvh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -48,7 +48,7 @@ export default {
   width: 110%;
   margin: 5% 0;
   height: 0.3rem;
-  border-radius: 2vh;
+  border-radius: 2dvh;
   height: 0.4rem;
 }
 

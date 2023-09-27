@@ -62,9 +62,9 @@ export default {
 <style scoped>
 .card {
   background-color: #fafafa;
-  height: 14vh;
+  height: 14dvh;
   width: 85%;
-  border-radius: 3vh;
+  border-radius: 3dvh;
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -125,7 +125,7 @@ export default {
 .text {
   position: relative;
   width: 100%;
-  border-radius: 3vh;
+  border-radius: 3dvh;
   display: flex;
   flex-direction: column;
   align-items: right;

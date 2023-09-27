@@ -134,7 +134,7 @@ export default {
   height: 100%;
   -webkit-backface-visibility: hidden; /* Safari */
   backface-visibility: hidden;
-  border-radius: 2vh;
+  border-radius: 2dvh;
   box-shadow: rgba(85, 98, 123, 0.35) 0px 5px 15px;
   color: var(--ion-color-medium) !important;
 }

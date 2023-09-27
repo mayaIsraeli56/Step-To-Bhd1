@@ -138,7 +138,7 @@ export default {
   height: 8rem;
   width: 45%;
   margin: 3% 0%;
-  border-radius: 5vh;
+  border-radius: 5dvh;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -163,7 +163,7 @@ export default {
 
 .note {
   position: relative;
-  font-size: 2.2vh;
+  font-size: 2.2dvh;
   opacity: 0.8;
 }
 

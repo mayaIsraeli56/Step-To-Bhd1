@@ -4,7 +4,7 @@
   <audio style="display: none" ref="player" id="myAudio" :src="audioSrc" />
 
   <!-- time-->
-  <div :class="[{ transperent: !audioLoaded }, 'time']">
+  <div class="time">
     <ion-text class="text-dark-plain curr"
       >{{ formatTime(currTime) }}
     </ion-text>
@@ -23,7 +23,7 @@
   </div>
 
   <!-- control -->
-  <div :class="[{ transperent: !audioLoaded }, 'audio-func']">
+  <div class="audio-func">
     <ion-button class="details"></ion-button>
 
     <div class="control">
@@ -64,7 +64,6 @@ export default {
   data() {
     return {
       title: "",
-      audioLoaded: false,
       isPlaying: false,
       currTime: 0, // time is in sec
       duration: 0,
@@ -119,17 +118,6 @@ export default {
 
       audio.onloadedmetadata = () =>
         (this.duration = Math.round(audio.duration));
-
-      // nextTick run only after the entire view has been rendered
-      this.$nextTick(function () {
-        audio.addEventListener(
-          // "canplay" lets us know audio is ready for play
-          "canplay",
-          function (e) {
-            this.audioLoaded = true;
-          }.bind(this)
-        );
-      });
     },
 
     // user change time by input value
@@ -215,7 +203,7 @@ export default {
   width: 65%;
   height: 0.5rem;
   background-color: var(--ion-color-warning-shade);
-  border-radius: 2vh;
+  border-radius: 2dvh;
 }
 
 input[type="range"] {
@@ -230,7 +218,7 @@ input[type="range"] {
   overflow: hidden;
   position: relative;
   left: 0;
-  border-radius: 2vh;
+  border-radius: 2dvh;
   background-color: var(--ion-color-warning-shade);
   direction: ltr;
 }
@@ -243,7 +231,6 @@ input[type="range"]::-webkit-slider-thumb {
   height: 0.5rem;
   width: 0.5rem;
   background-color: var(--ion-color-primary-contrast);
-  border-radius: 50%;
   box-shadow: -407px 0 0 400px var(--ion-color-primary-contrast);
   transition: 0.2s ease-in-out;
 }
@@ -256,7 +243,6 @@ input[type="range"]::-moz-range-thumb {
   height: 0.5rem;
   width: 0.5rem;
   background-color: var(--ion-color-primary-contrast);
-  border-radius: 50%;
   box-shadow: -407px 0 0 400px var(--ion-color-primary-contrast);
   transition: 0.2s ease-in-out;
 }

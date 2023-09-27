@@ -138,54 +138,54 @@ export default {
 
 .circle {
   position: relative;
-  top: -5vh;
+  top: -5dvh;
   background-color: var(--ion-color-secondary-tint);
-  height: 10vh;
-  width: 10vh;
+  height: 10dvh;
+  width: 10dvh;
   border-radius: 100%;
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  padding-bottom: 1vh;
-  font-size: 3.5vh;
+  padding-bottom: 1dvh;
+  font-size: 3.5dvh;
   font-weight: 700;
   color: var(--ion-color-medium);
   text-shadow: none;
 }
 .game-icon {
-  width: 7vh;
-  height: 7vh;
+  width: 7dvh;
+  height: 7dvh;
 }
 
 .title {
   position: relative;
-  top: -7vh;
+  top: -7dvh;
   width: 100%;
-  height: 9vh;
-  padding: 3vh;
+  height: 9dvh;
+  padding: 3dvh;
   color: var(--ion-color-medium);
   text-shadow: none;
   font-weight: 700;
-  font-size: 3vh;
-  border-bottom: solid 1vh var(--ion-color-secondary-tint);
+  font-size: 3dvh;
+  border-bottom: solid 1dvh var(--ion-color-secondary-tint);
 }
 
 .text {
   position: relative;
   transform: translateY(-70%);
-  font-size: 2.5vh;
+  font-size: 2.5dvh;
   padding: 0%;
   color: var(--ion-color-medium);
   text-shadow: none;
   width: 90%;
-  height: 6vh;
+  height: 6dvh;
   font-weight: 500;
 }
 
 .blue-circle {
   background: var(--ion-color-primary-tint-light);
-  height: 5vh;
-  width: 5vh;
+  height: 5dvh;
+  width: 5dvh;
   margin: 1%;
   border-radius: 100%;
   display: flex;
@@ -212,11 +212,11 @@ export default {
 .character-name {
   color: var(--ion-color-primary-tint);
   text-shadow: none;
-  font-size: 2.5vh;
+  font-size: 2.5dvh;
 }
 .note {
   position: relative;
-  font-size: 2.7vh;
+  font-size: 2.7dvh;
   opacity: 0.8;
 }
 
@@ -231,7 +231,7 @@ export default {
 }
 
 .mySwiper {
-  margin-top: 2vh;
+  margin-top: 2dvh;
 }
 </style>
 
@@ -242,7 +242,7 @@ export default {
 }
 
 .swiper-pagination-bullet-active {
-  margin-top: 10vh;
+  margin-top: 10dvh;
   background-color: var(--ion-color-primary);
 }
 </style>

@@ -39,7 +39,7 @@ export default {
 .progress-bar {
   width: 65%;
   height: 0.25rem;
-  border-radius: 2vh;
+  border-radius: 2dvh;
   background-color: var(--ion-color-warning-shade);
   display: flex;
   justify-content: flex-end;
@@ -49,7 +49,7 @@ export default {
   position: relative;
   left: 0;
   width: 65%;
-  border-radius: 2vh;
+  border-radius: 2dvh;
   background-color: var(--ion-color-primary-contrast);
 }
 </style>

@@ -45,20 +45,20 @@
       ><img src="https://swiperjs.com/demos/images/nature-9.jpg"
     /></swiper-slide>
   </swiper>
+
+  <ion-button @click="handleSignOut">התנתק</ion-button>
 </template>
 
 <script>
 // Import Swiper Vue.js components
 import { Swiper, SwiperSlide } from "swiper/vue";
-
-// Import Swiper styles
 import "swiper/css";
-
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
-
-// import required modules
 import { EffectCoverflow, Pagination } from "swiper";
+
+import { IonButton } from "@ionic/vue";
+import { getAuth, signOut } from "firebase/auth";
 
 export default {
   name: "SubMenu0",
@@ -66,12 +66,22 @@ export default {
   components: {
     Swiper,
     SwiperSlide,
+    IonButton,
   },
 
   data() {
     return {};
   },
-  methods: {},
+
+  methods: {
+
+    async handleSignOut() {
+      let auth = getAuth();
+      signOut(auth).then(() => {
+        this.$router.push({ name: "Start" });
+      });
+    },
+  },
   setup() {
     return {
       modules: [EffectCoverflow, Pagination],

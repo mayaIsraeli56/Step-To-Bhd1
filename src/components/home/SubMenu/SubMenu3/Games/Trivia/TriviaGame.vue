@@ -98,7 +98,7 @@ export default {
 
 <style scoped>
 .trivia {
-  height: 90vh;
+  height: 90dvh;
   display: flex;
   align-items: space-between;
   flex-direction: column;
