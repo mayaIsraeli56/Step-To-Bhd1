@@ -40,7 +40,7 @@ export default {
       swiper: null,
       perView: 3,
       spaceBet: 5,
-      slideNum: 5,
+      slideNum: 6,
       activeIndex: null,
       opacity: true,
     };

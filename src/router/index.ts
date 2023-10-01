@@ -20,7 +20,7 @@ const routes: Array<RouteRecordRaw> = [
     component: HomePage,
     meta: {
       requireAuth: true,
-    }
+    },
   },
 ];
 
@@ -31,16 +31,16 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   const auth = getAuth();
-if(to.matched.some((record) => record.meta.requireAuth)) {
-  if(auth != null) {
-    next();
+  if (to.matched.some((record) => record.meta.requireAuth)) {
+    if (auth != null) {
+      next();
+    } else {
+      alert("Please login first");
+      next("/");
+    }
   } else {
-    alert("Please login first");
-    next("/")
+    next();
   }
-}else {
-  next();
-}
-})
+});
 
 export default router;

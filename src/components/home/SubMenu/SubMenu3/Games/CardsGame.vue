@@ -1,10 +1,14 @@
 <template>
   <div class="cards">
-    <ion-text class="text-dark-plain note">
+    <ion-text class="text-dark-plain note" ref="txt">
       לחצו על הכרטיסייה כדי לראות את התשובה</ion-text
     >
 
-    <div class="flip-card">
+    <div
+      :class="['flip-card', flip ? 'flip' : '']"
+      @click="() => (flip = !flip)"
+      ref="card"
+    >
       <div class="flip-card-inner">
         <div class="flip-card-front card">
           <ion-text class="text-dark-plain cntnt" ref="front">
@@ -55,6 +59,7 @@ export default {
       arrow: require("@/assets/media1/HomePage/arrow-back.png"),
       cards: [],
       cardNum: 0,
+      flip: false,
     };
   },
 
@@ -63,16 +68,16 @@ export default {
   },
 
   beforeMount() {
-    cards.forEach((chap,i) => {
+    cards.forEach((chap, i) => {
       chap.forEach((ques) => {
-        if(this.chosenChapters.includes(i+1))
-        this.cards.push(ques);
+        if (this.chosenChapters.includes(i)) this.cards.push(ques);
       });
     });
   },
 
   methods: {
     changeCard(change) {
+      this.flip = false;
       this.$refs.front.$el.style.opacity = 0;
       setTimeout(() => {
         this.cardNum += change;
@@ -122,7 +127,7 @@ export default {
 }
 
 /* Do an horizontal flip when you move the mouse over the flip box container */
-.flip-card:hover .flip-card-inner {
+.flip .flip-card-inner {
   transform: rotateY(180deg);
 }
 

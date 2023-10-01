@@ -36,7 +36,7 @@
       >איפה טעיתי ?  
     </ion-button>
     <ion-button shape="round" size="large" @click="$emit('tryAgain')" :key="0"
-      >נסה שוב
+      >בא לי שוב
     </ion-button>
   </transition-group>
 </template>

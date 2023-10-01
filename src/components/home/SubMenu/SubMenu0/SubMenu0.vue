@@ -1,93 +1,79 @@
 <template>
-  <h2>SubMenu0</h2>
-
-  <swiper
-    :effect="'coverflow'"
-    :grabCursor="true"
-    :centeredSlides="true"
-    :slidesPerView="3"
-    :coverflowEffect="{
-      rotate: 50,
-      stretch: 0,
-      depth: 30,
-      modifier: 2,
-      slideShadows: true,
-    }"
-    :pagination="true"
-    :modules="modules"
-    class="mySwiper"
-  >
-    <swiper-slide
-      ><img
-        src="https://swiperjs.com/demos/images/nature-1.jpg" /></swiper-slide
-    ><swiper-slide
-      ><img
-        src="https://swiperjs.com/demos/images/nature-2.jpg" /></swiper-slide
-    ><swiper-slide
-      ><img
-        src="https://swiperjs.com/demos/images/nature-3.jpg" /></swiper-slide
-    ><swiper-slide
-      ><img
-        src="https://swiperjs.com/demos/images/nature-4.jpg" /></swiper-slide
-    ><swiper-slide
-      ><img
-        src="https://swiperjs.com/demos/images/nature-5.jpg" /></swiper-slide
-    ><swiper-slide
-      ><img
-        src="https://swiperjs.com/demos/images/nature-6.jpg" /></swiper-slide
-    ><swiper-slide
-      ><img
-        src="https://swiperjs.com/demos/images/nature-7.jpg" /></swiper-slide
-    ><swiper-slide
-      ><img
-        src="https://swiperjs.com/demos/images/nature-8.jpg" /></swiper-slide
-    ><swiper-slide
-      ><img src="https://swiperjs.com/demos/images/nature-9.jpg"
-    /></swiper-slide>
-  </swiper>
-
-  <ion-button @click="handleSignOut">התנתק</ion-button>
+  <div class="on-me">
+    <div class="text-box">
+      <ion-text class="text-dark-plain num" color="medium">
+        היי {{ userName }} !</ion-text
+      >
+      <ion-text class="text-dark-plain" color="medium">
+        קצינים לעתיד לומדים כרגע בעזרת בצעד לבה”ד
+      </ion-text>
+      <ion-text class="text-dark-plain" color="medium">
+        אבל אם לא בוער בך להמשיך ולהיות חלק מהם...
+      </ion-text>
+    </div>
+    <ion-button @click="handleSignOut" class="btn" size="large"
+      >התנתק</ion-button
+    >
+  </div>
 </template>
 
 <script>
-// Import Swiper Vue.js components
-import { Swiper, SwiperSlide } from "swiper/vue";
-import "swiper/css";
-import "swiper/css/effect-coverflow";
-import "swiper/css/pagination";
-import { EffectCoverflow, Pagination } from "swiper";
-
-import { IonButton } from "@ionic/vue";
+import { IonText, IonButton } from "@ionic/vue";
 import { getAuth, signOut } from "firebase/auth";
 
 export default {
   name: "SubMenu0",
   props: [""],
-  components: {
-    Swiper,
-    SwiperSlide,
-    IonButton,
-  },
+  components: { IonText, IonButton },
 
   data() {
-    return {};
+    return {
+      userName: "",
+    };
+  },
+  mounted() {
+    const auth = getAuth();
+    this.userName = auth.currentUser.displayName;
   },
 
   methods: {
-
     async handleSignOut() {
-      let auth = getAuth();
+      const auth = getAuth();
       signOut(auth).then(() => {
         this.$router.push({ name: "Start" });
       });
     },
   },
-  setup() {
-    return {
-      modules: [EffectCoverflow, Pagination],
-    };
-  },
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.on-me {
+  position: relative;
+  top: -5%;
+}
+
+.text-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 5%;
+}
+.text-dark-plain {
+  font-size: 1.2rem;
+  margin: 1% 0;
+}
+
+.num {
+  font-size: 2rem;
+  font-weight: 900;
+  --background: none;
+  color: var(--ion-color-medium);
+  text-shadow: -0.2rem 0.1rem 0.2rem var(--ion-color-warning-tint);
+}
+
+.btn {
+  --border-radius: 2dvh;
+}
+</style>

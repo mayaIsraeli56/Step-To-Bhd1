@@ -31,7 +31,7 @@ export default {
     return {
       toClose: false,
       timeForScreen: 5000,
-      lessTimeIfLogged: 1000,
+      lessTimeIfLogged: 2000,
       signOption: null,
     };
   },

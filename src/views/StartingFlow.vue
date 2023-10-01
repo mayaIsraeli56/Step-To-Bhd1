@@ -17,9 +17,7 @@ export default defineComponent({
     IonContent,
     IonPage,
     StartingPages,
-  }
-  
-  
+  } 
 });
 </script>
 
@@ -41,9 +39,7 @@ export default defineComponent({
 #container p {
   font-size: 16px;
   line-height: 22px;
-  
   color: #8c8c8c;
-  
   margin: 0;
 }
 

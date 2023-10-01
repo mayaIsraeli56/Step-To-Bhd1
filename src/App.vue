@@ -20,7 +20,7 @@ export default defineComponent({
 
   mounted() {
     this.resizeHandler();
-    window.addEventListener("resize", this.resizeHandler);
+    // window.addEventListener("resize", this.resizeHandler);
   },
   unmounted() {
     window.removeEventListener("resize", this.resizeHandler);

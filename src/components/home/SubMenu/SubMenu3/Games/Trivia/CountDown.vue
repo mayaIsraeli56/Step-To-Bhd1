@@ -12,7 +12,7 @@ export default {
 
   data() {
     return {
-      countDown: 1,
+      countDown: 3,
     };
   },
 
