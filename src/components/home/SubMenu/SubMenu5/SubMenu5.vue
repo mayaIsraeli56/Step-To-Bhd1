@@ -26,7 +26,6 @@
       <ion-text class="text-dark-plain" color="medium">
         "גם מסע בן אלף מייל מתחיל בצעד קטן אחד"</ion-text
       >
-
       <ion-text class="text-dark-plain credit" color="medium">
         לאו דזה</ion-text
       >
