@@ -24,7 +24,7 @@
 
   <!-- control -->
   <div class="audio-func">
-    <ion-button class="details"></ion-button>
+    <ion-button class="details" @click="openingTimingMenu"></ion-button>
 
     <div class="control">
       <ion-button
@@ -68,11 +68,12 @@ export default {
       currTime: 0, // time is in sec
       duration: 0,
       speed: 1,
+      openTimingMenu: false,
     };
   },
 
   computed: {
-    ...mapState("podcasts", ["chapter", "subChapter"]),
+    ...mapState("podcasts", ["chapter", "subChapter", "timingMenu", "newTime"]),
 
     audioSrc() {
       return require(`@/assets/audio/chap${this.chapter + 1}/${
@@ -86,12 +87,23 @@ export default {
   },
 
   methods: {
-    ...mapActions("podcasts", ["nextPodcast", "lastPodcast"]),
+    ...mapActions("podcasts", [
+      "nextPodcast",
+      "lastPodcast",
+      "toggleTimingMenu",
+      "finishUpdateTime",
+    ]),
+
+    openingTimingMenu() {
+      this.toggleTimingMenu();
+    },
 
     disableBtn(btnNum) {
       return (
         (btnNum == 3 && this.subChapter == 0 && this.chapter == 0) ||
-        (btnNum == 1 && this.subChapter == MAX_SUB[10] -1 && this.chapter == 10)
+        (btnNum == 1 &&
+          this.subChapter == MAX_SUB[10] - 1 &&
+          this.chapter == 10)
       );
     },
 
@@ -186,6 +198,18 @@ export default {
       return `${min < 10 ? "0" : ""}${min}:${sec < 10 ? "0" : ""}${sec}`;
     },
   },
+
+  watch: {
+    newTime: {
+      deep: true,
+      handler() {
+        if (this.newTime != -1) {
+          this.$refs.player.currentTime = this.newTime;
+          this.finishUpdateTime();
+        }
+      },
+    },
+  },
 };
 </script>
 
@@ -228,7 +252,7 @@ input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
   border: none;
-  height: 0.5rem;
+  height: 0.6rem;
   width: 0.5rem;
   background-color: var(--ion-color-primary-contrast);
   box-shadow: -407px 0 0 400px var(--ion-color-primary-contrast);
@@ -240,7 +264,7 @@ input[type="range"]::-moz-range-thumb {
   -webkit-appearance: none;
   appearance: none;
   border: none;
-  height: 0.5rem;
+  height: 0.6rem;
   width: 0.5rem;
   background-color: var(--ion-color-primary-contrast);
   box-shadow: -407px 0 0 400px var(--ion-color-primary-contrast);
@@ -289,8 +313,8 @@ ion-button {
 }
 
 .details {
-  --background: url("@/assets/media1/HomePage/podcasts/timing-btn.png") 0 0/100%
-    100% no-repeat;
+  --background: url("@/assets/media1/HomePage/podcasts/details.png") 50%/50% 50%
+    no-repeat;
   --box-shadow: none;
 }
 

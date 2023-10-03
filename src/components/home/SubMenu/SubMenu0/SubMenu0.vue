@@ -18,6 +18,7 @@
     <ion-item>
       <ion-toggle
         :checked="themeToggle"
+        :ngModel="toggle"
         @ionChange="toggleChange($event)"
         justify="space-between"
       >
@@ -48,6 +49,7 @@ export default defineComponent({
   data() {
     return {
       userName: "",
+      toggle: true,
       numOfOnlineUsers: 0,
     };
   },

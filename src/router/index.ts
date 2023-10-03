@@ -29,18 +29,10 @@ const router = createRouter({
   routes,
 });
 
-router.beforeEach((to, from, next) => {
-  const auth = getAuth();
-  if (to.matched.some((record) => record.meta.requireAuth)) {
-    if (auth != null) {
-      next();
-    } else {
-      alert("Please login first");
-      next("/");
-    }
-  } else {
-    next();
-  }
-});
+// router.beforeEach(async (to) => {
+//   const auth = getAuth();
+//   const user = auth.currentUser;
+//   if (user == null && to.name !== "Start") return { name: "Start" };
+// });
 
 export default router;

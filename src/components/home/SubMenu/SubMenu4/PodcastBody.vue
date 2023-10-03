@@ -1,9 +1,8 @@
 <template>
   <div class="body">
-    <ion-img
-      class="photo"
-      :src="require(`@/assets/media1/HomePage/chapter-logo/${1}.png`)"
-    ></ion-img>
+    <div :style="cssProps" class="photo">
+      <audio-timing-menu></audio-timing-menu>
+    </div>
 
     <ion-text class="text-dark-plain text"
       >{{ subChapter + 1 }} - {{ title }}
@@ -14,16 +13,18 @@
 
 <script>
 import AudoiFunc from "./AudioFunc.vue";
-import { IonText, IonImg } from "@ionic/vue";
+import AudioTimingMenu from "./AudioTimingMenu.vue";
+import { IonText } from "@ionic/vue";
 import { mapState } from "vuex";
 
 export default {
   name: "PodcastBody",
-  components: { AudoiFunc, IonText, IonImg },
+  components: { AudoiFunc, AudioTimingMenu, IonText },
 
   data() {
     return {
       isPlaying: false,
+      cssProps: {},
     };
   },
 
@@ -39,7 +40,13 @@ export default {
     },
   },
 
-  methods: {},
+  mounted() {
+    this.cssProps = {
+      backgroundImage: `url(${require(`@/assets/media1/HomePage/chapter-logo/${
+        this.chapter + 1
+      }.png`)})`,
+    };
+  },
 };
 </script>
 
@@ -56,14 +63,17 @@ export default {
   position: relative;
   transition: all 1s ease;
   border-radius: 3dvh;
-  padding: 3%;
   width: 95%;
+  height: 13rem;
   z-index: 2;
-  background-color: #695f4446;
+  background-color: var(--ion-color-warning);
   display: flex;
   justify-content: center;
   align-items: center;
   margin: 2% 0%;
+  background-repeat: no-repeat;
+  background-size: 7rem;
+  background-position: center;
 }
 
 ion-img::part(image) {

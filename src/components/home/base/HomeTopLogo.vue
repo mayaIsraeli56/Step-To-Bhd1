@@ -79,7 +79,7 @@ export default defineComponent({
       arrowSrc: require("@/assets/media1/HomePage/arrow-back.png"),
       text: "",
       showHeading: false,
-      textArray: ["אנשים", "בחנים", "מקראות", "משחקים", "הסכתים"],
+      textArray: ["התנתק", "בחנים", "מקראות", "משחקים", "הסכתים","על הבה\"ד"],
       icon: null,
     };
   },

@@ -6,6 +6,8 @@ export default {
   state: {
     chapter: -1,
     subChapter: -1,
+    timingMenu: false,
+    newTime: -1,
   },
 
   getters: {},
@@ -16,6 +18,16 @@ export default {
     },
     setSubChapter(state, n) {
       state.subChapter = n;
+    },
+    toggleTimingMenu(state) {
+      state.timingMenu = !state.timingMenu;
+    },
+    updateTime(state,time) {
+      state.newTime = time;
+    },
+
+    finishUpdateTime(state) {
+      state.newTime = -1;
     },
   },
 
@@ -45,6 +57,17 @@ export default {
         commit("setSubChapter", MAX_SUB[state.chapter-1] - 1)
         commit("setChapter", state.chapter - 1);
       }
+    },
+
+    toggleTimingMenu({ commit }) {
+      commit("toggleTimingMenu");
+    },
+
+    updateTime({ commit }, time) {
+      commit("updateTime", time);
+    },
+    finishUpdateTime({ commit }) {
+      commit("finishUpdateTime");
     },
   },
 };
