@@ -201,10 +201,10 @@ export default {
 
   watch: {
     newTime: {
-      deep: true,
       handler() {
         if (this.newTime != -1) {
           this.$refs.player.currentTime = this.newTime;
+          this.currTime = this.newTime;
           this.finishUpdateTime();
         }
       },
@@ -221,6 +221,7 @@ export default {
   align-items: center;
   margin: 2% 0%;
   flex-direction: row-reverse;
+  transition: all 0.5s ease;
 }
 
 .progress-bar {
@@ -228,6 +229,7 @@ export default {
   height: 0.5rem;
   background-color: var(--ion-color-warning-shade);
   border-radius: 2dvh;
+  transition: all 0.5s ease;
 }
 
 input[type="range"] {
