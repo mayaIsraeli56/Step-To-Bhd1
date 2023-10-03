@@ -1,6 +1,5 @@
 <template>
   <div class="on-me">
-    <div>Number of online users: {{ numOfOnlineUsers }}</div>
     <div class="text-box">
       <ion-text class="text-dark-plain num" color="medium">
         היי {{ userName }} !</ion-text
@@ -34,14 +33,7 @@ import { getAuth, signOut } from "firebase/auth";
 
 import { defineComponent, ref } from "vue";
 
-import firebase from "@/firebase/index.js";
-import {
-  getFirestore,
-  collection,
-  getDoc,
-  doc,
-  updateDoc,
-} from "firebase/firestore/lite";
+import { getFirestore, getDoc, doc } from "firebase/firestore/lite";
 import "firebase/database";
 
 export default defineComponent({
