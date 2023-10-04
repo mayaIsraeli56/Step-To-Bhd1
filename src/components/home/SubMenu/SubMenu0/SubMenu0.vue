@@ -5,7 +5,7 @@
         היי {{ userName }} !</ion-text
       >
       <ion-text class="text-dark-plain" color="medium">
-        קצינים לעתיד לומדים כרגע בעזרת בצעד לבה”ד
+        קצינים לעתיד לומדים כרגע בעזרת בצעד לבה”ד,
       </ion-text>
       <ion-text class="text-dark-plain" color="medium">
         אבל אם לא בוער בך להמשיך ולהיות חלק מהם...
@@ -18,7 +18,6 @@
     <ion-item>
       <ion-toggle
         :checked="themeToggle"
-        :ngModel="toggle"
         @ionChange="toggleChange($event)"
         justify="space-between"
       >
@@ -57,9 +56,6 @@ export default defineComponent({
   setup() {
     const themeToggle = ref(false);
 
-    // Use matchMedia to check the user preference
-    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)");
-
     // Add or remove the "dark" class on the document body
     const toggleDarkTheme = (shouldAdd) => {
       document.body.classList.toggle("dark", shouldAdd);
@@ -68,17 +64,15 @@ export default defineComponent({
     // Check/uncheck the toggle and update the theme based on isDark
     const initializeDarkTheme = (isDark) => {
       themeToggle.value = isDark;
-      toggleDarkTheme(isDark);
+
+      let isCurrDark = document.body.classList.contains("dark");
+      themeToggle.value = isCurrDark;
+
+      toggleDarkTheme(isCurrDark);
     };
 
-    // Initialize the dark theme based on the initial
-    // value of the prefers-color-scheme media query
-    initializeDarkTheme(prefersDark.matches);
-
-    // Listen for changes to the prefers-color-scheme media query
-    prefersDark.addEventListener("change", (mediaQuery) =>
-      initializeDarkTheme(mediaQuery.matches)
-    );
+    // Initialize the dark theme based on the initial value
+    initializeDarkTheme();
 
     // Listen for the toggle check/uncheck to toggle the dark theme
     const toggleChange = (ToggleCustomEvent) => {
@@ -91,6 +85,21 @@ export default defineComponent({
       toggleDarkTheme,
       themeToggle,
     };
+  },
+
+  mounted() {
+    const auth = getAuth();
+    const name = auth.currentUser.displayName;
+    this.userName = name ? name : "";
+  },
+
+  methods: {
+    async handleSignOut() {
+      const auth = getAuth();
+      signOut(auth).then(() => {
+        this.$router.push({ name: "Start" });
+      });
+    },
   },
 
   async created() {
@@ -118,21 +127,6 @@ export default defineComponent({
     //     ref.onDisconnect().cancel();
     //   }
     // });
-  },
-
-  mounted() {
-    const auth = getAuth();
-    const name = auth.currentUser.displayName;
-    this.userName = name ? name : "";
-  },
-
-  methods: {
-    async handleSignOut() {
-      const auth = getAuth();
-      signOut(auth).then(() => {
-        this.$router.push({ name: "Start" });
-      });
-    },
   },
 });
 </script>
