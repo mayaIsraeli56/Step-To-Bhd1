@@ -31,7 +31,7 @@ export default {
 
 <style scoped>
 .card {
-  background-color: #fafafa;
+  background-color: var(--ion-white);
   width: 100%;
   border-radius: 2dvh;
   display: flex;
