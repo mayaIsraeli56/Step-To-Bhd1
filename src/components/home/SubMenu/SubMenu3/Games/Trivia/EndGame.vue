@@ -73,7 +73,7 @@ export default {
 
 <style scoped>
 .card {
-  background-color: #fafafa;
+  background-color: var(--ion-white);
   width: 100%;
   max-height: 13rem;
   border-radius: 2dvh;
@@ -106,8 +106,8 @@ export default {
 }
 
 .line {
-  background-color: #fafafa;
-  width: 95%;
+  background-color: var(--ion-white);
+  width: 100%;
   margin-top: 5%;
   height: 0.4rem;
   border-radius: 2dvh;

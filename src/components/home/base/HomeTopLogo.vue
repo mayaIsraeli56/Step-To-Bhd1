@@ -196,7 +196,7 @@ ion-text {
   height: 200%;
   transform: translateY(-50%);
   border-radius: 100%;
-  background-color: #83a9ad;
+  background-color: var(--ion-color-primary);
   position: absolute;
   transition: all 1s ease;
 }

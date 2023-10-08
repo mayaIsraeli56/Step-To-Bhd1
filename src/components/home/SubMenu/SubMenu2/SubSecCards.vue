@@ -51,7 +51,7 @@ export default {
 
 <style scoped>
 .card-details {
-  background-color: #fafafa;
+  background-color:var(--ion-white);
   width: 85%;
   display: flex;
   flex-direction: column;

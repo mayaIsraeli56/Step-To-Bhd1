@@ -3,7 +3,7 @@
     <ion-img
       :src="icon"
       :key="0"
-      :class="[learnSubSec != null ? 'mini' : '', 'icon']"
+      :class="[learnSubSec != null ? 'mini' : '', 'icon', isDark? 'dark-img' : '']"
     ></ion-img>
     <ion-text
       :key="1"
@@ -27,7 +27,12 @@ export default {
       icon: null,
       openSubMenu: -1,
       closeSubMenu: -1,
+      isDark: false,
     };
+  },
+
+  mounted() {
+    this.isDark = document.body.classList.contains("dark");
   },
 
   computed: {
@@ -74,5 +79,9 @@ ion-img {
   left: -40%;
   height: 5dvh;
   transition: all 0.5s ease;
+}
+
+.dark-img {
+  filter: sepia(1800%) brightness(250%) grayscale(150%);
 }
 </style>

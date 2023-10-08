@@ -120,4 +120,10 @@ export default {
   opacity: 0;
   transition: all 0.5s ease;
 }
+
+@media only screen and (max-height: 800px) {
+  .trivia {
+    padding: 4%, 1%;
+  }
+}
 </style>

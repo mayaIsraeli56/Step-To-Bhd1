@@ -116,7 +116,7 @@ ion-list {
 }
 
 .card {
-  background-color: #d9e3e4;
+  background-color: var(--ion-color-tertiary);
   height: 8dvh;
   width: 85%;
   border-radius: 3dvh;
@@ -134,7 +134,7 @@ ion-list {
 }
 
 .ans {
-  background-color: #fafafa;
+  background-color: var(--ion-white);
   border-radius: 0 0 3dvh 3dvh;
   height: fit-content;
   margin-top: -10%;
@@ -160,4 +160,5 @@ ion-list {
   clip-path: inset(0);
   opacity: 1;
 }
+
 </style>

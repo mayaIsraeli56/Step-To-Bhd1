@@ -109,12 +109,13 @@ ion-content {
 
 ion-list {
   padding: 0;
+  padding-bottom: 10%;
   min-height: 66dvh;
   transition: all 0.5s ease-in-out;
 }
 
 .full-page {
-  top: -3.1dvh;
+  top: -5%;
   height: 90%;
 }
 

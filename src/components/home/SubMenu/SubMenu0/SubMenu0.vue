@@ -1,34 +1,41 @@
 <template>
-  <div class="on-me">
-    <div class="text-box">
-      <ion-text class="text-dark-plain num" color="medium">
-        היי {{ userName }} !</ion-text
+  <div class="container">
+    <card-with-line :title="` היי ${userName} !`">
+      <div class="text-box">
+        <ion-text class="text-dark-plain" color="medium">
+          קצינים לעתיד לומדים כרגע,
+        </ion-text>
+        <ion-text class="text-dark-plain" color="medium">
+          בעזרת בצעד לבה"ד
+        </ion-text>
+        <ion-text class="text-dark-plain" color="medium">
+          אבל אם לא בוער בך
+        </ion-text>
+        <ion-text class="text-dark-plain" color="medium">
+          להמשיך ולהיות חלק מהם...
+        </ion-text>
+      </div>
+      <ion-button @click="handleSignOut" class="btn" size="large"
+        >התנתק</ion-button
       >
-      <ion-text class="text-dark-plain" color="medium">
-        קצינים לעתיד לומדים כרגע בעזרת בצעד לבה”ד,
-      </ion-text>
-      <ion-text class="text-dark-plain" color="medium">
-        אבל אם לא בוער בך להמשיך ולהיות חלק מהם...
-      </ion-text>
-    </div>
-    <ion-button @click="handleSignOut" class="btn" size="large"
-      >התנתק</ion-button
-    >
 
-    <ion-item>
-      <ion-toggle
-        :checked="themeToggle"
-        @ionChange="toggleChange($event)"
-        justify="space-between"
-      >
-        <ion-text class="text-dark-plain" color="medium"> מצב לילה </ion-text>
-      </ion-toggle>
-    </ion-item>
+      <ion-item>
+        <ion-toggle
+          :checked="themeToggle"
+          @ionChange="toggleChange($event)"
+          justify="space-between"
+        >
+          <ion-text class="text-dark-plain" color="medium"> מצב לילה </ion-text>
+        </ion-toggle>
+      </ion-item>
+    </card-with-line>
   </div>
 </template>
 
 <script>
 import { IonText, IonButton, IonItem, IonToggle } from "@ionic/vue";
+import CardWithLine from "@/components/reuse/CardWithLine.vue";
+
 import { getAuth, signOut } from "firebase/auth";
 
 import { defineComponent, ref } from "vue";
@@ -42,6 +49,7 @@ export default defineComponent({
     IonButton,
     IonItem,
     IonText,
+    CardWithLine,
     IonToggle,
   },
 
@@ -132,14 +140,35 @@ export default defineComponent({
 </script>
 
 <style scoped>
+.container {
+  width: 100%;
+  height: fit-content;
+  border-radius: 2dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4% 0 4%;
+  transition: all 0.5s ease;
+  font-size: 1.2rem;
+  flex-direction: column;
+  position: relative;
+  top: -6%;
+}
 .on-me {
   position: relative;
-  top: -5%;
+  top: -10%;
   display: flex;
   flex-direction: column;
   padding: 0% 10%;
   justify-content: center;
   align-items: center;
+  background-color: var(--ion-white);
+  border-radius: 2dvh;
+  margin: 0 5%;
+  padding: 7% 2%;
+  transition: all 0.5s ease;
+  font-size: 1.2rem;
+  flex-direction: column;
 }
 
 .text-box {
@@ -147,11 +176,11 @@ export default defineComponent({
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  padding: 5%;
+  padding: 0%;
 }
 .text-dark-plain {
-  font-size: 1.2rem;
-  margin: 1% 0;
+  font-size: 1.1rem;
+  margin: 1% 0%;
 }
 
 .num {
@@ -159,18 +188,21 @@ export default defineComponent({
   font-weight: 900;
   --background: none;
   color: var(--ion-color-medium);
-  text-shadow: -0.2rem 0.1rem 0.2rem var(--ion-color-warning-tint);
 }
 
 .btn {
-  --border-radius: 4dvh;
-  width: 100%;
+  margin-top: 5%;
 }
 
 ion-item {
-  margin-top: 15%;
+  margin-top: 5%;
   --background: none;
-  width: 60%;
+  width: 50%;
+}
+
+ion-item {
+  --padding-end: 0;
+  --inner-padding-end: 0;
 }
 
 ion-toggle {

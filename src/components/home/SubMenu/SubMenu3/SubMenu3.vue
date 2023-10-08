@@ -127,7 +127,7 @@ export default {
   transition: opacity 0.2s linear;
 }
 .swiper-slide {
-  background-color: #fafafa;
+  background-color: var(--ion-white);
   border-radius: 7%;
   display: flex;
   align-items: center;

@@ -15,6 +15,7 @@
         <ion-img
           :src="require('@/assets/media1/HomePage/bookmark.png')"
           :key="0"
+          v-if="isMarked(n)"
           class="bookmark"
         ></ion-img>
         <div class="circle">{{ n }}</div>
@@ -33,6 +34,8 @@ import { SwiperSlide } from "swiper/vue";
 import ChapterInfo from "@/json/chapters/ChapterInfo";
 import ChoseSubChapter from "./ChoseSubChapter.vue";
 import { mapState, mapMutations } from "vuex";
+
+import { getAuth } from "firebase/auth";
 
 export default {
   name: "SubMenu2",
@@ -62,6 +65,12 @@ export default {
     openChapter() {
       this.openSubChapters = true;
     },
+
+    async isMarked(numOfSub) {
+      // const user = getAuth().currentUser;
+      // console.log(user);
+      return true;
+    },
   },
 
   watch: {
@@ -78,7 +87,7 @@ export default {
 
 <style scoped>
 .swiper-slide {
-  background-color: #fafafa;
+  background-color: var(--ion-white);
   height: 90%;
   border-radius: 7%;
   display: flex;

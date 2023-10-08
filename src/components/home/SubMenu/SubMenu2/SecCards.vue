@@ -61,7 +61,7 @@ export default {
 
 <style scoped>
 .card {
-  background-color: #fafafa;
+  background-color: var(--ion-white);
   height: 14dvh;
   width: 85%;
   border-radius: 3dvh;
@@ -70,7 +70,7 @@ export default {
   justify-content: flex-start;
   margin: auto;
   margin-top: 0%;
-  margin-bottom: 1.8%;
+  margin-bottom: 4% !important;
   padding: 1% 3%;
   flex-wrap: wrap;
   transition: all 0.5s ease;
@@ -84,7 +84,7 @@ export default {
 }
 
 .num {
-  font-size: 2.5rem;
+  font-size: 150%;
   font-weight: 600;
   margin-right: 0.3rem;
 }

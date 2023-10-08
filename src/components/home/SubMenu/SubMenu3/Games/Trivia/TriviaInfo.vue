@@ -9,16 +9,19 @@
       ]"
     >
       <ion-img
-        :class="[type == 5 ? 'clock-icn-test' : '', 'trivia-icon clock-icn']"
+      ref="imgimgimg"
+        :class="[type == 5 ? 'clock-icn-test' : '',  isDark? 'dark-img' : '',
+        'trivia-icon clock-icn']"
         :src="require(`@/assets/media1/HomePage/games/trivia/time.png`)"
       ></ion-img>
+
       <div class="time">
-        <ion-text class="text-dark-plain" v-if="sec > 9">
-          {{ min + ":" + sec }}</ion-text
-        >
-        <ion-text class="text-dark-plain" v-else>
-          {{ min + ":0" + sec }}</ion-text
-        >
+        <div class="text-dark-plain" v-if="sec > 9">
+          {{ min + ":" + sec }}
+        </div>
+        <div class="text-dark-plain" v-else>
+          {{ min + ":0" + sec }}
+        </div>
       </div>
     </div>
 
@@ -26,7 +29,7 @@
       <ion-img
         v-for="n in life"
         :key="n"
-        :class="[n > noWrong ? 'popIn' : 'popOut', 'trivia-icon heart']"
+        :class="[n > noWrong ? 'popIn' : 'popOut', isDark? 'dark-img' : '', 'trivia-icon heart']"
         :src="require(`@/assets/media1/HomePage/games/trivia/like.png`)"
       ></ion-img>
     </div>
@@ -43,7 +46,7 @@
 
     <div class="checkd-part" v-if="type == 2 || type == 3">
       <ion-img
-        class="trivia-icon mark"
+        :class="[ isDark? 'dark-img' : '', 'trivia-icon mark']"
         :src="require(`@/assets/media1/HomePage/games/trivia/check.png`)"
       ></ion-img>
       <ion-text class="text-dark-plain checked-num"> {{ noCorrect }}</ion-text>
@@ -67,11 +70,16 @@ export default {
       sec: 0,
       isPicked: false,
       timeout: null,
+      isDark: false,
     };
   },
 
   computed: {
     ...mapState("games", ["testAnswers", "_questNum"]),
+  },
+
+  mounted() {
+    this.isDark = document.body.classList.contains("dark");
   },
 
   methods: {
@@ -125,7 +133,7 @@ export default {
             this.sec = 0;
             this.countDownTimer();
           }
-        } else if(this.stage == "end") {
+        } else if (this.stage == "end") {
           clearTimeout(this.timeout);
         }
       },
@@ -172,6 +180,7 @@ export default {
   width: 100%;
   height: 40%;
   margin-bottom: 2%;
+  align-items: baseline;
 }
 .heart {
   margin: 2%;
@@ -210,7 +219,12 @@ export default {
 .clock-icn-test {
   margin: 0%;
   height: 100%;
-  padding: 0 0 0 3%;
+  width: 10%;
+  align-content: start;
+  padding: 0;
+  --padding: 0;
+  margin-left: 2%;
+  transform: translateY(15%);
 }
 .test {
   width: 100%;
@@ -218,7 +232,7 @@ export default {
   display: grid;
   grid-template-columns: auto auto auto auto auto auto auto auto auto auto;
   align-items: center;
-  margin: 0;
+  margin: 1%;
   padding: 0;
   justify-content: space-between;
 }
@@ -239,7 +253,7 @@ export default {
 .answered {
   transition: all 1s ease;
   color: var(--ion-color-secondary);
-  --background: var(--ion-color-primary-tint);
+  --background: var(--ion-color-primary);
 }
 
 .popIn {
@@ -257,6 +271,10 @@ export default {
 }
 .wronge {
   --background: var(--ion-color-danger);
+}
+
+.dark-img {
+  filter: sepia(900%) contrast(100%) brightness(400%);
 }
 
 @media only screen and (min-height: 800px) {

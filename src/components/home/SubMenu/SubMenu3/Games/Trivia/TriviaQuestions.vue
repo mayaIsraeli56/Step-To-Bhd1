@@ -77,7 +77,7 @@ export default {
       allQuestions.forEach((chap, i) => {
         chap.forEach((ques) => {
           ques.answered = false;
-          if (this.chosenChapters.includes(i + 1))
+          if (this.chosenChapters.includes(i))
             this.questions.push({ ...ques });
         });
       });
@@ -162,7 +162,7 @@ export default {
 
     ansPickedGame(hisAnswer) {
       let correct = this.questions[this._questNum].correct; // num of correct ans
-      let timeout = 1200;
+      let timeout = 1500;
       this.answered = true;
 
       this.$refs["ans" + hisAnswer][0].style.backgroundColor = "var(--ion-color-danger)";
@@ -235,14 +235,14 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 5% 0 5% 0;
+  padding: 4% 0;
   max-height: 90%;
-  margin: 1% 0;
+  margin: 0;
   height: 100%;
 }
 
 .ques-card {
-  background-color: #fafafa;
+  background-color: var(--ion-white);
   width: 100%;
   height: 10rem;
   border-radius: 2dvh;
@@ -255,7 +255,7 @@ export default {
 }
 
 .line {
-  background-color: #fafafa;
+  background-color: var(--ion-white);
   width: 95%;
   margin-top: 5%;
   height: 0.3rem;
@@ -270,6 +270,13 @@ export default {
   justify-content: flex-start;
   width: 100%;
   margin: 5% 0%;
+}
+
+
+@media only screen and (max-height: 800px) {
+  .answers {
+    margin: 2%;
+  }
 }
 
 .ans {

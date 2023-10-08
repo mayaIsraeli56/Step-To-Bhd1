@@ -60,6 +60,7 @@ export default {
       cards: [],
       cardNum: 0,
       flip: false,
+      changingNum: false
     };
   },
 
@@ -79,10 +80,18 @@ export default {
     changeCard(change) {
       this.flip = false;
       this.$refs.front.$el.style.opacity = 0;
-      setTimeout(() => {
-        this.cardNum += change;
-        this.$refs.front.$el.style.opacity = 1;
-      }, 500);
+
+      if (
+        this.cardNum + change <= this.cards.length - 1 &&
+        this.cardNum + change >= 0 && !this.changingNum
+      ) {
+        this.changingNum = true;
+        setTimeout(() => {
+          this.cardNum += change;
+          this.$refs.front.$el.style.opacity = 1;
+          this.changingNum = false;
+        }, 500);
+      }
     },
   },
 };
@@ -112,8 +121,8 @@ export default {
   background-color: transparent;
   width: 85%;
   height: 70%;
-  border: 1px solid #f1f1f1;
   perspective: 100%; /* Remove this if you don't want the 3D effect */
+  color: var(--ion-white);
 }
 
 /* This container is needed to position the front and back side */
@@ -146,12 +155,12 @@ export default {
 
 /* Style the front side (fallback if image is missing) */
 .flip-card-front {
-  background-color: #d9e3e4;
+  background-color: var(--ion-color-tertiary);
 }
 
 /* Style the back side */
 .flip-card-back {
-  background-color: #fafafa;
+  background-color: var(--ion-white);
   transform: rotateY(180deg);
 }
 
