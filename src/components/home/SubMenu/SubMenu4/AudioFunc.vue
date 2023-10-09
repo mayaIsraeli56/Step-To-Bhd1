@@ -24,15 +24,16 @@
 
   <!-- control -->
   <div class="audio-func">
-    <ion-button class="details" @click="openingTimingMenu"></ion-button>
+    <ion-button :class="[isDark ? 'dark' : '', 'details']" @click="openingTimingMenu"></ion-button>
 
     <div class="control">
       <ion-button
         v-for="n in 3"
         :key="n"
-        :class="'control' + n"
+        
         @click="handleClick(n)"
         :disabled="disableBtn(n)"
+        :class="[isDark ? 'dark' : '', `control${n}`]"
       >
         <ion-img
           :src="
@@ -40,6 +41,7 @@
               n == 2 && isPlaying ? 4 : n
             }.png`)
           "
+          :class="[isDark ? 'dark' : '']"
         ></ion-img>
       </ion-button>
     </div>
@@ -69,6 +71,7 @@ export default {
       duration: 0,
       speed: 1,
       openTimingMenu: false,
+      isDark: false,
     };
   },
 
@@ -84,6 +87,7 @@ export default {
 
   mounted() {
     this.initAudio();
+    this.isDark = document.body.classList.contains("dark");
   },
 
   methods: {
@@ -331,5 +335,9 @@ ion-button {
 
 .transperent {
   opacity: 0;
+}
+
+.dark {
+  filter: sepia(1800%) brightness(250%) grayscale(150%);
 }
 </style>

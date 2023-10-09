@@ -10,7 +10,7 @@
     >
       <ion-img
       ref="imgimgimg"
-        :class="[type == 5 ? 'clock-icn-test' : '',  isDark? 'dark-img' : '',
+        :class="[type == 5 ? 'clock-icn-test' : '',  isDark? 'dark' : '',
         'trivia-icon clock-icn']"
         :src="require(`@/assets/media1/HomePage/games/trivia/time.png`)"
       ></ion-img>
@@ -273,7 +273,7 @@ export default {
   --background: var(--ion-color-danger);
 }
 
-.dark-img {
+.dark {
   filter: sepia(900%) contrast(100%) brightness(400%);
 }
 

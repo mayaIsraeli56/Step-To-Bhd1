@@ -3,7 +3,7 @@
     <ion-img
       :src="icon"
       :key="0"
-      :class="[learnSubSec != null ? 'mini' : '', 'icon', isDark? 'dark-img' : '']"
+      :class="[learnSubSec != null ? 'mini' : '', 'icon', isDark? 'dark' : '']"
     ></ion-img>
     <ion-text
       :key="1"
@@ -81,7 +81,7 @@ ion-img {
   transition: all 0.5s ease;
 }
 
-.dark-img {
+.dark {
   filter: sepia(1800%) brightness(250%) grayscale(150%);
 }
 </style>
