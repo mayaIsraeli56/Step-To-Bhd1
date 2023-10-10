@@ -64,7 +64,7 @@ export default {
   beforeMount() {
     allQuestions.forEach((chap, i) => {
       chap.forEach((ques) => {
-        if (this.chosenChapters.includes(i + 1)) this.questions.push(ques);
+        if (this.chosenChapters.includes(i)) this.questions.push(ques);
       });
     });
   },
@@ -97,6 +97,7 @@ ion-content {
 
 ion-list {
   padding: 0;
+  padding-bottom: 30%;
   min-height: 100%;
   transition: all 0.5s ease-in-out;
   --ion-background-color: var(--ion-color-secondary-tint);
@@ -116,8 +117,8 @@ ion-list {
 }
 
 .card {
-  background-color: var(--ion-color-tertiary);
-  height: 8dvh;
+  background-color: var( --ion-thinking-game);
+  height: 10dvh;
   width: 85%;
   border-radius: 3dvh;
   display: flex;
@@ -146,7 +147,7 @@ ion-list {
 }
 
 .qes {
-  font-size: 1.4rem;
+  font-size: 100%;
 }
 
 .close {

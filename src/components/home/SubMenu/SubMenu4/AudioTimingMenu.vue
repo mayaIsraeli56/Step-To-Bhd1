@@ -83,6 +83,11 @@ export default defineComponent({
 </script>
 
 <style scoped>
+
+ion-col {
+  text-shadow: none;
+}
+
 ion-content {
   position: relative;
   border-radius: 3dvh;
@@ -91,7 +96,7 @@ ion-content {
   width: 100%;
   height: 100%;
   z-index: 1;
-  background-color: var(--ion-color-medium-tint);
+  background-color: var( --ion-color-medium-shade);
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -108,7 +113,7 @@ ion-grid {
 .time {
   font-weight: 650;
   font-size: 1rem;
-  color: var(--ion-color-secondary-shade);
+  color: var( --ion-podcasts-time-menu-num);
 }
 .name {
   font-size: 1rem;

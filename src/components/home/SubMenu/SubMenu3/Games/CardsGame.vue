@@ -60,7 +60,7 @@ export default {
       cards: [],
       cardNum: 0,
       flip: false,
-      changingNum: false
+      changingNum: false,
     };
   },
 
@@ -74,16 +74,38 @@ export default {
         if (this.chosenChapters.includes(i)) this.cards.push(ques);
       });
     });
+
+    this.cards = this.shuffle(this.cards);
   },
 
   methods: {
+    shuffle(array) {
+      let currentIndex = array.length,
+        randomIndex;
+
+      // While there remain elements to shuffle.
+      while (currentIndex > 0) {
+        // Pick a remaining element.
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+
+        // And swap it with the current element.
+        [array[currentIndex], array[randomIndex]] = [
+          array[randomIndex],
+          array[currentIndex],
+        ];
+      }
+
+      return array;
+    },
     changeCard(change) {
       this.flip = false;
       this.$refs.front.$el.style.opacity = 0;
 
       if (
         this.cardNum + change <= this.cards.length - 1 &&
-        this.cardNum + change >= 0 && !this.changingNum
+        this.cardNum + change >= 0 &&
+        !this.changingNum
       ) {
         this.changingNum = true;
         setTimeout(() => {
@@ -134,7 +156,15 @@ export default {
   transition: transform 0.8s;
   transform-style: preserve-3d;
 }
-
+.card {
+  padding: 4%;
+  font-size: 90%;
+  transform-style: preserve-3d;
+  transition: all 1s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 /* Do an horizontal flip when you move the mouse over the flip box container */
 .flip .flip-card-inner {
   transform: rotateY(180deg);
@@ -156,6 +186,8 @@ export default {
 /* Style the front side (fallback if image is missing) */
 .flip-card-front {
   background-color: var(--ion-color-tertiary);
+  font-weight: 700;
+  font-size: 200%;
 }
 
 /* Style the back side */
@@ -180,12 +212,6 @@ ion-button {
 }
 .back-arr {
   left: 20%;
-}
-.card {
-  padding: 4%;
-  font-size: 75%;
-  transform-style: preserve-3d;
-  transition: all 1s ease;
 }
 
 .cntnt {

@@ -1,5 +1,5 @@
 <template>
-  <ion-content :class="learnSubSec != null ? 'full-page' : ''">
+  <ion-content :class="learnSubSec != null ? 'full-page' : ''" ref="content">
     <ion-list>
       <transition-group
         tag="div"
@@ -87,6 +87,7 @@ export default {
 
   mounted() {
     this.openingSubMenu(-1);
+    this.$refs.content.$el.scrollToTop(500);
 
     import(`@/json/chapters/chapter${this.learnChapter + 1}`).then((module) => {
       this.sections = module.sections;

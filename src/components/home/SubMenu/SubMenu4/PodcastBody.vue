@@ -82,7 +82,7 @@ ion-img::part(image) {
 }
 
 .text {
-  background-color: var(--ion-color-secondary);
+  background-color: var(--ion-color-tertiary-tint);
   font-weight: 700;
   width: 95%;
   padding: 2%;

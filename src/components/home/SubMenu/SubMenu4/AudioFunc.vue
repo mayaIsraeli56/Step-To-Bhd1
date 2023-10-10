@@ -231,7 +231,7 @@ export default {
 .progress-bar {
   width: 65%;
   height: 0.5rem;
-  background-color: var(--ion-color-warning-shade);
+  background-color: var(--ion-progress-bar-color);
   border-radius: 2dvh;
   transition: all 0.5s ease;
 }
@@ -249,7 +249,7 @@ input[type="range"] {
   position: relative;
   left: 0;
   border-radius: 2dvh;
-  background-color: var(--ion-color-warning-shade);
+  background-color: var(--ion-progress-bar-color);
   direction: ltr;
 }
 
@@ -260,8 +260,8 @@ input[type="range"]::-webkit-slider-thumb {
   border: none;
   height: 0.6rem;
   width: 0.5rem;
-  background-color: var(--ion-color-primary-contrast);
-  box-shadow: -407px 0 0 400px var(--ion-color-primary-contrast);
+  background-color: var(--ion-progress-bar-prog);
+  box-shadow: -407px 0 0 400px var(--ion-progress-bar-prog);
   transition: 0.2s ease-in-out;
 }
 
@@ -272,8 +272,8 @@ input[type="range"]::-moz-range-thumb {
   border: none;
   height: 0.6rem;
   width: 0.5rem;
-  background-color: var(--ion-color-primary-contrast);
-  box-shadow: -407px 0 0 400px var(--ion-color-primary-contrast);
+  background-color: var(--ion-color-light);
+  box-shadow: -407px 0 0 400px var(--ion-color-light);
   transition: 0.2s ease-in-out;
 }
 
