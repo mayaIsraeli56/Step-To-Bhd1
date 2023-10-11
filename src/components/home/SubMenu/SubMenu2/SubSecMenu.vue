@@ -87,7 +87,7 @@ export default {
 
   mounted() {
     this.openingSubMenu(-1);
-    this.$refs.content.$el.scrollToTop(500);
+    // this.$refs.content.$el.scrollToTop(500);
 
     import(`@/json/chapters/chapter${this.learnChapter + 1}`).then((module) => {
       this.sections = module.sections;
