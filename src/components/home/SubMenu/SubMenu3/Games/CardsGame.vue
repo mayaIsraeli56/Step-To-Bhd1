@@ -16,7 +16,7 @@
           >
         </div>
         <div class="flip-card-back card">
-          <ion-text class="text-dark-plain cntnt">
+          <ion-text class="text-dark-plain cntnt ion-text-justify">
             {{ cards[cardNum].ans }}</ion-text
           >
         </div>
@@ -157,7 +157,7 @@ export default {
   transform-style: preserve-3d;
 }
 .card {
-  padding: 4%;
+  padding: 6%;
   font-size: 90%;
   transform-style: preserve-3d;
   transition: all 1s ease;
@@ -178,7 +178,7 @@ export default {
   height: 100%;
   -webkit-backface-visibility: hidden; /* Safari */
   backface-visibility: hidden;
-  border-radius: 2dvh;
+  border-radius: 5dvh;
   box-shadow: rgba(85, 98, 123, 0.35) 0px 5px 15px;
   color: var(--ion-color-medium) !important;
 }
