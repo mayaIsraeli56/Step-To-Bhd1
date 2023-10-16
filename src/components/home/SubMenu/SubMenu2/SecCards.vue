@@ -80,7 +80,7 @@ export default {
   width: 92%;
   padding-top: 5%;
   margin-top: 5%;
-  margin-bottom: 30%;
+  margin-bottom: 20% !important;;
 }
 
 .num {
@@ -137,7 +137,7 @@ export default {
   font-size: 80%;
 }
 .text-chosen {
-  text-align: right;
   direction: rtl;
+  text-align: right;
 }
 </style>

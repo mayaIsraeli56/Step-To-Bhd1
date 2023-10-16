@@ -1,6 +1,6 @@
 <template>
   <ion-content :class="learnSubSec != null ? 'full-page' : ''" ref="content">
-    <ion-list>
+    <ion-list ref="list">
       <transition-group
         tag="div"
         class="container"
@@ -87,7 +87,6 @@ export default {
 
   mounted() {
     this.openingSubMenu(-1);
-    this.$refs.content.$el.scrollToTop(500);
 
     import(`@/json/chapters/chapter${this.learnChapter + 1}`).then((module) => {
       this.sections = module.sections;
@@ -96,6 +95,14 @@ export default {
     setTimeout(() => {
       this.unableOpening = false;
     }, 500);
+  },
+
+  watch: {
+    learnSec: {
+      handler() {
+        this.$refs.content.$el.scrollToTop();
+      },
+    },
   },
 };
 </script>
@@ -121,7 +128,7 @@ ion-list {
 }
 
 .container {
-  background-color:transparent;
+  background-color: transparent;
 }
 .chosen-sec {
   width: 100%;

@@ -40,9 +40,6 @@ import { getAuth, signOut } from "firebase/auth";
 
 import { defineComponent, ref } from "vue";
 
-import { getFirestore, getDoc, doc } from "firebase/firestore/lite";
-import "firebase/database";
-
 export default defineComponent({
   name: "SubMenu0",
   components: {
@@ -97,8 +94,7 @@ export default defineComponent({
 
   mounted() {
     const auth = getAuth();
-    const name = auth.currentUser.displayName;
-    this.userName = name ? name : "";
+    this.userName = auth.currentUser ? auth.currentUser.displayName : "";
   },
 
   methods: {
@@ -110,32 +106,6 @@ export default defineComponent({
     },
   },
 
-  async created() {
-    const db = getFirestore();
-    const onlineUsersRef = doc(db, "innerData", "wmTTzKKtHUUb8dt4KUys");
-
-    try {
-      const docSnap = await getDoc(onlineUsersRef);
-      this.numOfOnlineUsers = docSnap.data().onlineUsers;
-    } catch (error) {
-      console.log(error);
-    }
-
-    let nOfOnlineUsers = this.numOfOnlineUsers;
-
-    // getAuth().onAuthStateChanged(async function (user) {
-    //   if (user) {
-    //     await updateDoc(doc(db, "innerData", "wmTTzKKtHUUb8dt4KUys"), {
-    //       onlineUsers: nOfOnlineUsers + 1,
-    //     });
-
-    //     var ref = firebase.database().ref("onlineState");
-    //     ref.onDisconnect().set(false);
-    //     // ... sometime later
-    //     ref.onDisconnect().cancel();
-    //   }
-    // });
-  },
 });
 </script>
 
