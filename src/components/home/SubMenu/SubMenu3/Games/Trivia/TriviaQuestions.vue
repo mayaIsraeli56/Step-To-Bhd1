@@ -13,17 +13,17 @@
       <div class="answers">
         <button
           :disabled="answered || stage != 'game'"
-          :class="[
-            testAnswers[_questNum].picked == n ? 'picked' : 'unpicked',
-            'ans',
-            answerClass(n),
-          ]"
+          :class="['ans', answerClass(n)]"
           v-for="n in 4"
           :key="n"
           @click="ansPicked(n)"
           :ref="'ans' + n"
         >
-          <ion-text class="text-dark-plain" :ref="`quest${n}`" v-model="_questNum">
+          <ion-text
+            class="text-dark-plain"
+            :ref="`quest${n}`"
+            v-model="_questNum"
+          >
             {{ questions[_questNum][n] }}</ion-text
           >
         </button>
@@ -33,14 +33,12 @@
         shape="round"
         size="large"
         v-if="type == 5"
-        :class="[allAnswered || stage == 'review'? '' : 'transparent']"
+        :class="[allAnswered || stage == 'review' ? '' : 'transparent']"
         @click="reset"
         :key="0"
         >סיימתי</ion-button
       >
     </div>
-
-
   </transition>
 </template>
 
@@ -69,7 +67,7 @@ export default {
     ...mapState("games", ["chosenChapters", "testAnswers", "_questNum"]),
   },
 
-  beforeMount() {
+  async beforeMount() {
     // copy all relavent questions
 
     if (this.type != 5) {
@@ -77,8 +75,7 @@ export default {
       allQuestions.forEach((chap, i) => {
         chap.forEach((ques) => {
           ques.answered = false;
-          if (this.chosenChapters.includes(i))
-            this.questions.push({ ...ques });
+          if (this.chosenChapters.includes(i)) this.questions.push({ ...ques });
         });
       });
     } else {
@@ -88,7 +85,6 @@ export default {
         this.questions.push({ ...ques });
         correct.push(ques.correct);
       });
-
       this.updateCorrectAns(correct); // send to store correct answers - for triviaInfo
     }
 
@@ -107,7 +103,7 @@ export default {
 
     answerClass(n) {
       if (this.stage == "game")
-        return this.testAnswers[this._questNum].picked == n
+        return this.testAnswers[this._questNum] && this.testAnswers[this._questNum].picked == n
           ? "picked"
           : "unpicked";
 
@@ -165,8 +161,10 @@ export default {
       let timeout = 1500;
       this.answered = true;
 
-      this.$refs["ans" + hisAnswer][0].style.backgroundColor = "var(--ion-color-danger)";
-      this.$refs["ans" + correct][0].style.backgroundColor = "var(--ion-color-success)";
+      this.$refs["ans" + hisAnswer][0].style.backgroundColor =
+        "var(--ion-color-danger)";
+      this.$refs["ans" + correct][0].style.backgroundColor =
+        "var(--ion-color-success)";
 
       if (hisAnswer == correct) {
         this.questions[this._questNum].answered = true;
@@ -271,7 +269,6 @@ export default {
   width: 100%;
   margin: 5% 0%;
 }
-
 
 @media only screen and (max-height: 800px) {
   .answers {

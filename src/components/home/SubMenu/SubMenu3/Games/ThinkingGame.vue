@@ -29,7 +29,7 @@
               :class="['card ans', isCardShown(i) ? 'open' : 'close']"
               @click="toggleCard(i)"
             >
-              <ion-text class="text-dark-plain">
+              <ion-text class="text-dark-plain ion-text-justify">
                 {{ questions[i].ans }}</ion-text
               >
             </ion-card>

@@ -79,7 +79,7 @@ export default {
   position: relative;
   top: -10%;
   height: 65%;
-  padding-bottom: 2%;
+  padding-bottom: 1%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -105,20 +105,18 @@ export default {
 }
 
 .swiper-slide {
-  border-radius: 4dvh;  
-  font-weight: bold;
-  color: #fff;
+  border-radius: 10%;
 }
 
 ion-img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  border-radius: 3dvh;
+  object-fit: fill;
 }
 
 .credit {
   font-size: 1rem;
   text-decoration: underline;
 }
-
 </style>
