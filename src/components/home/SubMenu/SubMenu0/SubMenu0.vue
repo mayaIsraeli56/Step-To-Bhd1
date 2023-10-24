@@ -37,7 +37,6 @@ import { IonText, IonButton, IonItem, IonToggle } from "@ionic/vue";
 import CardWithLine from "@/components/reuse/CardWithLine.vue";
 
 import { getAuth, signOut } from "firebase/auth";
-
 import { defineComponent, ref } from "vue";
 
 export default defineComponent({
@@ -94,7 +93,7 @@ export default defineComponent({
 
   mounted() {
     const auth = getAuth();
-    this.userName = auth.currentUser ? auth.currentUser.displayName : "";
+    this.userName = auth.currentUser ? auth.currentUser.displayName : "צוער";
   },
 
   methods: {
@@ -105,7 +104,6 @@ export default defineComponent({
       });
     },
   },
-
 });
 </script>
 
