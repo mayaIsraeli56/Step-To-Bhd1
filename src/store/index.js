@@ -7,16 +7,6 @@ import podcasts from "./modules/podcasts";
 import games from "./modules/games";
 
 export default createStore({
-  state: {
-  },
-  getters: {
-  },
-  mutations: {
-   
-  },
-
-  actions: {},
-
   modules: {
     users,
     learning,

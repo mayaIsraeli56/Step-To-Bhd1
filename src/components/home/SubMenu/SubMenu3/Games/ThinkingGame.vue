@@ -147,7 +147,7 @@ ion-list {
 }
 
 .qes {
-  font-size: 100%;
+  font-size: 150%;
 }
 
 .close {

@@ -24,8 +24,6 @@ export default {
     backToSubPod: false,
   },
 
-  getters: {},
-
   mutations: {
     toggleBackBtn(state) {
       state.showBackBtn = !state.showBackBtn;
@@ -50,6 +48,7 @@ export default {
   },
 
   actions: {
+    
     setReturningFunc({ commit, state }, funcNum) {
       if (!state.showBackBtn) commit("showBackBtn");
       commit("setReturningFunc", funcNum);
@@ -96,22 +95,6 @@ export default {
       commit("closeBackFunc");
 
       commit("setReturningFunc", state.funcNum - 1);
-    },
-
-    someAction({ dispatch, commit, getters, rootGetters }) {
-      // getters.someGetter // -> 'foo/someGetter'
-      // rootGetters.someGetter // -> 'someGetter'
-      // rootGetters['bar/someGetter'] // -> 'bar/someGetter'
-
-      dispatch("someOtherAction"); // -> 'foo/someOtherAction'
-      // dispatch('someOtherAction', null, { root: true }) // -> 'someOtherAction'
-
-      // commit('someMutation') // -> 'foo/someMutation'
-      // commit('someMutation', null, { root: true }) // -> 'someMutation'
-    },
-    someOtherAction(ctx, payload) {
-      console.log(ctx);
-      console.log(payload);
     },
   },
 };

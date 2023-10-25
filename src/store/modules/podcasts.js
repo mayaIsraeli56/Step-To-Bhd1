@@ -10,8 +10,6 @@ export default {
     newTime: -1,
   },
 
-  getters: {},
-
   mutations: {
     setChapter(state, n) {
       state.chapter = n;

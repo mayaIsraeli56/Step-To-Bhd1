@@ -21,8 +21,6 @@ export default {
     ],
   },
 
-  getters: {},
-
   mutations: {
     setGameType(state, gameType) {
       state.gameType = gameType;

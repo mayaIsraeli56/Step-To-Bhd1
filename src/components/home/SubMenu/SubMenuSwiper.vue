@@ -1,7 +1,7 @@
 <template>
   <swiper
     :centeredSlides="true"
-    :initialSlide="$store.state.subChapter"
+    :initialSlide="5"
     :spaceBetween="5"
     :slidesPerView="1.3"
     :pagination="true"
@@ -34,6 +34,7 @@ export default {
   data() {
     return {
       activeIndex: 0,
+      initSlide: this.$store.state.learning.lastChapter,
     };
   },
 
