@@ -7,11 +7,9 @@ export default {
     learnSec: null,
     learnSubSec: null,
     openSubMenu: -1,
-    subChapter: 0,
+    lastChapter: 0,
     bookmark: [],
   },
-
-  getters: {},
 
   mutations: {
     ////////////////Chapter////////////////
@@ -20,6 +18,7 @@ export default {
     },
 
     notLearningChapter(state) {
+      state.lastChapter = state.learnChapter;
       state.learnChapter = null;
     },
 

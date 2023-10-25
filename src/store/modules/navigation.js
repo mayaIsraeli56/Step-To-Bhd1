@@ -10,8 +10,6 @@ export default {
     miniIcon: false, // left top corner mini icon
   },
 
-  getters: {},
-
   mutations: {
     showNavi(state) {
       state.showNavi = true;
@@ -51,6 +49,4 @@ export default {
       state.stage = stage;
     },
   },
-
-  actions: {},
 };
