@@ -230,8 +230,8 @@ export default {
   display: grid;
   grid-template-columns: auto auto auto auto auto auto auto auto auto auto;
   align-items: center;
-  margin: 1%;
-  padding: 0;
+  margin: 1% 0;
+  padding: 0 1%;
   justify-content: space-between;
 }
 
@@ -243,9 +243,9 @@ export default {
   --background: var(--ion-color-primary-tint-light);
   color: var(--ion-color-medium);
   font-weight: 700;
-  width: 90%;
-  height: 100%;
-  aspect-ratio: 1 / 1;
+  width: 2.5em;
+  height: 2.5em;
+  aspect-ratio: 1/1;
 }
 
 .answered {
