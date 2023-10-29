@@ -103,7 +103,6 @@ export default {
   align-items: space-between;
   flex-direction: column;
   padding: 1% 4% ;
-  background-color: black;
 }
 
 .box {
