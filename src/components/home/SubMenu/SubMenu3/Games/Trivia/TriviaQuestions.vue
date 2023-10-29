@@ -270,12 +270,6 @@ export default {
   margin: 5% 0%;
 }
 
-@media only screen and (max-height: 800px) {
-  .answers {
-    margin: 2%;
-  }
-}
-
 .ans {
   background: none;
   color: inherit;
@@ -326,5 +320,25 @@ export default {
 }
 .wrong {
   background-color: var(--ion-color-danger);
+}
+
+@media only screen and (max-height: 800px) {
+  .answers {
+    margin: 2%;
+  }
+
+  .ans {
+    padding: 2.5% 0;
+    border-radius: 3dvh;
+    transition: all 0.5s ease;
+    font-size: 0.8rem;
+    margin: 1.5% 0;
+  }
+
+  .ques-card {
+    height: 7rem;
+    padding: 0% 2%;
+    font-size: 85%;
+  }
 }
 </style>

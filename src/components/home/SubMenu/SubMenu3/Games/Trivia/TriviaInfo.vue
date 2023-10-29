@@ -9,7 +9,6 @@
       ]"
     >
       <ion-img
-      ref="imgimgimg"
         :class="[type == 5 ? 'clock-icn-test' : '',  isDark? 'dark' : '',
         'trivia-icon clock-icn']"
         :src="require(`@/assets/media1/HomePage/games/trivia/time.png`)"
@@ -151,7 +150,6 @@ export default {
 }
 
 .info-test {
-  height: 12%;
   flex-direction: column;
 }
 
@@ -179,7 +177,7 @@ export default {
 .clock-part-test {
   width: 100%;
   height: 40%;
-  margin-bottom: 2%;
+  margin-bottom: 1%;
   align-items: baseline;
 }
 .heart {
@@ -218,7 +216,7 @@ export default {
 
 .clock-icn-test {
   margin: 0%;
-  height: 100%;
+  height: 1.5rem;
   width: 10%;
   align-content: start;
   padding: 0;
@@ -290,9 +288,16 @@ export default {
     width: 95%;
   }
 }
+
 @media only screen and (min-height: 1000px) {
   .circle {
     width: 110%;
+  }
+}
+
+@media only screen and (max-height: 800px) {
+  .circle {
+    width: 80%;
   }
 }
 
