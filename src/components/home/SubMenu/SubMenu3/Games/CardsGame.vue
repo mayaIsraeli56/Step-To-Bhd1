@@ -158,7 +158,7 @@ export default {
 }
 .card {
   padding: 6%;
-  font-size: 90%;
+  font-size: 80%;
   transform-style: preserve-3d;
   transition: all 1s ease;
   display: flex;

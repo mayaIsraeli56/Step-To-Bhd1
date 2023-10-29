@@ -102,7 +102,8 @@ export default {
   display: flex;
   align-items: space-between;
   flex-direction: column;
-  padding: 4%;
+  padding: 1% 4% ;
+  background-color: black;
 }
 
 .box {
