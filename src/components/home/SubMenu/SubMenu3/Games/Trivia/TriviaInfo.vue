@@ -225,8 +225,6 @@ export default {
   transform: translateY(15%);
 }
 .test {
-  width: 100%;
-  height: 100%;
   display: grid;
   grid-template-columns: auto auto auto auto auto auto auto auto auto auto;
   align-items: center;
