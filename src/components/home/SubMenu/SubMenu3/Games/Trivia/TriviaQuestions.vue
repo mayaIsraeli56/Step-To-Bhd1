@@ -281,7 +281,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--ion-color-tertiary);
+  background-color: var(--ion-color-tertiary-shade);
   width: 100%;
   padding: 4% 0;
   border-radius: 3dvh;
@@ -310,7 +310,7 @@ export default {
 }
 
 .unpicked {
-  background-color: var(--ion-color-tertiary);
+  background-color: var(--ion-color-tertiary-shade);
 }
 .picked {
   background-color: var(--ion-color-secondary-shade);
