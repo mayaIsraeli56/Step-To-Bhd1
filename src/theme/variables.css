@@ -66,6 +66,7 @@ http://ionicframework.com/docs/theming/ */
   --ion-progress-bar-prog: var(--ion-color-medium-tint);
   --ion-podcasts-time-menu-num: var(--ion-color-secondary-shade);
   --ion-thinking-game: var(--ion-color-secondary-contrast);
+  --audio-disable: #b8b8b8;
 }
 
 @media (prefers-color-scheme: dark) {

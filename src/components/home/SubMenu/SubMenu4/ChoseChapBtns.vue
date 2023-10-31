@@ -11,33 +11,17 @@
     <ion-text
       v-for="n in noCircles"
       :key="n"
-      :class="[
-        circlesChosen[n - 1] ? 'circle-chosen' : '',
-        'blue-circle text-dark-plain',
-      ]"
+      class="blue-circle text-dark-plain"
       @click="choseCirc(n)"
     >
-      <ion-text
-        :class="[
-          circlesChosen[n - 1] ? 'text-chosen' : '',
-          'text-dark-plain chap-num',
-        ]"
-      >
-        {{ n }}</ion-text
-      >
-      <ion-text
-        :class="[
-          circlesChosen[n - 1] ? 'text-chosen' : '',
-          'text-dark-plain names',
-        ]"
-       
+      <ion-text class="text-dark-plain chap-num"> {{ n }}</ion-text>
+      <ion-text class="text-dark-plain names"
         >{{
           chapNames[n - 1].length < maxChar
             ? chapNames[n - 1]
             : chapNames[n - 1].substring(0, maxChar) + "... "
         }}
       </ion-text>
-      
     </ion-text>
   </div>
 </template>
@@ -61,13 +45,10 @@ export default {
 
   data() {
     return {
-      chosenTxt: "last",
-      chosenQueue: [],
       circlesChosen: [],
       noChosen: 0,
       opacity: 0,
       lastChosen: -1,
-      CIRCELSECHOSEN2: [],
       maxChar: 45,
     };
   },
@@ -75,13 +56,9 @@ export default {
   mounted() {
     let column = "";
 
-    for (let i = 0; i < this.noCircles / 2; i++) {
-      column += "auto ";
-      this.circlesChosen[i] = false;
-    }
-
     for (let i = 0; i < this.noCircles; i++) {
       this.circlesChosen[i] = false;
+      if (i < this.noCircles / 2) column += "auto ";
     }
     this.$refs.box.style.gridTemplateColumns = column;
   },
@@ -99,7 +76,6 @@ export default {
           this.opacity = 1;
         }
 
-        this.chosenTxt = this.chapNames[noCirc - 1];
         this.circlesChosen[noCirc - 1] = !this.circlesChosen[noCirc - 1];
         this.$emit("circlesChosen", this.circlesChosen, noCirc - 1);
       } else {
@@ -119,7 +95,6 @@ export default {
           this.lastChosen = noCirc - 1;
         }
 
-        this.chosenTxt = this.chapNames[noCirc - 1];
         this.circlesChosen[noCirc - 1] = !this.circlesChosen[noCirc - 1];
         this.$emit("circlesChosen", this.circlesChosen, noCirc - 1);
       }
@@ -165,14 +140,6 @@ export default {
   position: relative;
   font-size: 2.2dvh;
   opacity: 0.8;
-}
-
-.circle-chosen {
-  background-color: var(--ion-color-primary);
-  color: var(--ion-color-secondary-tint);
-}
-.text-chosen {
-  color: var(--ion-color-secondary-tint);
 }
 
 .chap-num {

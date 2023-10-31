@@ -24,13 +24,15 @@
 
   <!-- control -->
   <div class="audio-func">
-    <ion-button :class="[isDark ? 'dark' : '', 'details']" @click="openingTimingMenu"></ion-button>
+    <ion-button
+      :class="[isDark ? 'dark' : '', 'details']"
+      @click="openingTimingMenu"
+    ></ion-button>
 
     <div class="control">
       <ion-button
         v-for="n in 3"
         :key="n"
-        
         @click="handleClick(n)"
         :disabled="disableBtn(n)"
         :class="[isDark ? 'dark' : '', `control${n}`]"
@@ -76,7 +78,13 @@ export default {
   },
 
   computed: {
-    ...mapState("podcasts", ["chapter", "subChapter", "timingMenu", "newTime"]),
+    ...mapState("podcasts", [
+      "chapter",
+      "subChapter",
+      "timingMenu",
+      "newTime",
+      "disableAudio",
+    ]),
 
     audioSrc() {
       return require(`@/assets/audio/chap${this.chapter + 1}/${
@@ -106,8 +114,9 @@ export default {
       return (
         (btnNum == 3 && this.subChapter == 0 && this.chapter == 0) ||
         (btnNum == 1 &&
-          this.subChapter == MAX_SUB[10] - 1 &&
-          this.chapter == 10)
+          ((this.subChapter == MAX_SUB[10] - 1 && this.chapter == 10) ||
+            (this.subChapter == MAX_SUB[this.chapter] - 1 &&
+              this.chapter == this.disableAudio - 1)))
       );
     },
 

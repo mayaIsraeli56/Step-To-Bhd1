@@ -6,6 +6,7 @@
         :noCircles="noCircles"
         :circlesInfo="circlesInfo"
         :chooseOne="true"
+        :disableAudio="disableAudio"
         @circlesChosen="circlesChosen"
       ></chose-chaptes-circels>
       <ion-button @click="choseChap" class="btn" :disabled="chapter == -1"
@@ -45,6 +46,7 @@ export default {
 
   computed: {
     ...mapState("returning", ["backToSubMenu4"]),
+    ...mapState("podcasts", ["disableAudio"]),
   },
 
   mounted() {

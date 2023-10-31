@@ -19,16 +19,7 @@ import { IonContent, IonList } from "@ionic/vue";
 
 export default {
   name: "PodcastPlayer",
-  props: [""],
   components: { IonContent, IonList, CardWithLine, PodcastHeader, PodcastBody },
-
-  data() {
-    return {
-      title: "PODCASTS",
-    };
-  },
-
-  methods: {},
 };
 </script>
 

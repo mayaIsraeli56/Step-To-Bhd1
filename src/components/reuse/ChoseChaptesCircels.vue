@@ -14,15 +14,18 @@
       :class="[
         circlesChosen[n - 1] ? 'circle-chosen' : '',
         'blue-circle text-dark-plain',
+        disableAudio && disableAudio < n ? 'disable-audio' : '',
       ]"
       @click="choseCirc(n)"
     >
       {{ n }}
     </button>
   </div>
-  <ion-text class="character-name" :style="{ opacity: opacity }">{{
-    chosenTxt
-  }}</ion-text>
+  <ion-text
+    :class="[disableText ? 'disable-character-name' : '', 'character-name']"
+    :style="{ opacity: opacity }"
+    >{{ chosenTxt }}</ion-text
+  >
 </template>
 
 <script>
@@ -36,9 +39,9 @@ export default {
   props: [
     "explanation",
     "noCircles",
-    "textAfterChoosing",
     "circlesInfo",
     "chooseOne",
+    "disableAudio",
   ],
   emits: ["circlesChosen"],
 
@@ -50,7 +53,7 @@ export default {
       noChosen: 0,
       opacity: 0,
       lastChosen: -1,
-      CIRCELSECHOSEN2: [],
+      disableText: false,
     };
   },
 
@@ -70,6 +73,19 @@ export default {
 
   methods: {
     choseCirc(noCirc) {
+      if (this.disableAudio) {
+        if (this.disableAudio < noCirc) {
+          this.chosenTxt = "עובדים על זה (:";
+          this.opacity = 1;
+          this.disableText = true;
+          this.circlesChosen[this.lastChosen] = false;
+          this.lastChosen = -1;
+          this.$emit("circlesChosen", this.circlesChosen, -1);
+          return;
+        }
+        this.disableText = false;
+      }
+
       if (!this.chooseOne) {
         if (this.circlesChosen[noCirc - 1]) {
           // remove selected
@@ -83,7 +99,6 @@ export default {
 
         this.chosenTxt = this.circlesInfo[noCirc - 1];
         this.circlesChosen[noCirc - 1] = !this.circlesChosen[noCirc - 1];
-        this.$emit("circlesChosen", this.circlesChosen, noCirc - 1);
       } else {
         if (this.circlesChosen[noCirc - 1]) {
           // remove selected
@@ -103,8 +118,9 @@ export default {
 
         this.chosenTxt = this.circlesInfo[noCirc - 1];
         this.circlesChosen[noCirc - 1] = !this.circlesChosen[noCirc - 1];
-        this.$emit("circlesChosen", this.circlesChosen, noCirc - 1);
       }
+
+      this.$emit("circlesChosen", this.circlesChosen, noCirc - 1);
     },
   },
 };
@@ -173,5 +189,12 @@ export default {
 .circle-chosen {
   background-color: var(--ion-color-primary);
   color: var(--ion-color-secondary-tint);
+}
+
+.disable-audio {
+  background: var(--audio-disable);
+}
+.disable-character-name {
+  color: var(--ion-color-medium);
 }
 </style>
