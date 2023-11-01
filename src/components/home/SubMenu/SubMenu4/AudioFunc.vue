@@ -1,7 +1,7 @@
 <template>
   <!-- Hide the default audio player -->
 
-  <audio style="display: none" ref="player" id="myAudio" :src="audioSrc" />
+  <audio style="display: none" ref="player" id="myAudio" :src="audioSrc" poster='@/assets/media1/HomePage/icons/icon.png'/>
 
   <!-- time-->
   <div class="time">

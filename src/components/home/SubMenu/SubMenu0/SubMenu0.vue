@@ -93,7 +93,7 @@ export default defineComponent({
 
   mounted() {
     const auth = getAuth();
-    this.userName = auth.currentUser ? auth.currentUser.displayName : "צוער";
+    this.userName = auth.currentUser && auth.currentUser.displayName != null ? auth.currentUser.displayName : "צוער";
   },
 
   methods: {
