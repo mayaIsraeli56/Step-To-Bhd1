@@ -2,7 +2,7 @@
   <div class="header">
     <ion-img
       class="mini-icon"
-      :src="require(`@/assets/media1/HomePage/chapter-logo/${chapter + 1}.png`)"
+      :src="require(`@/assets/media1/HomePage/icons/favicon.png`)"
     ></ion-img>
     <div class="text-box">
       <ion-text class="text-dark-plain text" color="medium">
@@ -58,7 +58,7 @@ export default {
   height: 4.5rem;
   width: 4.5rem;
   border-radius: 100%;
-  padding: 3%;
+  padding: 0.5%;
   background-color: var(--ion-color-secondary-contrast);
 }
 
