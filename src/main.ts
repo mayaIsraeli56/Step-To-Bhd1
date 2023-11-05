@@ -26,6 +26,9 @@ import "./theme/variables.css";
 import "./theme/globalStyle.css";
 import "./theme/globalAnimations.css";
 
+//PWA
+import './registerServiceWorker';
+
 const app = createApp(App).use(IonicVue).use(router).use(Vue3TouchEvents).use(store);
 
 router.isReady().then(() => {

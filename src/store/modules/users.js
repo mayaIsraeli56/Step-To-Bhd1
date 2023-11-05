@@ -67,7 +67,7 @@ export default {
       dispatch,
     }) {
 
-      let atpos = email != null && email != "" ? email.indexOf("@") : "";
+      const atpos = email != null && email != "" ? email.indexOf("@") : "";
 
       if (email == "") {
         await dispatch("catchProblem", "no-email");
@@ -140,7 +140,7 @@ export default {
 
     catchProblem({ state }, error) {
       console.log(error);
-      for (let i in state.isOk) {
+      for (const i in state.isOk) {
         state.isOk[i] = true;
       }
       switch (error) {
@@ -191,7 +191,7 @@ export default {
           break;
         default:
           state.errMsg = "משהו השתבש נסה שוב";
-          for (let i in state.isOk) {
+          for (const i in state.isOk) {
             state.isOk[i] = false;
           }
           break;

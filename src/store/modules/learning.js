@@ -44,7 +44,7 @@ export default {
     },
 
     toggleBookMark(state, chapterToAdd) {
-      let index = state.bookmark.indexOf(chapterToAdd);
+      const index = state.bookmark.indexOf(chapterToAdd);
 
       if (index == -1) state.bookmark.push(chapterToAdd);
       else state.bookmark.splice(index, 1);
