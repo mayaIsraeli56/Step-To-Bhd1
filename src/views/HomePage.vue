@@ -24,7 +24,7 @@ import HomeTopLogo from "@/components/home/base/HomeTopLogo.vue";
 import HomeNavigation from "@/components/home/base/HomeNavigation.vue";
 import HomeBottom from "@/components/home/base/HomeBottom.vue";
 import HomeSubMenu from "@/components/home/base/HomeSubMenu.vue";
-import { mapState } from "vuex";
+import { mapState, mapMutations} from "vuex";
 
 export default defineComponent({
   name: "HomePage",
@@ -51,11 +51,17 @@ export default defineComponent({
   },
 
   methods: {
+    ...mapMutations("navigation",["resetStage"]),
+
     swiperChanged(slideNum) {
       this.firstOpened = false;
       this.slideNum = slideNum;
     },
   },
+
+  mounted() {
+    this.resetStage();
+  }
 });
 </script>
 

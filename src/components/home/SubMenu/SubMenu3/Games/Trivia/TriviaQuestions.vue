@@ -263,7 +263,7 @@ export default {
 
 .answers {
   display: flex;
-  height: 70%;
+  height: 60%;
   flex-direction: column;
   justify-content: flex-start;
   width: 100%;
@@ -283,7 +283,7 @@ export default {
   align-items: center;
   background-color: var(--ion-color-tertiary-shade);
   width: 100%;
-  padding: 4% 0;
+  padding: 2%;
   border-radius: 3dvh;
   transition: all 0.5s ease;
   font-size: 1rem;
@@ -328,7 +328,7 @@ export default {
   }
 
   .ans {
-    padding: 2.5% 0;
+    padding: 2%;
     border-radius: 3dvh;
     transition: all 0.5s ease;
     font-size: 0.8rem;

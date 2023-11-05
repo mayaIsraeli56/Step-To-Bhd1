@@ -48,5 +48,9 @@ export default {
     setStage(state, stage) {
       state.stage = stage;
     },
+
+    resetStage(state) {
+      state.stage = 2;
+    },
   },
 };

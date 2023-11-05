@@ -26,14 +26,14 @@
       >{{ text[1] }}
     </ion-button>
 
-    <ion-button
-      v-if="btnOn && signOption === 'sign-in'"
-      class="forgot"
-      fill="clear"
-      :data-index="5"
-      @click="forgotPass = true"
-      >שכחתי סיסמה
-    </ion-button>
+    <div v-if="btnOn && forgetBtn"  :data-index="5">
+      <ion-button
+        class="forgot"
+        fill="clear"
+        @click="forgotPass = true"
+        >שכחתי סיסמה
+      </ion-button>
+    </div>
 
     <p v-if="errMsg && btnOn && !forgotPass" :data-index="4">{{ errMsg }}</p>
     <div class="arrow" :data-index="6" v-if="btnOn">
@@ -68,8 +68,8 @@ export default defineComponent({
     ArrowAnimation,
     IonButton,
   },
-  props: ["signOption"],
   emits: ["signOptChanged"],
+  props: ["signOption"],
 
   data() {
     return {
@@ -104,6 +104,10 @@ export default defineComponent({
     isLogged() {
       return this.$store.state.users.isLogged;
     },
+
+    forgetBtn() {
+      return this.signOption == "sign-in";
+    },
   },
 
   setup() {
@@ -125,6 +129,7 @@ export default defineComponent({
     const leave = (el, done) => {
       gsap.to(el, {
         opacity: 0,
+        height: 0,
         y: 10,
         duration: 0.8,
         onComplete: done,
@@ -174,6 +179,7 @@ export default defineComponent({
     signOption: {
       immediate: true,
       handler() {
+        console.log(this.signOption);
         this.btnOn = !this.btnOn;
         this.$emit("signOptChanged");
 

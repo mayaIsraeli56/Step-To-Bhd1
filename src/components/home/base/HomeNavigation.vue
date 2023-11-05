@@ -37,7 +37,6 @@ export default {
     return {
       swiperChanged: 0,
       swiperClicked: false,
-      swiper: null,
       perView: 3,
       spaceBet: 5,
       slideNum: 6,
@@ -51,7 +50,7 @@ export default {
   },
 
   methods: {
-    ...mapMutations("navigation", ["setStage"]),
+    ...mapMutations("navigation",["setStage"]),
 
     swiperChange(e, type) {
       if (type == "click" || this.swiperClicked) {

@@ -9,8 +9,11 @@
       ]"
     >
       <ion-img
-        :class="[type == 5 ? 'clock-icn-test' : '',  isDark? 'dark' : '',
-        'trivia-icon clock-icn']"
+        :class="[
+          type == 5 ? 'clock-icn-test' : '',
+          isDark ? 'dark' : '',
+          'trivia-icon clock-icn',
+        ]"
         :src="require(`@/assets/media1/HomePage/games/trivia/time.png`)"
       ></ion-img>
 
@@ -28,24 +31,29 @@
       <ion-img
         v-for="n in life"
         :key="n"
-        :class="[n > noWrong ? 'popIn' : 'popOut', isDark? 'dark-img' : '', 'trivia-icon heart']"
+        :class="[
+          n > noWrong ? 'popIn' : 'popOut',
+          isDark ? 'dark-img' : '',
+          'trivia-icon heart',
+        ]"
         :src="require(`@/assets/media1/HomePage/games/trivia/like.png`)"
       ></ion-img>
     </div>
 
     <div class="test" v-if="type == 5">
-      <ion-button
+      <button
         v-for="n in 10"
         :key="n"
         :class="['circle', circleClass(n)]"
         @click="changeQuest(n)"
-        >{{ n }}</ion-button
       >
+        {{ n }}
+      </button>
     </div>
 
     <div class="checkd-part" v-if="type == 2 || type == 3">
       <ion-img
-        :class="[ isDark? 'dark-img' : '', 'trivia-icon mark']"
+        :class="[isDark ? 'dark-img' : '', 'trivia-icon mark']"
         :src="require(`@/assets/media1/HomePage/games/trivia/check.png`)"
       ></ion-img>
       <ion-text class="text-dark-plain checked-num"> {{ noCorrect }}</ion-text>
@@ -54,12 +62,12 @@
 </template>
 
 <script>
-import { IonImg, IonText, IonButton } from "@ionic/vue";
+import { IonImg, IonText } from "@ionic/vue";
 import { mapState, mapActions } from "vuex";
 
 export default {
   name: "TriviaGame",
-  components: { IonImg, IonText, IonButton },
+  components: { IonImg, IonText },
   props: ["type", "noCorrect", "noWrong", "stage"],
 
   data() {
@@ -225,20 +233,25 @@ export default {
   transform: translateY(15%);
 }
 .test {
-  display: grid;
-  grid-template-columns: auto auto auto auto auto auto auto auto auto auto;
-  align-items: center;
   margin: 1% 0;
-  padding: 0 1%;
   justify-content: space-between;
+  display: grid;
+  width: 100%;
+  height: fit-content;
+  padding: 0;
+  align-self: center;
+  grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto;
+  row-gap: 0;
+  column-gap: 0;
+  align-items: center;
+  justify-items: center;
 }
 
 .circle {
   min-width: 0px;
-  --border-radius: 100%;
-  --margin: 0;
+  border-radius: 100%;
   margin: 0;
-  --background: var(--ion-color-primary-tint-light);
+  background: var(--ion-color-primary-tint-light);
   color: var(--ion-color-medium);
   font-weight: 700;
   width: 2.5em;
@@ -246,10 +259,44 @@ export default {
   aspect-ratio: 1/1;
 }
 
+.circle {
+  align-items: center;
+  appearance: none;
+  cursor: pointer;
+  display: inline-flex;
+  fill: currentcolor;
+  justify-content: center;
+  letter-spacing: 0.25px;
+  line-height: normal;
+  max-width: 100%;
+  overflow: visible;
+  position: relative;
+  text-align: center;
+  text-transform: none;
+  transition: box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 15ms linear 30ms, transform 270ms cubic-bezier(0, 0, 0.2, 1) 0ms;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  will-change: transform, opacity;
+  z-index: 0;
+}
+
+
+
+.circle:active {
+  outline: none;
+}
+
+.circle:focus {
+  outline: none;
+  border: 1px solid var(--ion-color-primary);
+}
+
 .answered {
   transition: all 1s ease;
   color: var(--ion-color-secondary);
-  --background: var(--ion-color-primary);
+  background: var(--ion-color-primary);
 }
 
 .popIn {
@@ -273,29 +320,27 @@ export default {
   filter: sepia(900%) contrast(100%) brightness(400%);
 }
 
-@media only screen and (min-height: 800px) {
-  .info-test {
-    height: 10%;
+@media only screen and (min-height: 1000px) {
+  .circle {
+    width: 3em;
+    height: 3em;
   }
+}
 
+@media only screen and (min-height: 800px) {
   .time {
     font-size: 120%;
   }
 
-  .circle {
-    width: 95%;
-  }
-}
-
-@media only screen and (min-height: 1000px) {
-  .circle {
-    width: 110%;
+  .test {
+    height: 15%;
   }
 }
 
 @media only screen and (max-height: 800px) {
   .circle {
-    width: 80%;
+    width: 2em;
+    height: 2em;
   }
 }
 
