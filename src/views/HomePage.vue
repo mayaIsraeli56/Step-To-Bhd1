@@ -24,7 +24,7 @@ import HomeTopLogo from "@/components/home/base/HomeTopLogo.vue";
 import HomeNavigation from "@/components/home/base/HomeNavigation.vue";
 import HomeBottom from "@/components/home/base/HomeBottom.vue";
 import HomeSubMenu from "@/components/home/base/HomeSubMenu.vue";
-import { mapState, mapMutations} from "vuex";
+import { mapState, mapMutations } from "vuex";
 
 export default defineComponent({
   name: "HomePage",
@@ -51,7 +51,7 @@ export default defineComponent({
   },
 
   methods: {
-    ...mapMutations("navigation",["resetStage"]),
+    ...mapMutations("navigation", ["resetStage"]),
 
     swiperChanged(slideNum) {
       this.firstOpened = false;
@@ -61,7 +61,15 @@ export default defineComponent({
 
   mounted() {
     this.resetStage();
-  }
+
+    const isDarkMode = () =>
+      window.matchMedia &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+    if (isDarkMode && !document.body.classList.contains("dark")) {
+      document.body.classList.add("dark");
+    }
+  },
 });
 </script>
 
