@@ -103,7 +103,8 @@ export default {
 
     answerClass(n) {
       if (this.stage == "game")
-        return this.testAnswers[this._questNum] && this.testAnswers[this._questNum].picked == n
+        return this.testAnswers[this._questNum] &&
+          this.testAnswers[this._questNum].picked == n
           ? "picked"
           : "unpicked";
 
@@ -231,7 +232,7 @@ export default {
 .ques {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: top;
   align-items: center;
   padding: 4% 0;
   max-height: 90%;
@@ -286,7 +287,7 @@ export default {
   padding: 2%;
   border-radius: 3dvh;
   transition: all 0.5s ease;
-  font-size: 1rem;
+  font-size: 1.2rem;
   transition: all 1s ease;
   margin: 2% 0;
 }
@@ -331,7 +332,7 @@ export default {
     padding: 2%;
     border-radius: 3dvh;
     transition: all 0.5s ease;
-    font-size: 0.8rem;
+    font-size: 1rem;
     margin: 1.5% 0;
   }
 

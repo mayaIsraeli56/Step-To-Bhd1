@@ -289,8 +289,8 @@ export default {
 }
 
 .circle:focus {
-  outline: none;
-  border: 1px solid var(--ion-color-primary);
+  border: none;
+  outline: 2px solid var(--ion-color-primary);
 }
 
 .answered {
@@ -337,12 +337,7 @@ export default {
   }
 }
 
-@media only screen and (max-height: 800px) {
-  .circle {
-    width: 2em;
-    height: 2em;
-  }
-}
+
 
 @keyframes popIn {
   0% {

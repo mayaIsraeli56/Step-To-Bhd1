@@ -1,7 +1,5 @@
 {
-  "compileOnSave": true,
   "compilerOptions": {
-    "watch": true,
     "target": "esnext",
     "module": "esnext",
     "strict": true,
