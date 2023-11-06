@@ -1,10 +1,12 @@
 {
   "name": "Step-To-BHD1",
   "short_name": "Step-To",
+  "description": "BHD1 app for learning",
   "display_override": ["window-control-overlay", "minimal-ui"],
   "display": "standalone",
-  "start_url": "https://step-to-bhd1.web.app/start",
-  "scope": "https://step-to-bhd1.web.app/",
+  "start_url": "/index.html",
+  "scope": "/index.html",
+  "oriantation": "portrait-primary",
   "background_color": "#83a9ad",
   "theme_color": "#83a9ad",
   "icons": [
