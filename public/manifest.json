@@ -2,7 +2,7 @@
   "name": "Step-To-BHD1",
   "short_name": "Step-To",
   "description": "BHD1 app for learning",
-  "display_override": ["window-control-overlay", "minimal-ui"],
+  "display_override": ["fullscreen", "minimal-ui"],
   "display": "standalone",
   "start_url": "/index.html",
   "scope": "/index.html",
@@ -76,6 +76,22 @@
       "src": "./img/icons/mstile-150x150.png",
       "sizes": "150x150",
       "type": "image/png"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "./img/screenshots/home.png",
+      "sizes": "1587x2644",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Homescreen of Step-To-BHD1"
+    },
+    {
+      "src": "./img/screenshots/start.png",
+      "sizes": "1587x2644",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "intro to Step-To-BHD1 app"
     }
   ]
 }
