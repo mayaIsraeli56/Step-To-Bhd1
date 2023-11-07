@@ -1,7 +1,7 @@
 <template>
   <swiper
     :centeredSlides="true"
-    :initialSlide="9"
+    :initialSlide="7"
     :spaceBetween="5"
     :slidesPerView="1.3"
     :pagination="true"
