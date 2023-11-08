@@ -290,7 +290,7 @@ export default {
 
 .circle:focus {
   border: none;
-  outline: 2px solid var(--ion-color-primary);
+  outline: 0.2rem solid var(--ion-color-primary);
 }
 
 .answered {
@@ -309,12 +309,7 @@ export default {
   transition: all 0.5s ease;
 }
 
-.correct {
-  --background: var(--ion-color-success);
-}
-.wronge {
-  --background: var(--ion-color-danger);
-}
+
 
 .dark {
   filter: sepia(900%) contrast(100%) brightness(400%);
@@ -387,5 +382,11 @@ export default {
   100% {
     transform: scale(0);
   }
+}
+.correct {
+  background: var(--ion-color-success) !important;
+}
+.wronge {
+  background: var(--ion-color-danger) !important;
 }
 </style>

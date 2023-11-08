@@ -11,16 +11,22 @@
 <script lang="js">
 import { IonApp } from "@ionic/vue";
 import { defineComponent } from "vue";
+import { mapState } from "vuex";
+
 
 export default defineComponent({
   name: "App",
   components: {
     IonApp,
   },
+  computed: {
+    ...mapState("users", ["isLogged"]),
+  },
 
   mounted() {
     this.resizeHandler();
-    // window.addEventListener("resize", this.resizeHandler);
+    window.addEventListener("resize", () => {
+      if(this.isLogged) this.resizeHandler});
   },
   unmounted() {
     window.removeEventListener("resize", this.resizeHandler);

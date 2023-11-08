@@ -264,7 +264,7 @@ export default {
 
 .answers {
   display: flex;
-  height: 60%;
+  height: 55%;
   flex-direction: column;
   justify-content: flex-start;
   width: 100%;

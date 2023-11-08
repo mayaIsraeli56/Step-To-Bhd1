@@ -8,7 +8,7 @@ export default {
     subChapter: -1,
     timingMenu: false,
     newTime: -1,
-    disableAudio:1,
+    disableAudio:2,
   },
 
   mutations: {
