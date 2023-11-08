@@ -20,7 +20,7 @@
     "cordova": "^11.1.0",
     "cordova-plugin-ionic-keyboard": "^2.2.0",
     "core-js": "^3.6.5",
-    "firebase": "^9.15.0",
+    "firebase": "^9.23.0",
     "gsap": "^3.11.3",
     "ionicons": "^6.0.3",
     "plugin": "^0.0.15",
