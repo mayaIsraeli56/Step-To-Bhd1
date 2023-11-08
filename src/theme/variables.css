@@ -67,6 +67,7 @@ http://ionicframework.com/docs/theming/ */
   --ion-podcasts-time-menu-num: var(--ion-color-secondary-shade);
   --ion-thinking-game: var(--ion-color-secondary-contrast);
   --audio-disable: #b8b8b8;
+  --form-input-text: var(--ion-color-secondary);
 }
 
 body.dark,
@@ -163,17 +164,17 @@ body.dark,
    * -------------------------------------------
    */
 
-  /*
+/*
    * iOS Dark Theme .ios body {}
    * -------------------------------------------
    */
 
-  /*
+/*
    * Material Design Dark Theme   .md body {}
    * -------------------------------------------
    */
 
-  /*
+/*
   * Dark Colors - all, .ios body.dark, .md body.dark
   * -------------------------------------------
   */

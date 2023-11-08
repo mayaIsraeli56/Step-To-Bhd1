@@ -179,7 +179,6 @@ export default defineComponent({
     signOption: {
       immediate: true,
       handler() {
-        console.log(this.signOption);
         this.btnOn = !this.btnOn;
         this.$emit("signOptChanged");
 

@@ -79,7 +79,6 @@ CORE STYLES
   --uiFieldPaddingLeft: var(--fieldPaddingLeft, 1rem);
   display: var(--fieldDisplay, inline-flex);
   position: relative;
-
   font-size: var(--fieldFontSize, 1rem);
 }
 
@@ -145,7 +144,7 @@ CORE STYLES
 }
 
 .field__label {
-  color: var(--ion-color-medium);
+  color: var(--ion-color-primary-contrast);
   text-shadow: none;
   font-weight: 700;
   position: absolute;

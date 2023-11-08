@@ -7,17 +7,22 @@
 </template>
 
 <script lang="ts">
-import { IonContent, IonPage } from '@ionic/vue';
-import { defineComponent } from 'vue';
+import { IonContent, IonPage } from "@ionic/vue";
+import { defineComponent } from "vue";
 import StartingPages from "@/components/starting/base/StartingPage.vue";
 
 export default defineComponent({
-  name: 'StartingFlow',
+  name: "StartingFlow",
   components: {
     IonContent,
     IonPage,
     StartingPages,
-  } 
+  },
+
+  mounted() {
+    if (document.body.classList.contains("dark"))
+      document.body.classList.remove("dark");
+  },
 });
 </script>
 
