@@ -42,7 +42,7 @@
     </div>
   </transition-group>
 
-  <transition @before-enter="beforeEnter" @enter="enter" @leave="leave" appear
+  <transition @before-enter="beforeEnter" @enter="enter" @leave="leaveFade" appear
     ><sign-form-forgot
       v-if="forgotPass"
       @closeForgot="forgotPass = false"
@@ -137,7 +137,16 @@ export default defineComponent({
       });
     };
 
-    return { beforeEnter, enter, leave };
+    const leaveFade = (el, done) => {
+      gsap.to(el, {
+        opacity: 0, 
+        duration: 0.8,
+        onComplete: done,   
+        y: 10,  
+      });
+    };
+
+    return { beforeEnter, enter, leave, leaveFade };
   },
 
   methods: {

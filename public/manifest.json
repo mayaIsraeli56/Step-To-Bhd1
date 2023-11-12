@@ -1,9 +1,9 @@
 {
-  "name": "Step-To-BHD1",
-  "short_name": "Step-To",
+  "name": "בצעד לבה''ד",
+  "short_name": "בצעד לבה''ד",
   "description": "BHD1 app for learning",
-  "display_override": ["fullscreen", "minimal-ui"],
-  "display": "standalone",
+  "display_override": ["fullscreen","standalone", "minimal-ui"],
+  "display": "fullscreen",
   "start_url": "/index.html",
   "scope": "/index.html",
   "oriantation": "portrait-primary",
