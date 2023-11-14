@@ -288,11 +288,6 @@ export default {
   outline: none;
 }
 
-.circle:focus {
-  border: none;
-  outline: 0.2rem solid var(--ion-color-primary);
-}
-
 .answered {
   transition: all 1s ease;
   color: var(--ion-color-secondary);
@@ -388,5 +383,20 @@ export default {
 }
 .wronge {
   background: var(--ion-color-danger) !important;
+  animation: wrong-pop infinite 1.5s;
+}
+
+@keyframes wrong-pop {
+  0% {
+    box-shadow: none;
+  }
+  50% {
+    box-shadow: 0px 0px 0.7rem 0px var(--ion-color-danger);
+    -webkit-box-shadow: 0px 0px 0.7rem 0px var(--ion-color-danger);
+    -moz-box-shadow: 0px 0px 0.7rem 0px var(--ion-color-danger);
+  }
+  100% {
+    box-shadow: none;
+  }
 }
 </style>

@@ -34,12 +34,11 @@ export default {
   data() {
     return {
       activeIndex: 0,
-      initSlide: this.$store.state.learning.lastChapter,
     };
   },
 
   methods: {
-    ...mapActions("learning", ["changeChapter"]),
+    ...mapActions("learning", ["changeChapter", "resetInitSlide"]),
 
     swiperChange(e) {
       this.activeIndex = toRaw(e).activeIndex;

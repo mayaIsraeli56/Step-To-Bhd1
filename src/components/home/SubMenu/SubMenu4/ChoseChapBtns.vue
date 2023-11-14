@@ -144,10 +144,10 @@ export default {
 
 .chap-num {
   font-weight: 900;
-  font-size: larger;
+  font-size: xx-large;
 }
 
 .names {
-  font-size: 90%;
+  font-size: 70%;
 }
 </style>

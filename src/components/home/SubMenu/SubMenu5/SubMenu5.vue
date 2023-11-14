@@ -1,36 +1,38 @@
 <template>
-  <div class="on-bhd">
-    <div class="text-box">
-      <ion-text class="text-dark-plain" color="medium">
-        הדרך אל הבה"ד ארוכה, אבל אתם מתקרבים...</ion-text
+  <transition name="fade" appear>
+    <div class="on-bhd">
+      <div class="text-box">
+        <ion-text class="text-dark-plain" color="medium">
+          הדרך אל הבה"ד ארוכה, אבל אתם מתקרבים...</ion-text
+        >
+      </div>
+      <swiper
+        :effect="'cards'"
+        :grabCursor="true"
+        :centeredSlides="true"
+        :slidesPerView="2"
+        :initialSlide="0"
+        :pagination="true"
+        :modules="modules"
+        class="mySwiper mySwiperCards"
       >
-    </div>
-    <swiper
-      :effect="'cards'"
-      :grabCursor="true"
-      :centeredSlides="true"
-      :slidesPerView="2"
-      :initialSlide="0"
-      :pagination="true"
-      :modules="modules"
-      class="mySwiper"
-    >
-      <swiper-slide v-for="n in 8" :key="n">
-        <ion-img
-          :src="require(`@/assets/media1/HomePage/cards/${n}.png`)"
-        ></ion-img>
-      </swiper-slide>
-    </swiper>
+        <swiper-slide v-for="n in 8" :key="n">
+          <ion-img
+            :src="require(`@/assets/media1/HomePage/cards/${n}.png`)"
+          ></ion-img>
+        </swiper-slide>
+      </swiper>
 
-    <div class="text-box txt2">
-      <ion-text class="text-dark-plain" color="medium">
-        "גם מסע בן אלף מייל מתחיל בצעד קטן אחד"</ion-text
-      >
-      <ion-text class="text-dark-plain credit" color="medium">
-        לאו דזה</ion-text
-      >
+      <div class="text-box txt2">
+        <ion-text class="text-dark-plain" color="medium">
+          "גם מסע בן אלף מייל מתחיל בצעד קטן אחד"</ion-text
+        >
+        <ion-text class="text-dark-plain credit" color="medium">
+          לאו דזה</ion-text
+        >
+      </div>
     </div>
-  </div>
+  </transition>
 </template>
 
 <script>
@@ -46,16 +48,11 @@ import { getAuth, signOut } from "firebase/auth";
 
 export default {
   name: "SubMenu5",
-  props: [""],
   components: {
     Swiper,
     SwiperSlide,
     IonText,
     IonImg,
-  },
-
-  data() {
-    return {};
   },
 
   methods: {
@@ -66,6 +63,7 @@ export default {
       });
     },
   },
+
   setup() {
     return {
       modules: [EffectCards, Pagination],
@@ -84,6 +82,8 @@ export default {
   flex-direction: column;
   justify-content: space-between;
 }
+
+
 
 .text-box {
   display: flex;
@@ -118,5 +118,11 @@ ion-img {
 .credit {
   font-size: 1rem;
   text-decoration: underline;
+}
+</style>
+
+<style>
+.mySwiperCards > .swiper-pagination-bullets {
+  direction: ltr;
 }
 </style>

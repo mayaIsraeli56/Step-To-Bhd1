@@ -143,7 +143,7 @@
 .fadeAbs-leave-to {
   opacity: 0;
   transform: scale(0.8);
-  position: absolute;
+  z-index: -1;
 }
 
 .fadeAbs-leave-active {
@@ -153,6 +153,43 @@
 .fadeAbs-move {
   transition: all 0.5s ease;
 }
+
+
+/* ////////////fadeEnter//////////// */
+.fadeEnter-enter-from {
+  opacity: 0;
+  transform: scale(0.8);
+}
+
+.fadeEnter-enter-to {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.fadeEnter-enter-active {
+  transition: all 0.5s ease;
+}
+
+.fadeEnter-leave-from {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.fadeEnter-leave-to {
+  opacity: 0;
+  transform: scale(1);
+}
+
+.fadeEnter-leave-active {
+  position: absolute;
+  transition: all 0.5s ease;
+}
+
+.fadeEnter-enter-active {
+  transition: all 0.5s ease;
+}
+
+
 
 @keyframes slide-down {
   from {
@@ -219,6 +256,26 @@
 .slideD-forward-enter-active,
 .slideD-forward-move {
   transition: all 1s ease-in;
+}
+
+@keyframes fading {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-scale {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 

@@ -3,7 +3,7 @@
     <card-with-line :title="` היי ${userName} !`">
       <div class="text-box">
         <ion-text class="text-dark-plain" color="medium">
-          קצינים לעתיד לומדים כרגע,
+          קצינים לעתיד לומדים כרגע
         </ion-text>
         <ion-text class="text-dark-plain" color="medium">
           בעזרת בצעד לבה"ד
@@ -15,7 +15,7 @@
           להמשיך ולהיות חלק מהם...
         </ion-text>
       </div>
-      <ion-button @click="handleSignOut" class="btn" size="large"
+      <ion-button @click="handleSignOut" class="btn"
         >התנתק</ion-button
       >
 
@@ -93,7 +93,10 @@ export default defineComponent({
 
   mounted() {
     const auth = getAuth();
-    this.userName = auth.currentUser && auth.currentUser.displayName != null ? auth.currentUser.displayName : "צוער";
+    this.userName =
+      auth.currentUser && auth.currentUser.displayName != null
+        ? auth.currentUser.displayName
+        : "צוער";
   },
 
   methods: {

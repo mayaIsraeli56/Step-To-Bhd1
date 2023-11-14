@@ -1,4 +1,5 @@
 <template>
+  <transition appear name="fadeEnter">
   <div class="cards">
     <ion-text class="text-dark-plain note" ref="txt">
       לחצו על הכרטיסייה כדי לראות את התשובה</ion-text
@@ -43,6 +44,7 @@
       </ion-button>
     </div>
   </div>
+  </transition>
 </template>
 
 <script>
@@ -129,6 +131,7 @@ export default {
 }
 .note {
   font-size: 75%;
+  transform: translateY(25%);
 }
 
 .btns {
