@@ -1,12 +1,12 @@
 <template>
   <ion-content scroll-y="false">
     <ion-list>
-      <card-with-line title="">
-        <template v-slot:header>
-          <podcast-header></podcast-header>
-        </template>
-        <podcast-body></podcast-body>
-      </card-with-line>
+        <card-with-line title="">
+          <template v-slot:header>
+            <podcast-header></podcast-header>
+          </template>
+          <podcast-body></podcast-body>
+        </card-with-line>
     </ion-list>
   </ion-content>
 </template>
