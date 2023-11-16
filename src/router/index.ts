@@ -37,10 +37,10 @@ const router = createRouter({
   }
 });
 
-// router.beforeEach(async (to) => {
-//   const auth = getAuth();
-//   const user = auth.currentUser;
-//   if (user == null && to.name !== "Start") return { name: "Start" };
-// });
+router.beforeEach(async (to) => {
+  const auth = getAuth();
+  const user = auth.currentUser;
+  if (user == null && to.name !== "Start") return { name: "Start" };
+});
 
 export default router;
