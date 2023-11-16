@@ -83,8 +83,6 @@ export default {
   justify-content: space-between;
 }
 
-
-
 .text-box {
   display: flex;
   align-items: center;

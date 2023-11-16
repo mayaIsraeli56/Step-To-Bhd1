@@ -23,10 +23,20 @@
       >
     </ion-text>
 
+    <transition name="fade" appear>
+      <ion-img
+        v-if="secNum == learnSec"
+        class="setting-icon"
+        :src="require(`@/assets/media1/HomePage/setting/${settingSrc}.png`)"
+        @click="() => $emit('toggleTextSetting')"
+      ></ion-img>
+    </transition>
+
     <transition name="slideD-forward" appear>
       <div class="text" v-if="secNum == learnSec">
         <ion-text
           :class="[secNum == learnSec ? 'text-chosen' : '', 'text-dark-plain']"
+          :style="{ fontSize: styleTxtObj.fontSize*25 + '%', lineHeight: styleTxtObj.lineHeight*25 + '%', textAlign: styleTxtObj.textAlign? `justify` : 'right'}"
           v-for="(sub, i) in sec.subSections[learnSubSec].text"
           :key="i"
           >{{ sub }} <br />
@@ -34,16 +44,19 @@
         /></ion-text>
       </div>
     </transition>
+
   </div>
 </template>
+
 <script>
-import { IonText } from "@ionic/vue";
+import { IonText, IonImg } from "@ionic/vue";
 import { mapState } from "vuex";
 
 export default {
   name: "SecCards",
-  components: { IonText },
-  props: ["secNum", "sec"],
+  components: { IonText, IonImg },
+  props: ["secNum", "sec", "styleTxtObj"],
+  emits: ["toggleTextSetting"],
 
   data() {
     return {
@@ -55,6 +68,10 @@ export default {
 
   computed: {
     ...mapState("learning", ["learnChapter", "learnSec", "learnSubSec"]),
+
+    settingSrc() {
+      return document.body.classList.contains("dark") ? "dark" : "light";
+    },
   },
 };
 </script>
@@ -80,7 +97,7 @@ export default {
   width: 92%;
   padding-top: 5%;
   margin-top: 5%;
-  margin-bottom: 20% !important;;
+  margin-bottom: 20% !important;
 }
 
 .num {
@@ -139,5 +156,11 @@ export default {
 .text-chosen {
   direction: rtl;
   text-align: right;
+}
+
+.setting-icon {
+  position: relative;
+  width: 1.5rem;
+  height: 1.5rem;
 }
 </style>

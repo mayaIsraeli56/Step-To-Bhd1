@@ -154,7 +154,6 @@
   transition: all 0.5s ease;
 }
 
-
 /* ////////////fadeEnter//////////// */
 .fadeEnter-enter-from {
   opacity: 0;
@@ -189,8 +188,6 @@
   transition: all 0.5s ease;
 }
 
-
-
 @keyframes slide-down {
   from {
     transform: translateY(0%);
@@ -208,7 +205,7 @@
 
 .slideD-enter-to {
   clip-path: inset(0);
-  height: fit-content ;
+  height: fit-content;
   opacity: 1;
 }
 
@@ -247,15 +244,30 @@
 
 .slideD-forward-enter-to {
   clip-path: inset(0);
-  height: fit-content ;
+  height: fit-content;
   opacity: 1;
 }
-
-
 
 .slideD-forward-enter-active,
 .slideD-forward-move {
   transition: all 1s ease-in;
+}
+
+/* ////////////justFade-delay//////////// */
+.justFade-enter-from,
+.justFade-leave-to {
+  opacity: 0;
+}
+
+.justFade-enter-to,
+.justFade-leave-from {
+  opacity: 1;
+}
+
+.justFade-enter-active,
+.justFade-leave-active,
+.justFade-move {
+  transition: all 0.5s ease;
 }
 
 @keyframes fading {
@@ -277,5 +289,3 @@
     transform: scale(1);
   }
 }
-
-

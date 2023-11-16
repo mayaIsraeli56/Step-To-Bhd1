@@ -1,202 +1,80 @@
 <template>
-  <ion-content :class="learnSubSec != null ? 'full-page' : ''" ref="content">
-    <ion-list ref="list">
-      <transition-group
-        tag="div"
-        class="container"
-        appear
-        name="fadeA"
-        mode="out-in"
-      >
-        <div
-          v-for="(sec, secNum) in sections"
-          :key="secNum"
-          :class="[
-            secNum == learnSec
-              ? 'chosen-sec section'
-              : learnSec != null
-              ? 'close'
-              : 'section',
-          ]"
-          :ref="'sec' + secNum"
-        >
-          <sec-cards
-            :secNum="secNum"
-            :sec="sec"
-            :openTextSetting="openTextSetting"
-            :styleTxtObj="styleTxtObj"
-            @click="openSubSecCard(secNum)"
-            @toggleTextSetting="toggleTextSetting"
-            v-if="secNum == learnSec || learnSec == null"
-          ></sec-cards>
+  <transition appear name="justFade">
+    <div class="back-drop" @click="$emit('toggleTextSetting')" v-if="openTextSetting"></div>
+  </transition>
 
-          <sub-sec-cards
-            :secNum="secNum"
-            :subSections="sec.subSections"
-            :ref="'slide' + secNum"
-            :class="[
-              learnSubSec != null || openSubMenu != secNum ? 'close' : 'open',
-              'sub-sec-menu',
-            ]"
-          >
-          </sub-sec-cards>
+  <transition appear name="popSlide">
+    <div class="pop" v-if="openTextSetting">
+      <div class="short-line" @click="$emit('toggleTextSetting')"></div>
+      <ion-text class="text-dark-plain" @click="$emit('toggleTextSetting')">הגדרות</ion-text>
+      <div class="long-line"></div>
+
+      <div class="input-line">
+        <ion-text class="text-dark-plain">{{ fontSize }} </ion-text>
+        <div class="progress-bar">
+          <input
+            type="range"
+            min="3"
+            max="8"
+            v-model="fontSize"
+            @input="$emit('updateFont', fontSize)"
+          />
         </div>
-      </transition-group>
-    </ion-list>
-  </ion-content>
+        <ion-text class="text-dark-plain">גודל גופן </ion-text>
+      </div>
 
-  <text-setting
-    :openTextSetting="openTextSetting"
-    @updateFont="updateFont"
-    @updateHeight="updateHeight"
-    @updateAline="updateAline"
-    @toggleTextSetting="toggleTextSetting"
-  >
-  </text-setting>
+      <div class="input-line">
+        <ion-text class="text-dark-plain">{{ lineHeight }} </ion-text>
+        <div class="progress-bar">
+          <input
+            type="range"
+            min="3"
+            max="8"
+            v-model="lineHeight"
+            @input="$emit('updateHeight', lineHeight)"
+          />
+        </div>
+        <ion-text class="text-dark-plain">רווח</ion-text>
+      </div>
+
+      <div class="input-line">
+        <ion-toggle
+          v-model="textAlign"
+          @ionChange="() => $emit('updateAline', textAlign)"
+        ></ion-toggle>
+        <ion-text class="text-dark-plain long-setting-text"
+          >יישור ל-2 הצדדים</ion-text
+        >
+      </div>
+    </div>
+  </transition>
 </template>
 <script>
-import SubSecCards from "./SubSecCards.vue";
-import SecCards from "./SecCards.vue";
-import TextSetting from "./TextSetting.vue";
-import { IonContent, IonList } from "@ionic/vue";
-import { mapState, mapMutations } from "vuex";
+import { IonText, IonToggle } from "@ionic/vue";
 
 export default {
   name: "SubSecMenu",
   components: {
-    SubSecCards,
-    SecCards,
-    IonContent,
-    IonList,
-    TextSetting,
+    IonText,
+    IonToggle,
   },
+
+  props: ["openTextSetting"],
+  emits: ["updateAline", "updateHeight", "updateFont", "toggleTextSetting"],
 
   data() {
     return {
-      sections: null,
-      unableOpening: true,
-      openTextSetting: false,
-      styleTxtObj: {
-        fontSize: 4,
-        lineHeight: 5,
-        textAlign: false,
-      },
+      fontSize: 4,
+      lineHeight: 5,
+      textAlign: false,
     };
   },
 
-  computed: {
-    ...mapState("learning", [
-      "learnChapter",
-      "learnSec",
-      "learnSubSec",
-      "openSubMenu",
-    ]),
-    ...mapState("returning", ["backToSubSecMenu"]),
-  },
-
-  methods: {
-    ...mapMutations("learning", ["openingSubMenu"]),
-
-    openSubSecCard(chosenSlide) {
-      if (this.unableOpening) {
-        return;
-      }
-
-      if (chosenSlide == this.openSubMenu) {
-        this.openingSubMenu(-1);
-      } else {
-        this.openingSubMenu(chosenSlide);
-      }
-    },
-
-    toggleTextSetting() {
-      this.openTextSetting = !this.openTextSetting;
-    },
-
-    updateFont(newFontSize) {
-      this.styleTxtObj.fontSize = newFontSize;
-    },
-
-    updateHeight(newHeight) {
-      this.styleTxtObj.lineHeight = newHeight;
-    },
-
-    updateAline(newAline) {
-      this.styleTxtObj.textAlign = newAline;
-    },
-  },
-
-  mounted() {
-    this.openingSubMenu(-1);
-
-    import(`@/json/chapters/chapter${this.learnChapter + 1}`).then((module) => {
-      this.sections = module.sections;
-    });
-
-    setTimeout(() => {
-      this.unableOpening = false;
-    }, 500);
-  },
-
-  watch: {
-    learnSec: {
-      handler() {
-        this.$refs.content.$el.scrollToTop();
-      },
-    },
-  },
+  methods: {},
 };
 </script>
 
 <style scoped>
-ion-content {
-  direction: ltr;
-  --ion-background-color: transparent;
-  height: 66dvh;
-  transition: all 0.5s ease-in-out;
-}
-
-ion-list {
-  padding: 0;
-  padding-bottom: 10%;
-  min-height: 66dvh;
-  transition: all 0.5s ease-in-out;
-}
-
-.full-page {
-  top: -5%;
-  height: 90%;
-}
-
-.container {
-  background-color: transparent;
-}
-.chosen-sec {
-  width: 100%;
-  margin-top: 5%;
-}
-
-.section {
-  min-height: 14dvh;
-  margin-top: 5%;
-}
-
-.sub-sec-menu {
-  transition: all 0.5s ease-in-out;
-}
-.close {
-  clip-path: inset(0 0 100% 0);
-  height: 0 !important;
-  opacity: 0;
-  overflow: hidden;
-}
-
-.open {
-  clip-path: inset(0);
-  height: fit-content;
-  opacity: 1;
-}
-
 .pop {
   position: absolute;
   bottom: 0;
@@ -225,7 +103,7 @@ ion-list {
   height: 0.1rem;
   width: 100%;
   background-color: var(--setting-pop-txt);
-  margin: 2% 0 4% 0;
+  margin: 2% 0 8% 0;
 }
 
 .popSlide-enter-from {
