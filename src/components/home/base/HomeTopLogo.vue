@@ -32,20 +32,26 @@
       </ion-text>
 
       <div class="circle sub-circle" ref="circle" v-if="showHeading" :key="3">
-
         <ion-img
           :src="arrowSrc"
           ref="arrow"
-          :class="[!bigNavi ? 'arrow-small' : '', showBackBtn? '' : 'hide', 'arrow']"
-  
+          :class="[
+            !bigNavi ? 'arrow-small' : '',
+            showBackBtn ? '' : 'hide',
+            'arrow',
+          ]"
           @click="playBackFunc()"
         ></ion-img>
 
         <ion-text v-if="showHeading" ref="text" class="text" :key="5">
           {{ text }}</ion-text
         >
-        <ion-img :key="6"
-          :class="[!miniIcon || bigNavi  || !showBackBtn ? 'hide' : '', 'mini-icon']"
+        <ion-img
+          :key="6"
+          :class="[
+            !miniIcon || bigNavi || !showBackBtn ? 'hide' : '',
+            'mini-icon',
+          ]"
           :src="require(`@/assets/media1/HomePage/icons-nevi/${stage}.png`)"
         ></ion-img>
 
@@ -65,11 +71,18 @@
 import { defineComponent } from "vue";
 import { IonImg, IonText } from "@ionic/vue";
 import { mapState, mapActions } from "vuex";
+import { useBackButton } from '@ionic/vue';
 
 export default defineComponent({
   name: "HomeTopLogo",
   components: { IonImg, IonText },
   props: ["firstOpened", "slideNum"],
+
+  setup() {
+    useBackButton(10, () => {
+      this.playBackFunc();
+    });
+  },
 
   data() {
     return {
@@ -79,7 +92,7 @@ export default defineComponent({
       arrowSrc: require("@/assets/media1/HomePage/arrow-back.png"),
       text: "",
       showHeading: false,
-      textArray: ["הגדרות", "בחנים", "מקראות", "משחקים", "הסכתים","על הבה\"ד"],
+      textArray: ["הגדרות", "בחנים", "מקראות", "משחקים", "הסכתים", 'על הבה"ד'],
       icon: null,
     };
   },
@@ -143,7 +156,8 @@ export default defineComponent({
 
     gameType: {
       handler() {
-        if (this.gameType != null && this.gameType < 5) { // a game but not a test
+        if (this.gameType != null && this.gameType < 5) {
+          // a game but not a test
           import(`@/json/games/gamesInfo`).then((module) => {
             this.text = module[this.gameType - 1].title;
           });
