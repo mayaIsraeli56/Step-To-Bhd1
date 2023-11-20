@@ -24,7 +24,6 @@
             :secNum="secNum"
             :sec="sec"
             :openTextSetting="openTextSetting"
-            :styleTxtObj="styleTxtObj"
             @click="openSubSecCard(secNum)"
             @toggleTextSetting="toggleTextSetting"
             v-if="secNum == learnSec || learnSec == null"
@@ -47,9 +46,6 @@
 
   <text-setting
     :openTextSetting="openTextSetting"
-    @updateFont="updateFont"
-    @updateHeight="updateHeight"
-    @updateAline="updateAline"
     @toggleTextSetting="toggleTextSetting"
   >
   </text-setting>
@@ -76,11 +72,6 @@ export default {
       sections: null,
       unableOpening: true,
       openTextSetting: false,
-      styleTxtObj: {
-        fontSize: 4,
-        lineHeight: 5,
-        textAlign: false,
-      },
     };
   },
 
@@ -111,18 +102,6 @@ export default {
 
     toggleTextSetting() {
       this.openTextSetting = !this.openTextSetting;
-    },
-
-    updateFont(newFontSize) {
-      this.styleTxtObj.fontSize = newFontSize;
-    },
-
-    updateHeight(newHeight) {
-      this.styleTxtObj.lineHeight = newHeight;
-    },
-
-    updateAline(newAline) {
-      this.styleTxtObj.textAlign = newAline;
     },
   },
 

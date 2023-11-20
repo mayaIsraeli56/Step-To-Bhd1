@@ -1,12 +1,18 @@
 <template>
   <transition appear name="justFade">
-    <div class="back-drop" @click="$emit('toggleTextSetting')" v-if="openTextSetting"></div>
+    <div
+      class="back-drop"
+      @click="$emit('toggleTextSetting')"
+      v-if="openTextSetting"
+    ></div>
   </transition>
 
   <transition appear name="popSlide">
     <div class="pop" v-if="openTextSetting">
       <div class="short-line" @click="$emit('toggleTextSetting')"></div>
-      <ion-text class="text-dark-plain" @click="$emit('toggleTextSetting')">הגדרות</ion-text>
+      <ion-text class="text-dark-plain" @click="$emit('toggleTextSetting')"
+        >הגדרות</ion-text
+      >
       <div class="long-line"></div>
 
       <div class="input-line">
@@ -17,7 +23,7 @@
             min="3"
             max="8"
             v-model="fontSize"
-            @input="$emit('updateFont', fontSize)"
+            @input="updateStyle(fontSize, 'fontSize')"
           />
         </div>
         <ion-text class="text-dark-plain">גודל גופן </ion-text>
@@ -31,7 +37,7 @@
             min="3"
             max="8"
             v-model="lineHeight"
-            @input="$emit('updateHeight', lineHeight)"
+            @input="updateStyle(lineHeight, 'lineHeight')"
           />
         </div>
         <ion-text class="text-dark-plain">רווח</ion-text>
@@ -40,7 +46,7 @@
       <div class="input-line">
         <ion-toggle
           v-model="textAlign"
-          @ionChange="() => $emit('updateAline', textAlign)"
+          @ionChange="() => updateStyle(textAlign, 'textAlign')"
         ></ion-toggle>
         <ion-text class="text-dark-plain long-setting-text"
           >יישור ל-2 הצדדים</ion-text
@@ -51,6 +57,7 @@
 </template>
 <script>
 import { IonText, IonToggle } from "@ionic/vue";
+import { mapState, mapActions } from "vuex";
 
 export default {
   name: "SubSecMenu",
@@ -60,7 +67,7 @@ export default {
   },
 
   props: ["openTextSetting"],
-  emits: ["updateAline", "updateHeight", "updateFont", "toggleTextSetting"],
+  emits: ["toggleTextSetting"],
 
   data() {
     return {
@@ -70,7 +77,22 @@ export default {
     };
   },
 
-  methods: {},
+  computed: {
+    ...mapState("learning", ["styleTxtObj"]),
+  },
+  mounted() {
+    this.fontSize = this.styleTxtObj.fontSize;
+    this.lineHeight = this.styleTxtObj.lineHeight;
+    this.textAlign = this.styleTxtObj.textAlign;
+  },
+
+  methods: {
+    ...mapActions("learning", ["updateTextStyle"]),
+
+    updateStyle(newValue, key) {
+      this.updateTextStyle([newValue, key]);
+    },
+  },
 };
 </script>
 

@@ -3,40 +3,52 @@
     :class="[secNum == learnSec ? 'chosen-card' : '', 'card']"
     :ref="'card' + secNum"
   >
-    <ion-text class="num text-dark-plain" v-if="learnSubSec == null" :key="1">{{
-      secNum + 1
-    }}</ion-text>
+    <div class="top">
+      <ion-text
+        class="num text-dark-plain"
+        v-if="learnSubSec == null"
+        :key="1"
+        >{{ secNum + 1 }}</ion-text
+      >
 
-    <ion-text class="s-num text-dark-plain" v-else :key="2"
-      >{{ secNum + 1 }}.{{ learnSubSec + 1 }}</ion-text
-    >
-
-    <ion-text
-      :class="[secNum == learnSec ? 'title-big' : '', 'text-dark-plain title']"
-      >{{ sec.title }}
+      <ion-text class="s-num text-dark-plain" v-else :key="2"
+        >{{ secNum + 1 }}.{{ learnSubSec + 1 }}</ion-text
+      >
 
       <ion-text
-        class="text-dark-plain title sub-title"
-        v-if="learnSubSec != null"
-      >
-        {{ " - " + sec.subSections[learnSubSec].title }}</ion-text
-      >
-    </ion-text>
+        :class="[
+          secNum == learnSec ? 'title-big' : '',
+          'text-dark-plain title',
+        ]"
+        >{{ sec.title }}
 
-    <transition name="fade" appear>
-      <ion-img
-        v-if="secNum == learnSec"
-        class="setting-icon"
-        :src="require(`@/assets/media1/HomePage/setting/${settingSrc}.png`)"
-        @click="() => $emit('toggleTextSetting')"
-      ></ion-img>
-    </transition>
+        <ion-text
+          class="text-dark-plain title sub-title"
+          v-if="learnSubSec != null"
+        >
+          {{ " - " + sec.subSections[learnSubSec].title }}</ion-text
+        >
+      </ion-text>
+
+      <transition name="fade" appear>
+        <ion-img
+          v-if="secNum == learnSec"
+          class="setting-icon"
+          :src="require(`@/assets/media1/HomePage/setting/${settingSrc}.png`)"
+          @click="() => $emit('toggleTextSetting')"
+        ></ion-img>
+      </transition>
+    </div>
 
     <transition name="slideD-forward" appear>
       <div class="text" v-if="secNum == learnSec">
         <ion-text
           :class="[secNum == learnSec ? 'text-chosen' : '', 'text-dark-plain']"
-          :style="{ fontSize: styleTxtObj.fontSize*25 + '%', lineHeight: styleTxtObj.lineHeight*25 + '%', textAlign: styleTxtObj.textAlign? `justify` : 'right'}"
+          :style="{
+            fontSize: styleTxtObj.fontSize * 25 + '%',
+            lineHeight: styleTxtObj.lineHeight * 25 + '%',
+            textAlign: styleTxtObj.textAlign ? `justify` : 'right',
+          }"
           v-for="(sub, i) in sec.subSections[learnSubSec].text"
           :key="i"
           >{{ sub }} <br />
@@ -44,7 +56,6 @@
         /></ion-text>
       </div>
     </transition>
-
   </div>
 </template>
 
@@ -55,7 +66,7 @@ import { mapState } from "vuex";
 export default {
   name: "SecCards",
   components: { IonText, IonImg },
-  props: ["secNum", "sec", "styleTxtObj"],
+  props: ["secNum", "sec"],
   emits: ["toggleTextSetting"],
 
   data() {
@@ -67,7 +78,12 @@ export default {
   },
 
   computed: {
-    ...mapState("learning", ["learnChapter", "learnSec", "learnSubSec"]),
+    ...mapState("learning", [
+      "learnChapter",
+      "learnSec",
+      "learnSubSec",
+      "styleTxtObj",
+    ]),
 
     settingSrc() {
       return document.body.classList.contains("dark") ? "dark" : "light";
@@ -162,5 +178,13 @@ export default {
   position: relative;
   width: 1.5rem;
   height: 1.5rem;
+  transform: translateY(20%);
+}
+
+.top {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 </style>
