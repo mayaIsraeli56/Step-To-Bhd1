@@ -9,6 +9,11 @@ export default {
     openSubMenu: -1,
     lastChapter: 0,
     bookmark: [],
+    styleTxtObj: {
+      fontSize: 4,
+      lineHeight: 5,
+      textAlign: false,
+    },
   },
 
   mutations: {
@@ -43,6 +48,10 @@ export default {
       state.openSubMenu = sub;
     },
 
+    updateTextStyle(state, change) {
+      state.styleTxtObj[change[1]] = change[0];
+    },
+
     toggleBookMark(state, chapterToAdd) {
       const index = state.bookmark.indexOf(chapterToAdd);
 
@@ -70,6 +79,10 @@ export default {
     removeSubAndSec({ commit }) {
       commit("removeSubAndSec");
       commit("navigation/bigNavi", null, { root: true });
+    },
+
+    updateTextStyle({ commit }, change) {
+      commit("updateTextStyle", change);
     },
   },
 };

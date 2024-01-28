@@ -53,7 +53,7 @@ export default {
 }
 
 .title {
-  font-size: 1.3rem;
+  font-size: 3dvh;
   font-weight: 700;
 }
 </style>

@@ -33,7 +33,7 @@
         :key="n"
         :class="[
           n > noWrong ? 'popIn' : 'popOut',
-          isDark ? 'dark-img' : '',
+          isDark ? 'dark' : '',
           'trivia-icon heart',
         ]"
         :src="require(`@/assets/media1/HomePage/games/trivia/like.png`)"
@@ -53,7 +53,7 @@
 
     <div class="checkd-part" v-if="type == 2 || type == 3">
       <ion-img
-        :class="[isDark ? 'dark-img' : '', 'trivia-icon mark']"
+        :class="[isDark ? 'dark' : '', 'trivia-icon mark']"
         :src="require(`@/assets/media1/HomePage/games/trivia/check.png`)"
       ></ion-img>
       <ion-text class="text-dark-plain checked-num"> {{ noCorrect }}</ion-text>
@@ -162,7 +162,7 @@ export default {
 }
 
 .time {
-  font-size: 100%;
+  font-size: 3dvh;
 }
 
 .trivia-icon {
@@ -210,7 +210,7 @@ export default {
 
 .checked-num {
   margin: 0 4% 0 4%;
-  font-size: 1.8rem;
+  font-size: 3dvh;
 }
 
 .clock-icn {
@@ -254,8 +254,8 @@ export default {
   background: var(--ion-color-primary-tint-light);
   color: var(--ion-color-medium);
   font-weight: 700;
-  width: 2.5em;
-  height: 2.5em;
+  width: 4dvh;
+  height: 4dvh;
   aspect-ratio: 1/1;
 }
 
@@ -286,11 +286,6 @@ export default {
 
 .circle:active {
   outline: none;
-}
-
-.circle:focus {
-  border: none;
-  outline: 0.2rem solid var(--ion-color-primary);
 }
 
 .answered {
@@ -388,5 +383,20 @@ export default {
 }
 .wronge {
   background: var(--ion-color-danger) !important;
+  animation: wrong-pop infinite 1.5s;
+}
+
+@keyframes wrong-pop {
+  0% {
+    box-shadow: none;
+  }
+  50% {
+    box-shadow: 0px 0px 0.7rem 0px var(--ion-color-danger);
+    -webkit-box-shadow: 0px 0px 0.7rem 0px var(--ion-color-danger);
+    -moz-box-shadow: 0px 0px 0.7rem 0px var(--ion-color-danger);
+  }
+  100% {
+    box-shadow: none;
+  }
 }
 </style>

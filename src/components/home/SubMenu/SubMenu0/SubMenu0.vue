@@ -3,7 +3,7 @@
     <card-with-line :title="` היי ${userName} !`">
       <div class="text-box">
         <ion-text class="text-dark-plain" color="medium">
-          קצינים לעתיד לומדים כרגע,
+          קצינים לעתיד לומדים כרגע
         </ion-text>
         <ion-text class="text-dark-plain" color="medium">
           בעזרת בצעד לבה"ד
@@ -15,7 +15,7 @@
           להמשיך ולהיות חלק מהם...
         </ion-text>
       </div>
-      <ion-button @click="handleSignOut" class="btn" size="large"
+      <ion-button @click="handleSignOut" class="btn"
         >התנתק</ion-button
       >
 
@@ -93,7 +93,10 @@ export default defineComponent({
 
   mounted() {
     const auth = getAuth();
-    this.userName = auth.currentUser && auth.currentUser.displayName != null ? auth.currentUser.displayName : "צוער";
+    this.userName =
+      auth.currentUser && auth.currentUser.displayName != null
+        ? auth.currentUser.displayName
+        : "צוער";
   },
 
   methods: {
@@ -117,7 +120,7 @@ export default defineComponent({
   justify-content: center;
   padding: 0 4% 0 4%;
   transition: all 0.5s ease;
-  font-size: 1.2rem;
+  font-size: 2.5dvh;
   flex-direction: column;
   position: relative;
   top: -6%;
@@ -135,7 +138,6 @@ export default defineComponent({
   margin: 0 5%;
   padding: 7% 2%;
   transition: all 0.5s ease;
-  font-size: 1.2rem;
   flex-direction: column;
 }
 
@@ -147,12 +149,11 @@ export default defineComponent({
   padding: 0%;
 }
 .text-dark-plain {
-  font-size: 1.1rem;
+  font-size: 2.5dvh;
   margin: 1% 0%;
 }
 
 .num {
-  font-size: 2rem;
   font-weight: 900;
   --background: none;
   color: var(--ion-color-medium);
@@ -165,10 +166,7 @@ export default defineComponent({
 ion-item {
   margin-top: 5%;
   --background: none;
-  width: 50%;
-}
-
-ion-item {
+  width: fit-content;
   --padding-end: 0;
   --inner-padding-end: 0;
 }

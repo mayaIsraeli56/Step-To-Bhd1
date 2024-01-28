@@ -1,44 +1,46 @@
 <template>
-  <div class="games" v-if="gameType == null">
-    <ion-text class="text-dark-plain note animate__animated" ref="note"
-      >בחרו את הפרקים אותם תרצו לתרגל</ion-text
-    >
-
-    <chose-chaptes-circels
-      :explanation="[]"
-      :noCircles="noChapters"
-      :circlesInfo="circlesInfo"
-      :chooseOne="false"
-      @circlesChosen="circlesChosen"
-    ></chose-chaptes-circels>
-
-    <sub-menu-swiper :parent="3" :slidesNum="slidesNum">
-      <slot
-        ><swiper-slide
-          v-for="n in this.gamesInfo.length"
-          :key="n"
-          :class="'slide' + n"
-          ref="slide"
-          @click="choseGame(n)"
-        >
-          <div class="circle">
-            <ion-img
-              class="game-icon"
-              :src="require(`@/assets/media1/HomePage/games/icons/${n}.png`)"
-            ></ion-img>
-          </div>
-          <div class="title">{{ this.gamesInfo[n - 1].title }}</div>
-          <div class="text">{{ this.gamesInfo[n - 1].text }}</div>
-        </swiper-slide></slot
+    <div class="games" v-if="gameType == null" :key="0" :data-index="0">
+      <ion-text class="text-dark-plain note animate__animated" ref="note"
+        >בחרו את הפרקים אותם תרצו לתרגל</ion-text
       >
-    </sub-menu-swiper>
-  </div>
 
-  <cards-game v-if="gameType == 1"></cards-game>
+      <chose-chaptes-circels
+        :explanation="[]"
+        :noCircles="noChapters"
+        :circlesInfo="circlesInfo"
+        :chooseOne="false"
+        @circlesChosen="circlesChosen"
+      ></chose-chaptes-circels>
+
+      <sub-menu-swiper :parent="3" :slidesNum="slidesNum">
+        <slot
+          ><swiper-slide
+            v-for="n in this.gamesInfo.length"
+            :key="n"
+            :class="'slide' + n"
+            ref="slide"
+            @click="choseGame(n)"
+          >
+            <div class="circle">
+              <ion-img
+                class="game-icon"
+                :src="require(`@/assets/media1/HomePage/games/icons/${n}.png`)"
+              ></ion-img>
+            </div>
+            <div class="title">{{ this.gamesInfo[n - 1].title }}</div>
+            <div class="text">{{ this.gamesInfo[n - 1].text }}</div>
+          </swiper-slide></slot
+        >
+      </sub-menu-swiper>
+    </div>
+
+  <cards-game v-if="gameType == 1" :key="1" :data-index="1"></cards-game>
   <trivia-game
     v-if="gameType == 3 || gameType == 2"
     :type="gameType"
     :exam="-1"
+    :key="3"
+    :data-index="1"
   ></trivia-game>
   <thinking-game v-if="gameType == 4"></thinking-game>
 </template>
@@ -56,6 +58,7 @@ import ChapterInfo from "@/json/chapters/ChapterInfo";
 import { IonText, IonImg } from "@ionic/vue";
 
 import { mapState, mapMutations, mapActions } from "vuex";
+import gsap from "gsap";
 
 export default {
   name: "SubMenu3",
@@ -116,7 +119,7 @@ export default {
     },
 
     circlesChosen(listOfCircles, noChap) {
-      this.addOrRemoveChap(noChap)
+      this.addOrRemoveChap(noChap);
     },
   },
 };
@@ -223,6 +226,7 @@ export default {
 .games {
   position: relative;
   top: -7%;
+  animation: fade-scale 0.5s 1 forwards;
 }
 
 .circle-chosen {

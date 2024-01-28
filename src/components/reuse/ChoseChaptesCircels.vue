@@ -157,7 +157,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 100%;
+  font-size: 70%;
   font-weight: 800;
   transition: 0.2s linear;
 }

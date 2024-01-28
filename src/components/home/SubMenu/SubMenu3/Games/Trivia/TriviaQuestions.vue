@@ -69,21 +69,23 @@ export default {
 
   async beforeMount() {
     // copy all relavent questions
-
     if (this.type != 5) {
       // trivia
       allQuestions.forEach((chap, i) => {
         chap.forEach((ques) => {
           ques.answered = false;
-          if (this.chosenChapters.includes(i)) this.questions.push({ ...ques });
+          if (this.chosenChapters.includes(i)) {
+            this.questions.push(this.mixAns({ ...ques }));
+          }
         });
       });
     } else {
       // test
       let correct = [];
       test[this.exam].forEach((ques) => {
-        this.questions.push({ ...ques });
-        correct.push(ques.correct);
+        let shuffledQues = this.mixAns({ ...ques });
+        this.questions.push(shuffledQues);
+        correct.push(shuffledQues.correct);
       });
       this.updateCorrectAns(correct); // send to store correct answers - for triviaInfo
     }
@@ -100,6 +102,34 @@ export default {
       "updatequestNum",
       "resetPicked",
     ]),
+
+    // recives a question object and returns the question with shuffled answers
+    mixAns(ques) {
+      let min = 1,
+        max = 4;
+
+      // i j k - indexes of answers to mix
+      let i = Math.round(Math.random() * (max - min) + min);
+      let j, k;
+
+      do j = Math.round(Math.random() * (max - min) + min);
+      while (i == j);
+
+      do k = Math.round(Math.random() * (max - min) + min);
+      while (k == j || k == i);
+
+      let tmp = ques[i];
+
+      ques[i] = ques[j];
+      ques[j] = ques[k];
+      ques[k] = tmp;
+
+      if (i == ques.correct) ques.correct = k;
+      else if (j == ques.correct) ques.correct = i;
+      else if (k == ques.correct) ques.correct = j;
+
+      return ques;
+    },
 
     answerClass(n) {
       if (this.stage == "game")
@@ -139,10 +169,19 @@ export default {
 
       if (this.type != 5) {
         this.questions.forEach((ques) => {
-          ques.answered = false;
-        }); // restart - all questions were not answered
+          ques.answered = false; // restart - all questions were not answered
+          ques = this.mixAns({ ...ques }); // shuffle the answers
+        });
         this.updatequestNum(this.getNext());
       } else {
+        let correct = [];
+        this.questions.forEach((ques, i) => {
+          let shuffledQues = this.mixAns({ ...ques });
+          this.questions[i] = shuffledQues; // shuffle the answers
+          correct.push(shuffledQues.correct);
+        });
+
+        this.updateCorrectAns(correct);
         this.updatequestNum(0); // first
       }
 
@@ -287,7 +326,7 @@ export default {
   padding: 2%;
   border-radius: 3dvh;
   transition: all 0.5s ease;
-  font-size: 1.2rem;
+  font-size: 2.5dvh;
   transition: all 1s ease;
   margin: 2% 0;
 }
@@ -332,7 +371,6 @@ export default {
     padding: 2%;
     border-radius: 3dvh;
     transition: all 0.5s ease;
-    font-size: 1rem;
     margin: 1.5% 0;
   }
 

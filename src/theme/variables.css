@@ -68,6 +68,10 @@ http://ionicframework.com/docs/theming/ */
   --ion-thinking-game: var(--ion-color-secondary-contrast);
   --audio-disable: #b8b8b8;
   --form-input-text: var(--ion-color-secondary);
+  --setting-pop-back: #acc2c4;
+  --setting-pop-txt: var(--ion-color-secondary-tint);
+  --setting-input-range-back: #e5ebec;
+  --setting-input-range-thumb: #739598;
 }
 
 body.dark,
@@ -145,6 +149,10 @@ body.dark,
   --ion-thinking-game: var(--ion-color-primary-tint);
   --swiper-pagination-bullet-inactive-color: #ffffff;
   --swiper-pagination-bullet-inactive-opacity: 0.7;
+  --setting-pop-back: #7e7f86;
+  --setting-input-range-back: #e5ebec;
+  --setting-input-range-thumb: #8fb2b5;
+
 }
 
 /*

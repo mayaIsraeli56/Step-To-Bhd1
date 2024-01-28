@@ -20,7 +20,6 @@ import { mapState } from "vuex";
 
 export default {
   name: "PodcastHeader",
-  props: [""],
   components: { IonText, IonImg },
 
   data() {
@@ -40,8 +39,6 @@ export default {
       );
     },
   },
-
-  methods: {},
 };
 </script>
 

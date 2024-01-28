@@ -24,7 +24,7 @@ export default {
 h2 {
   position: absolute;
   color: var(--ion-color-medium);
-  font-size: 90% !important;
+  font-size: 80% !important;
   text-shadow: none;
   top: 90%;
 }

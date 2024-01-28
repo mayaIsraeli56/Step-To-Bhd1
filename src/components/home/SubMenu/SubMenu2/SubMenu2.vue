@@ -4,6 +4,7 @@
     :slidesNum="slidesNum"
     @chapterChosen="openChapter"
     v-if="!openSubChapters"
+    class="sub-menu2-swiper"
   >
     <slot
       ><swiper-slide
@@ -140,6 +141,10 @@ export default {
   width: 90%;
   height: 25dvh;
   font-weight: 500;
+}
+
+.sub-menu2-swiper {
+  animation: fade-scale 0.7s 1 forwards;
 }
 </style>
 
