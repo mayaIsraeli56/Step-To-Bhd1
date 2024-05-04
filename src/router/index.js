@@ -4,7 +4,7 @@ import StartingFlow from "../views/StartingFlow.vue";
 import HomePage from "../views/HomePage.vue";
 import { getAuth } from "firebase/auth";
 
-const routes: Array<RouteRecordRaw> = [
+const routes = [
   {
     path: "/",
     redirect: "/start",

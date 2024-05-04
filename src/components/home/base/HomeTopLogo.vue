@@ -1,7 +1,7 @@
 <template>
   <div class="container" ref="container">
     <transition-group appear name="fadeA">
-      <div class="circle" ref="circle" :key="0"></div>
+      <div class="circle" ref="circle" :key="0" v-if="firstOpened"></div>
 
       <ion-img
         :src="stepLogoSrc"
@@ -54,14 +54,6 @@
           ]"
           :src="require(`@/assets/media1/HomePage/icons-nevi/${stage}.png`)"
         ></ion-img>
-
-        <!-- <ion-img
-      :src="searchSrc"
-      alt="search-icon"
-      class="search"
-      v-show="learnChapter != null && learnSubSec == null"
-      :key="3"
-    ></ion-img> -->
       </div>
     </transition-group>
   </div>
@@ -251,7 +243,7 @@ ion-text {
 }
 
 .sub-circle {
-  background-color: #83a9ad;
+  background-color: var(--ion-color-primary);
   display: flex;
   flex-direction: row;
   align-content: flex-end;
